@@ -17,4 +17,5 @@
 - https://github.com/jwon42/42cursus
 - https://docs.google.com/spreadsheets/d/1xoTR_7L2a52hLw_DzmlOozu3ZF9sdNVwha14ZDTok44/edit#gid=0
 - https://github.com/pasqualerossi/42-School-Guide
+- https://github.com/LoredanaLoSurdo?tab=repositories
 - 
