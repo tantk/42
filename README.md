@@ -13,3 +13,8 @@
 - https://github.com/whrlgus/CS_Study/tree/main/OS/CPU%20Scheduling
 - https://github.com/agavrel/42_CheatSheet
 - https://github.com/agavrel/42_Subjects
+- https://github.com/JaeSeoKim/42cursus
+- https://github.com/jwon42/42cursus
+- https://docs.google.com/spreadsheets/d/1xoTR_7L2a52hLw_DzmlOozu3ZF9sdNVwha14ZDTok44/edit#gid=0
+- https://github.com/pasqualerossi/42-School-Guide
+- 
