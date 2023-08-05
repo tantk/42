@@ -1,3 +1,75 @@
+# takes up too much space
 *.pdf
 # files with no extension are likely to be compiled programs
 *[^.]
+
+# The rest are templates
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Makefile generated files
+Makefile
+Makefile.in
+*.deps
+*.libs
+*.d
+*.pc
+*.log
+*.acn
+*.acr
+*.acs
+*.ada
+*.ads
+
+# Autotools generated files/dirs
+autom4te.cache/
+config.status
+config.log
+config.h.in
+aclocal.m4
+configure
+*.m4
+
+# For IDEs and editors
+
+# Eclipse
+*.cproject
+*.project
+*.settings/
+
+# Visual Studio Code
+.vscode/
+
+# Mac OS X
+.DS_Store
+*.swp
+
+# Other files and directories that may get generated
+*.bak
+*.tmp
+*~
+tags
+
