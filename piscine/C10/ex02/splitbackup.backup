@@ -1,0 +1,83 @@
+#include "ft_header.h"
+
+int ft_strlen_sep(char *str, char sep)
+{
+	int i;
+
+	i = 0;
+	while(*str && *str != sep)
+	{
+		i++;
+		str++;
+	}
+	return i;
+}
+
+char *ft_strdup_sep(char *str,char sep)
+{
+	char *s1;
+	char *s1_st;
+
+	s1 = (char *)malloc(sizeof(char) * (ft_strlen_sep(str, sep) + 1));
+	if (!s1)
+		return 0;
+	s1_st = s1;
+	while (*str && *str != sep)
+		*s1++ = *str++;
+	*s1 = '\0';
+	return s1_st;
+}
+
+int	ft_word_count(char *str, char sep)
+{
+	int	wc;
+
+	wc = 0;
+	while (*str)
+	{
+		if(*str == sep)
+			str++;
+		else
+		{
+			wc++;
+			while (*str != sep  && *str)
+				str++;
+		}
+	}
+	return wc;
+}
+
+char	**ft_split(char *str, char sep)
+{
+	char	**split;
+	char	**split_st;
+
+	split = (char **)malloc((ft_word_count(str, sep) + 1) * sizeof(char *));
+	if (!split)
+		return NULL;
+	split_st = split;
+	while(*str)
+	{
+		*split++ = ft_strdup_sep(str, sep);
+		while(*str != sep && *str)
+			str++;
+	}
+	*split = NULL;
+	return split_st;
+}
+
+void	free_split(char **split)
+{
+	char **split_st;
+
+	split_st = split;
+	if (split)
+	{
+		while(*split)
+		{
+			free(*split);
+			split++;
+		}
+		free(split_st);
+	}
+}
