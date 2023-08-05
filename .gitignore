@@ -1,0 +1,3 @@
+*.pdf
+# files with no extension are likely to be compiled programs
+*[^.]
