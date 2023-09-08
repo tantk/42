@@ -1,7 +1,6 @@
 # takes up too much space
 *.pdf
 # files with no extension are likely to be compiled programs
-*[^.]
 
 # The rest are templates
 # Compiled Object files
@@ -31,7 +30,6 @@
 *.app
 
 # Makefile generated files
-Makefile
 Makefile.in
 *.deps
 *.libs
@@ -70,6 +68,4 @@ configure
 # Other files and directories that may get generated
 *.bak
 *.tmp
-*~
-tags
 
