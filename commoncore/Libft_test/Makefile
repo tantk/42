@@ -1,5 +1,6 @@
 NAME = libft_test
-SRCS = main.c
+SRCS = main.c \
+	   ft_putchar_test.c
 CLAGS = -g -Wall -Wextra -Werror
 LIBRARY_DIR = ../Libft/
 INCLUDE_DIR = /.
