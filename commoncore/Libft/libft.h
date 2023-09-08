@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/08 18:35:47 by titan             #+#    #+#             */
-/*   Updated: 2023/08/08 18:36:32 by titan            ###   ########.fr       */
+/*   Created: 2023/09/08 16:47:12 by titan             #+#    #+#             */
+/*   Updated: 2023/09/08 17:24:06 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <unistd.h>
 
-int	ft_tolower(int c)
-{
-	if (65 <= c && c <= 90)
-		return (c + 32);
-	else
-		return (c);
-}
+int	ft_strlen(char *str);
+int	ft_isdigit(char c);
+int	ft_isalpha(char c);
+int	ft_atoi(char *str);
+void    ft_putchar(char c);
