@@ -1,3 +1,6 @@
+# Tester programs
+libft_online_test
+
 # takes up too much space
 *.pdf
 # files with no extension are likely to be compiled programs

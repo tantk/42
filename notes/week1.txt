@@ -1,0 +1,68 @@
+ft_striteri
+void ft_striteri(char *s, void (*f)(unsigned int, char*));
+function accepts  its index as first argument.
+#psuedocode
+while(i < strlen(s))
+{
+    f(s[i++],s);
+}
+
+void *memset(void *str, int c, size_t n)
+copies char c to first n character to str
+
+bzero erase data in the n bytes of the memory at location s by setting them to \0
+
+memcpy
+copy values from source to destination for num bytes
+
+there is condition, source and destination size need to be num byte
+
+memmove
+copies value of num bytes from location
+
+https://pvs-studio.com/en/blog/terms/0044/#:~:text=size_t%20is%20a%20special%20unsigned,the%20sizeof%20and%20alignof%20operators.
+size_t
+size_t is a special unsigned integer ype defined in stdlib of c and c++.
+it is the result returned by sizeof and aligned of operator.
+
+size_t is chosen so that it can store maximum size of theoretically possible array or an object.
+
+like many datatype, size_t's size is dependent on the operating system. 32 bit -> 32 bit . 64 -> 64 bit. This means that it can safely store a pointer.
+There are a few exceptions where the platforms have memory segmentation and pointers to class functions.
+
+Size_t is a safer and more efficient choice than using ordinary unsigned integer type.
+In the implementation ( we should check it out sometime ),it was designed to store pointers.
+
+some reasons for it being more efficient:
+- write loops and counters without worrying about possible overflow when changing platform. i.e. when iteration exceeds UINT_MAX.
+
+- size_t is also used to index arrays because of its characteristic (able to store largest possible object). it ensures that the required iteration cannot exceeds UINT_MAX.
+
+- size_t is also suitable for address arithmetic.
+
+const char * is a pointer to a const char
+char * const is a constant pointer to a char
+
+The below 2 are equivalent.
+const char* str
+char const* str
+
+int       *      mutable_pointer_to_mutable_int;
+int const *      mutable_pointer_to_constant_int;
+int       *const constant_pointer_to_mutable_int;
+int const *const constant_pointer_to_constant_int;
+
+declares a pointer to a constant character string 'str'
+const char* str = "hello";
+
+Same as the previous example, declares a pointer to a constant strng
+char const* str = "world";
+
+declares a constant pointer to a character string; pointer canot change.
+char* const ptr = "Constant";
+
+Declares a constant pointer to a constant string; both are immutable.
+const char* const ptr = "immutable";
+
+I have problem with memset due to void being unassignable.
+After checking the standard library book, he was using unsigned char as the working type within memset. Some implementation might generate an overflow storing certain int values in other characters types.
