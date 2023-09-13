@@ -74,7 +74,7 @@ Note that it is faster to use memcpy if we are very sure that the address do not
 
 strlcpy
 guarantee nul termination, src mustbe nul terminated.
-length of src
+it returns length of src
 
 strlcat
 both src and dst must be nul terminated.
