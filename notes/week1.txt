@@ -65,4 +65,19 @@ Declares a constant pointer to a constant string; both are immutable.
 const char* const ptr = "immutable";
 
 I have problem with memset due to void being unassignable.
-After checking the standard library book, he was using unsigned char as the working type within memset. Some implementation might generate an overflow storing certain int values in other characters types.
+After checking the standard library book, he was using unsigned char as the working type within memset. The reason being ,some implementation might generate an overflow storing certain int values in other characters types.
+
+In memset, the function tries to improve on memcpy. Where there will be undefined behavior when address of src and dst overlaps.
+whenever there is a overlapping memory, the function should reverse the order of the copying process, i.e. instead of copying from index 0 from src, its copying from the last index of src to the index 0.
+Note that it is faster to use memcpy if we are very sure that the address do not overlap. memmove should be slower because of the extra checks that it is doing.
+
+
+strlcpy
+guarantee nul termination, src mustbe nul terminated.
+length of src
+
+strlcat
+both src and dst must be nul terminated.
+initial length of dst + length of src. length of dst is the shorter of size or length of d
+
+
