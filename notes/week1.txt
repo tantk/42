@@ -80,4 +80,37 @@ strlcat
 both src and dst must be nul terminated.
 initial length of dst + length of src. length of dst is the shorter of size or length of d
 
+void *memchr(const void *s, int c, size_t n)
+scan initial n bytes of the memory for the first instance of C.
+c and s are interpreted as unsigned char.
+return address
+
+int memcmp(const void *s1, const void *s2, size_t n)
+
+
+    compares first n bytes of memory
+    returns integer less than, equal to or greater than zero if a match is found. if n is zero, the return value is zero.
+
+char *strnstr(const char *big, const char *little, size_t len);
+locates first occurence of null terminated string little in the string big. The search wont last more than len charaacters.
+
+characters that appeared after a \0 character are not searched.
+
+if little is an empty string, big is return.
+if little is not in big, NULL is returned.
+otherwise, pointer to the first character of the first occurence of little is returned.
+using strncmp here make things easier but inefficient.
+
+malloc
+allocates size bytes and returns a pointer to the allocated memory.
+memory is not initialized. if the size is 0 then malloc returns NULL or a unique pointer value that can be pass to the free function.
+
+free
+frees the memory space pointed to by ptr, which must have been returned by a previous call to malloc, calloc or realloc. if free has already been alled, the behavior is undefined. if the ptr is NULL, no operation is performed.
+
+calloc
+void *calloc(size_t nmemb, size_t size)
+allocates memory for an array of nmemb elements of size bytes each and returns a pointer to the allocated memory. memory is initialized to zero.
+if nmemb of size is 0, calloc returns either NULL or unique pointer value that can be passed to free. if multiplication of nmemb and size would result in integer overflow, then calloc returns an error.
+
 
