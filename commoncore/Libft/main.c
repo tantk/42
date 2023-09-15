@@ -1,6 +1,14 @@
-void    ft_putchar(char c);
+#include "libft.h"
+#include <stdio.h>
 
 int main(void)
 {
-    ft_putchar('a');
+    char s[] = "    hello   world      42 sg test tes     ";
+    char **result;
+
+    result = ft_split(s,' ');
+
+    while(*result)
+        printf("--%s\n",*result++);
+
 }

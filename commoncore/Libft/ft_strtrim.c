@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/09 19:35:15 by titan             #+#    #+#             */
-/*   Updated: 2023/09/15 17:32:45 by titan            ###   ########.fr       */
+/*   Created: 2023/09/15 16:28:23 by titan             #+#    #+#             */
+/*   Updated: 2023/09/15 22:22:35 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_substr(char const *s, unsigned int start, size_t len)
+char    *ft_strtrim(char const *s1, char const *set)
 {
-    size_t  count;
     char    *result;
+    size_t  result_len;
 
-    result = (char *)malloc(sizeof(char) * (len + 1));
-    if (!result)
-        return NULL;
-    count = 0;
-    while (count < len && s[count + start])
+    result = ft_strdup(s1);
+    while(*set)
     {
-        result[count] = s[count + start];
-        count++;
+        while (*result == *set)
+        {
+           *result ='\0';
+           result++;
+        }
+        result_len = ft_strlen(result);
+        while(result[result_len-1] == *set)
+        {
+           result[result_len - 1] = '\0';
+           result_len--;
+        }
+        set++;
     }
-    result[count] = '\0';
     return (result);
 }

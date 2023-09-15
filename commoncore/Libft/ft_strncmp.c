@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:52:58 by titan             #+#    #+#             */
-/*   Updated: 2023/09/13 21:14:08 by titan            ###   ########.fr       */
+/*   Updated: 2023/09/15 19:15:10 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -16,8 +16,8 @@ int ft_strncmp(const char *s1, const char *s2, size_t n)
     char    *s1_ptr;
     char    *s2_ptr;
 
-    s1_ptr = s1;
-    s2_ptr = s2;
+    s1_ptr = (char *)s1;
+    s2_ptr = (char *)s2;
     while(*s1 != *s2 && *s1 && n)
     {
        s1++;
