@@ -6,14 +6,14 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:06:35 by titan             #+#    #+#             */
-/*   Updated: 2023/09/09 16:14:53 by titan            ###   ########.fr       */
+/*   Updated: 2023/09/16 15:35:56 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-size_t  ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
-	size_t  i;
+	size_t	i;
 
 	i = 0;
 	while (*str)

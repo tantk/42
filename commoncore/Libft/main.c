@@ -1,14 +1,8 @@
 #include "libft.h"
 #include <stdio.h>
-
-int main(void)
+int	main(void)
 {
-    char s[] = "    hello   world      42 sg test tes     ";
-    char **result;
+	char		str2[] = "bonjour";
 
-    result = ft_split(s,' ');
-
-    while(*result)
-        printf("--%s\n",*result++);
-
+	printf("%s\n",ft_strchr(str2, '\0'));
 }

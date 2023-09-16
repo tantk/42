@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:20:17 by titan             #+#    #+#             */
-/*   Updated: 2023/08/08 18:16:13 by titan            ###   ########.fr       */
+/*   Updated: 2023/09/16 16:32:47 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,5 @@ int	ft_islower(int c)
 
 int	ft_isalpha(int c)
 {
-	return (ft_isupper(c) && ft_islower(c));
+	return (ft_isupper(c) || ft_islower(c));
 }

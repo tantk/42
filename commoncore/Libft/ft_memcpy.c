@@ -6,16 +6,16 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 17:14:35 by titan             #+#    #+#             */
-/*   Updated: 2023/09/13 02:07:09 by titan            ###   ########.fr       */
+/*   Updated: 2023/09/16 15:18:32 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void    *ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	char *dest_ptr;
-	const char *src_ptr;
+	char		*dest_ptr;
+	const char	*src_ptr;
 
 	dest_ptr = dest;
 	src_ptr = src;
