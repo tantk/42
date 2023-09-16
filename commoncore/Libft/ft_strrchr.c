@@ -6,23 +6,25 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 19:14:48 by titan             #+#    #+#             */
-/*   Updated: 2023/09/16 15:56:39 by titan            ###   ########.fr       */
+/*   Updated: 2023/09/16 19:58:16 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
 char	*ft_strrchr(const char *s, int c)
 {
-	size_t	s_len;
 	char	*s_ptr;
 
 	s_ptr = (char *)s;
-	s_len = ft_strlen(s);
-	while (s_len)
+	while(*s_ptr)
+		++s_ptr;
+	while((s-1) != s_ptr)
 	{
-		if ((char)s_ptr[s_len - 1] == (char)c)
+		if(*s_ptr == (char)c)
 			return (s_ptr);
-		s_len--;
+		s_ptr--;
 	}
+	if (!c)
+		return (s_ptr);
 	return (NULL);
 }

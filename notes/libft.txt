@@ -116,5 +116,14 @@ if nmemb of size is 0, calloc returns either NULL or unique pointer value that c
 strdup
 returns a pointer to a new string which is a duplicate of the string s. the new string is obtained with malloc and can be freed with free.
 
+strncmp
+ft_strncmp("abcdef", "abc\375xx", 6)
+is one of the reason we have to use unsigned char as the working data type.
+\375 becomes a -ve number if signed char is used, it overflows to the -ve region.
+\375
+'d' - (-ve number) becomes positive which is wrong, d should be smaller than \375.
+
+memcmp <- rely on n, no need to test for null, unlike strncmp or strcmp, we dont move through the while loop while testing for null.
+Probably why there is no memncmp.
 
 
