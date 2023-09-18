@@ -6,13 +6,13 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 04:20:47 by titan             #+#    #+#             */
-/*   Updated: 2023/09/19 06:22:52 by titan            ###   ########.fr       */
+/*   Updated: 2023/09/19 06:25:51 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int num_len(long n)
+static int	num_len(long n)
 {
 	if (n < 0)
 		return (1 + num_len(-n));
@@ -36,9 +36,9 @@ char	*ft_itoa(int n)
 	if (n < 0)
 		n_long = -n_long;
 	result[len] = '\0';
-	while(len)
+	while (len)
 	{
-		result[len-- - 1] =  n_long % 10 + '0';
+		result[len-- - 1] = n_long % 10 + '0';
 		n_long = n_long / 10;
 	}
 	if (n < 0)
