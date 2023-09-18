@@ -1,8 +1,14 @@
-#include "libft.h"
+#include <stdlib.h>
+#include <unistd.h>
 #include <stdio.h>
+#include "libft.h"
+#include <string.h>
 
 int	main(void)
 {
+	
+	printf("my number : %s end\n",ft_itoa(0));
 
-printf("%s",ft_strnstr("lorem ipsum dolor sit amet", "ipsum", 15));
 }
+
+

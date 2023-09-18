@@ -6,9 +6,14 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:17:52 by titan             #+#    #+#             */
-/*   Updated: 2023/09/14 20:16:49 by titan            ###   ########.fr       */
+/*   Updated: 2023/09/18 15:33:07 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+static	int	ft_isspace(char c)
+{
+	return (c == ' ' || (9 <= c && c <= 13));
+}
 
 int	ft_atoi(const char *str)
 {
@@ -17,7 +22,7 @@ int	ft_atoi(const char *str)
 
 	result = 0;
 	sign = 1;
-	while (*str == ' ')
+	while (ft_isspace(*str))
 		str++;
 	if (*str == '+' || *str == '-')
 	{
@@ -25,7 +30,10 @@ int	ft_atoi(const char *str)
 			sign = -1;
 		str++;
 	}
-	while ('0' <= *str && *str <= *str)
+	while ('0' <= *str && *str <= '9')
+	{
 		result = result * 10 + (*str - '0');
-	return (result);
+		str++;
+	}
+	return (result * sign);
 }

@@ -6,15 +6,16 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/13 20:52:58 by titan             #+#    #+#             */
-/*   Updated: 2023/09/16 21:45:53 by titan            ###   ########.fr       */
+/*   Updated: 2023/09/18 15:36:49 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
+
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	unsigned char	*s1_ptr;
 	unsigned char	*s2_ptr;
-	int		iter;
+	int				iter;
 
 	if (!n)
 		return (0);

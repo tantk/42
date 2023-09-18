@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 17:24:00 by titan             #+#    #+#             */
-/*   Updated: 2023/09/16 15:45:08 by titan            ###   ########.fr       */
+/*   Updated: 2023/09/18 18:47:29 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
 	count = 0;
 	len = ft_strlen(s);
-	result = (char *)malloc(count * sizeof(char));
+	result = (char *)malloc((len + 1) * sizeof(char));
 	if (!result)
 		return (NULL);
 	while (count < len)
@@ -35,5 +35,6 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		result[count] = f((unsigned int)count, s[count]);
 		count++;
 	}
+	result[count] = '\0';
 	return (result);
 }

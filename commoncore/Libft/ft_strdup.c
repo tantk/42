@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 13:13:20 by titan             #+#    #+#             */
-/*   Updated: 2023/09/16 15:31:51 by titan            ###   ########.fr       */
+/*   Updated: 2023/09/18 15:41:12 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ char	*ft_strdup(const char *s)
 	char	*s_ptr;
 
 	s_len = ft_strlen(s);
-	s_ptr = (char *)malloc(s_len * sizeof(char));
+	s_ptr = (char *)malloc((s_len + 1) * sizeof(char));
 	if (!s_ptr)
 		return (NULL);
 	s_ptr = ft_memcpy(s_ptr, s, s_len);
-	if (s_ptr[s_len - 1] != '\0')
-		s_ptr[s_len - 1] = '\0';
+	if (s_ptr[s_len] != '\0')
+		s_ptr[s_len] = '\0';
 	return (s_ptr);
 }

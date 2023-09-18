@@ -126,4 +126,11 @@ is one of the reason we have to use unsigned char as the working data type.
 memcmp <- rely on n, no need to test for null, unlike strncmp or strcmp, we dont move through the while loop while testing for null.
 Probably why there is no memncmp.
 
+ft_split
+find_ed function
+char *s = "  there is a  cow ";
+find_ed(s, 0, ' ');
+start -> 0 , 1, 2
+count -> 0, 1, 2, 3 , 4 ,5 
+returns 5 + 2 - 1-> 7 - 1 = 6, index 6 is at letter e. 
 

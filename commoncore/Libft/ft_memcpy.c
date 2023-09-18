@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 17:14:35 by titan             #+#    #+#             */
-/*   Updated: 2023/09/16 15:18:32 by titan            ###   ########.fr       */
+/*   Updated: 2023/09/18 21:48:04 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	char		*dest_ptr;
 	const char	*src_ptr;
 
+	if (!dest && !src)
+		return (0);
 	dest_ptr = dest;
 	src_ptr = src;
 	while (n)
