@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 20:55:19 by titan             #+#    #+#             */
-/*   Updated: 2023/09/19 04:15:54 by titan            ###   ########.fr       */
+/*   Updated: 2023/09/19 13:09:46 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -74,7 +74,7 @@ char	**ft_split(char const *s, char c)
 	result_ptr = result;
 	while (*s)
 	{
-		while (ft_strchr(&c, *s) && *s)
+		while (*s == c && *s)
 			s++;
 		len = find_len(s, c);
 		if (!len)
