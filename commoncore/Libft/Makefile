@@ -40,7 +40,9 @@ SRCS_BONUS = ft_lstnew_bonus.c \
 			 ft_lstlast_bonus.c \
 			 ft_lstadd_back_bonus.c \
 			 ft_lstdelone_bonus.c \
-			 ft_lstclear_bonus.c
+			 ft_lstclear_bonus.c \
+			 ft_lstiter_bonus.c \
+			 ft_lstmap_bonus.c
 CFLAGS = -g -Wall -Wextra -Werror -I /.
 OBJS = $(SRCS:%.c=%.o)
 OBJS_BONUS = $(SRCS_BONUS:%.c=%.o)

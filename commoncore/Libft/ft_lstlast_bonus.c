@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 16:57:21 by titan             #+#    #+#             */
-/*   Updated: 2023/09/19 17:05:25 by titan            ###   ########.fr       */
+/*   Updated: 2023/09/21 05:43:25 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list	*ft_lstlast(t_list *lst)
 {
 	if (!lst)
 		return (NULL);
-	while(lst -> next)
+	while (lst -> next)
 		lst = lst -> next;
 	return (lst);
 }
