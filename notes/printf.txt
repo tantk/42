@@ -1,0 +1,27 @@
+variadic arguments
+
+va_start
+va_arg
+va_end
+//declare va_list type as args, give it a place to store the list of args
+va_list args;
+
+va_start(args, num);
+int x  =  va_arg(args,int);
+......
+
+va_end(args);
+
+
+
+sizeof is determined at compile time even for custom data structures like struct.
+compiler calculates its size based on its member + paddings to add to align them.
+
+
+
+test for big or little endian
+int n = 1;
+// little endian if true
+if(*(char *)&n == 1) {...}
+
+https://stackoverflow.com/questions/12791864/c-program-to-check-little-vs-big-endian/12792301#12792301
