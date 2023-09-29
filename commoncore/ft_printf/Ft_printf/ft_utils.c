@@ -1,44 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flag_diuxX.c                                       :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/28 02:22:17 by titan             #+#    #+#             */
-/*   Updated: 2023/09/28 02:38:45 by titan            ###   ########.fr       */
+/*   Created: 2023/09/30 03:31:52 by titan             #+#    #+#             */
+/*   Updated: 2023/09/30 05:22:34 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "ft_printf.h"
 
-void	ft_putnbr_un(unsigned int n)
+int	print_hex(unsigned long long values, const char *hex_char)
 {
-	if (n > 9)
+	unsigned char	buffer[16];
+	int				index;
+	int				printed_char;
+
+	index = 0;
+	ft_bzero(buffer, 16);
+	if (!values)
 	{
-		ft_putnbr_un(n / 10);
-		ft_putnbr_un(n % 10);
-		return ;
+		ft_putchar_fd('0', 1);
+		return (1);
 	}
-	if (n < 10)
+	while (values && index < 16)
 	{
-		ft_putchar_fd(n + '0', 1);
-		return ;
+		buffer[index++] = hex_char[values & 0x0F];
+		values = values >> 4;
 	}
-}
-
-void	ft_parse_d(va_list va_ptr)
-{
-	ft_putnbr_fd(va_arg(va_ptr, int), 1);
-}
-
-void	ft_parse_i(va_list va_ptr)
-{
-	ft_putnbr_fd(va_arg(va_ptr,int), 1);
-}
-
-void	ft_parse_u(va_list va_ptr)
-{
-	ft_putnbr_un(va_arg(va_ptr, unsigned int));
+	printed_char = index;
+	while (index > 0)
+		ft_putchar_fd(buffer[--index], 1);
+	return (printed_char);
 }

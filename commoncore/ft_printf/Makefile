@@ -1,6 +1,5 @@
 NAME = libftprintf.a
-LIBFT_NAME = libft.a
-LIBFT_DIR = libft
+LIBFT_DIR = Libft
 LIBFT_SRCS =  $(addprefix $(LIBFT_DIR)/,\
 		ft_isalpha.c \
 	   ft_isdigit.c \
@@ -44,11 +43,15 @@ LIBFT_SRCS =  $(addprefix $(LIBFT_DIR)/,\
 	   ft_lstdelone_bonus.c \
 	   ft_lstclear_bonus.c \
 	   ft_lstiter_bonus.c \
-	   ft_lstmap_bonus.c
+	   ft_lstmap_bonus.c \
 	   )
-PRINTF_DIR = ft_printf
+PRINTF_DIR = Ft_printf
 PRINTF_SRCS = $(addprefix $(PRINTF_DIR)/,\
-		
+		ft_utils.c \
+		flag_csp.c \
+		flag_diu.c \
+		flag_xX.c \
+		ft_printf.c \
 		)
 INCLUDE_DIR = includes
 
@@ -58,10 +61,12 @@ LIBFT_OBJS = $(LIBFT_SRCS:%.c=%.o)
 
 PRINTF_OBJS = $(PRINTF_SRCS:%.c=%.o)
 
+ALL_OBJS = $(LIBFT_OBJS) $(PRINTF_OBJS)
+
 all: $(NAME)
 
-$(NAME): $(LIBFT_OBJS) $(PRINTF_OBJS)
-	ar rc $(NAME) $(LIBFT_OBJS) $(PRINTF_OBJS)
+$(NAME): $(ALL_OBJS)
+	ar rc $(NAME) $(ALL_OBJS)
 	ar -s $(NAME)
 
 %.o: %.c
@@ -69,11 +74,9 @@ $(NAME): $(LIBFT_OBJS) $(PRINTF_OBJS)
 
 clean:
 	rm -f $(LIBFT_OBJS) $(PRINTF_OBJS)
+	find . -type f -name "*.gch" -exec rm -f {} \;
 
-fclean:
-	clean
-	rm -f $(NAME)
+fclean: clean
+	rm -f $(NAME) $(LIBFT_NAME)
 
-re:
-	fclean all
-
+re: fclean all
