@@ -39,7 +39,7 @@ int main()
 
 int main()
 {
-	int fd = open("hello.txt",O_RDONLY);
+	int fd = open("empty.txt",O_RDONLY);
 	printf("%s--end\n",get_next_line(fd));
 	printf("%s--end\n",get_next_line(fd));
 

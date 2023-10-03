@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_util.c                               :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 15:54:31 by titan             #+#    #+#             */
-/*   Updated: 2023/10/03 18:01:28 by titan            ###   ########.fr       */
+/*   Updated: 2023/10/03 20:32:48 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ static void	*ft_memset(void *s, int c, size_t n)
 	return (s);
 }
 
-void	buffer_adjust(t_buffer *buf_obj, char *src,size_t new_size,size_t copy_size)
+void	buffer_adjust(t_buffer *buf_obj, char *src, size_t new_size,
+		size_t copy_size)
 {
 	char	*new_buffer;
 
@@ -51,13 +52,13 @@ void	buffer_adjust(t_buffer *buf_obj, char *src,size_t new_size,size_t copy_size
 	if (!new_buffer)
 	{
 		buf_obj -> err = 1;
-		return;
+		return ;
 	}
 	ft_memcpy(new_buffer, src, copy_size);
 	new_buffer[new_size] = '\0';
 	ft_memset(buf_obj -> buf, 0, buf_obj -> buf_size);
 	free(buf_obj -> buf);
-	buf_obj -> buf =  new_buffer;
+	buf_obj -> buf = new_buffer;
 	buf_obj -> buf_size = new_size;
 }
 
@@ -75,7 +76,8 @@ char	*buffer_reduce(t_buffer *buf_obj)
 	line = (char *)malloc((buf_obj -> nl_idx + 2) * sizeof(char *));
 	if (!line)
 		return (NULL);
-	buffer_adjust(buf_obj, buf_obj -> buf + buf_obj -> nl_idx + 1, new_size, new_size);
+	buffer_adjust(buf_obj, buf_obj -> buf + buf_obj -> nl_idx + 1,
+		new_size, new_size);
 	line = ft_memcpy(line, buf_obj -> buf, buf_obj -> nl_idx + 1);
 	line[buf_obj -> nl_idx + 1] = '\0';
 	buf_obj -> buf_chkpt = 0;
@@ -89,7 +91,6 @@ void	buffer_expand(t_buffer *buf_obj)
 	new_size = buf_obj -> buf_size + BUFFER_SIZE;
 	buffer_adjust(buf_obj, buf_obj-> buf, new_size, buf_obj -> buf_size);
 	if (buf_obj -> err)
-		return;
+		return ;
 	buf_obj -> buf_chkpt = buf_obj -> buf_size;
 }
-
