@@ -37,10 +37,22 @@ int main()
 	close(fd);
 }*/
 
-int main()
+int main(int argc, char **argv)
 {
-	int fd = open("empty.txt",O_RDONLY);
+	/*
+	char *file = argv[1];
+	int fd = open(file,O_RDWR);
 	printf("%s--end\n",get_next_line(fd));
 	printf("%s--end\n",get_next_line(fd));
-
+	*/
+	static t_storage storage= {
+		0,0,0,NULL,NULL
+	};
+	char something[] = "abcd";
+	char something2[] = "efg";
+	ft_lstnew(&storage, something,4);
+	ft_lstnew(&storage, something2,3);
+	printf("%s\n",storage.head->content);
+	printf("%s",storage.last->content);
+	ft_lstclear(&storage);
 }

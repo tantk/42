@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 08:15:52 by titan             #+#    #+#             */
-/*   Updated: 2023/10/05 15:51:23 by titan            ###   ########.fr       */
+/*   Updated: 2023/10/04 11:08:55 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef GET_NEXT_LINE_H
@@ -16,26 +16,19 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 15
+#  define BUFFER_SIZE 300
 # endif
 
-
-typedef struct s_lst{
-	char			*content;
-	struct s_lst	*next;
-}	t_lst;
-
-typedef struct s_storage{
-	int		last_len;
-	int		head_len;
+typedef struct s_buffer{
+	char	*buf;
+	int		nl_idx;
 	int		err;
-	int		size;
-	t_lst	*head;
-	t_lst	*last;
-}	t_storage;
+	int		last_read;
+}	t_buffer;
 
 char	*get_next_line(int fd);
-int		ft_lstnew(t_storage *storage, char *str, int last_idx);
-void	ft_lstclear(t_storage *storage);
-
+char	*buffer_reduce(t_buffer *buf_obj);
+void	buffer_expand(t_buffer *buf_obj);
+void	buffer_adjust(t_buffer *buf_obj, char *src, size_t new_size,
+			size_t copy_size);
 #endif

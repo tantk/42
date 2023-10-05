@@ -6,91 +6,112 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 15:54:31 by titan             #+#    #+#             */
-/*   Updated: 2023/10/03 20:32:48 by titan            ###   ########.fr       */
+/*   Updated: 2023/10/05 16:12:45 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static void	*ft_memcpy(void *dest, const void *src, size_t n)
+static void	ft_strcpy_gnl(char *dest, const char *src)
 {
 	char		*dest_ptr;
 	const char	*src_ptr;
 
-	if (!dest && !src)
+	if (!dest || !src)
 		return (0);
 	dest_ptr = dest;
 	src_ptr = src;
-	while (n)
-	{
+	while (*src)
 		*dest_ptr++ = *src_ptr++;
-		n--;
-	}
-	return (dest);
+	*dest_ptr = '\0';
 }
 
-static void	*ft_memset(void *s, int c, size_t n)
+size_t	ft_strlen(const char *str)
 {
-	unsigned char	*str;
+	size_t	i;
 
-	str = s;
-	while (n)
+	i = 0;
+	while (*str)
 	{
-		n--;
-		*str = c;
+		i++;
 		str++;
 	}
-	return (s);
+	return (i);
 }
 
-void	buffer_adjust(t_buffer *buf_obj, char *src, size_t new_size,
-		size_t copy_size)
+// return 1 if fails, return 0 if successful
+// use parameter len of 0 if we want to assume BUFFER_SIZE
+int	ft_lstnew(t_storage *storage, char *str, int len)
 {
-	char	*new_buffer;
+	t_lst	*node;
+	char	*content;
 
-	new_buffer = (char *)malloc((new_size + 1) * sizeof(char));
-	if (!new_buffer)
+	content = (char *)malloc(sizeof(char) * (len + 1));
+	node = (t_lst *)malloc(sizeof(t_lst));
+	if (!node || !content)
+		return (1);
+	ft_memcpy_gnl(content, str, len);
+	node -> content = content;
+	node -> next = NULL;
+	if (!storage -> head)
 	{
-		buf_obj -> err = 1;
-		return ;
+		storage -> head = node;
+		storage -> head_len = len;
 	}
-	ft_memcpy(new_buffer, src, copy_size);
-	new_buffer[new_size] = '\0';
-	ft_memset(buf_obj -> buf, 0, buf_obj -> buf_size);
-	free(buf_obj -> buf);
-	buf_obj -> buf = new_buffer;
-	buf_obj -> buf_size = new_size;
+	else
+		storage -> last -> next = node;
+	storage -> size++;
+	storage -> last = node;
+	storage -> last_len = node;
+	return (0);
 }
 
-char	*buffer_reduce(t_buffer *buf_obj)
+void	ft_lstclear(t_storage *storage)
 {
+	t_lst	*i;
+	t_lst	*j;
+
+	i = storage -> head;
+	while (i)
+	{
+		j = i -> next;
+		free(i -> content);
+		free(i);
+		i = j;
+	}
+	storage -> last_len = 0;
+	storage -> size = 0;
+	storage -> head_len = 0;
+	storage -> head = NULL;
+	storage -> last = NULL;
+}
+
+char	*extract_line(t_storage *storage, int nl_idx)
+{
+	int		line_len;
 	char	*line;
-	size_t	new_size;
+	char	*line_ptr;
+	t_lst	*i;
 
-	new_size = buf_obj -> buf_size - buf_obj -> nl_idx - 1;
-	if (!new_size)
-	{
-		buf_obj -> buf_size = 0;
-		return (buf_obj -> buf);
-	}
-	line = (char *)malloc((buf_obj -> nl_idx + 2) * sizeof(char *));
+	if (storage -> size > 2)
+		line_len = (storage -> size - 2) * BUFFER_SIZE + (nl_idx + 1);
+	else if (storage -> size == 2)
+		line_len = storage -> head_len + storage -> last_len;
+	else
+		line_len = storage -> head_len;
+	line = (char *)malloc((line_len + 1) * sizeof(char));
 	if (!line)
 		return (NULL);
-	buffer_adjust(buf_obj, buf_obj -> buf + buf_obj -> nl_idx + 1,
-		new_size, new_size);
-	line = ft_memcpy(line, buf_obj -> buf, buf_obj -> nl_idx + 1);
-	line[buf_obj -> nl_idx + 1] = '\0';
-	buf_obj -> buf_chkpt = 0;
+	line_ptr = line;
+	i = storage -> head;
+	while (i && storage -> last != i)
+	{
+		ft_memcpy_gnl(line_ptr, i->content, BUFFER_SIZE);
+		line_ptr += BUFFER_SIZE;
+		i = i -> next;
+	}
+	ft_memcpy_gnl(line_ptr, i -> content, (nl_idx + 1));
 	return (line);
 }
 
-void	buffer_expand(t_buffer *buf_obj)
-{
-	int		new_size;
-
-	new_size = buf_obj -> buf_size + BUFFER_SIZE;
-	buffer_adjust(buf_obj, buf_obj-> buf, new_size, buf_obj -> buf_size);
-	if (buf_obj -> err)
-		return ;
-	buf_obj -> buf_chkpt = buf_obj -> buf_size;
-}
+void	store_leftover(t_storage *storage, )
