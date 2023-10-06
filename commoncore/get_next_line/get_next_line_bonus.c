@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 15:17:01 by titan             #+#    #+#             */
-/*   Updated: 2023/10/07 07:08:47 by titan            ###   ########.fr       */
+/*   Updated: 2023/10/07 07:21:59 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -68,28 +68,47 @@ static int	read_till_nl(t_storage *storage, int fd)
 	return (ret_cond(storage, nl_idx, rd_bytes));
 }
 
+void	init_storage(t_storage *storage, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		storage[i].err = 0;
+		storage[i].content_len = 0;
+		storage[i].last_len = 0;
+		storage[i].last_read = -1;
+		storage[i].head = NULL;
+		storage[i].last = NULL;
+		i++;
+	}
+}
+
 char	*get_next_line(int fd)
 {
-	static t_storage	storage = {0, 0, 0, -1, NULL, NULL};
+	static t_storage	storage[1024];
 	int					nl_idx;
 	char				*line;
 
+	if (storage[0].err != 0)
+		init_storage(storage, 1024);
 	if (BUFFER_SIZE <= 0)
 		return (NULL);
-	nl_idx = read_till_nl(&storage, fd);
+	nl_idx = read_till_nl(&storage[fd], fd);
 	if (nl_idx == -1)
 	{
-		ft_lstclear(&storage);
+		ft_lstclear(&storage[fd]);
 		return (NULL);
 	}
-	line = extract_line(&storage, nl_idx);
+	line = extract_line(&storage[fd], nl_idx);
 	if (!line)
 		return (NULL);
-	if ((nl_idx + 1) < storage.last_read)
-		store_leftover(&storage, nl_idx);
+	if ((nl_idx + 1) < storage[fd].last_read)
+		store_leftover(&storage[fd], nl_idx);
 	else
-		ft_lstclear(&storage);
-	if (storage.err)
+		ft_lstclear(&storage[fd]);
+	if (storage[fd].err)
 		return (NULL);
 	return (line);
 }
