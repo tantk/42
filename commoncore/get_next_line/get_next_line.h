@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 08:15:52 by titan             #+#    #+#             */
-/*   Updated: 2023/10/07 06:50:48 by titan            ###   ########.fr       */
+/*   Updated: 2023/10/07 18:02:48 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef GET_NEXT_LINE_H
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 15
+#  define BUFFER_SIZE 10
 # endif
 
 typedef struct s_lst{

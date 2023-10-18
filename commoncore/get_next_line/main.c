@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "get_next_line.h"
+#include <time.h>
+
 void	ft_putchar(char c)
 {
 	write(1,&c,1);
@@ -40,6 +42,12 @@ int main()
 int main(int argc, char **argv)
 {
 
+	clock_t start, end;
+	double execution_time;
+	start = clock();
+
+	for (int i = 0; i < 100; i++)
+	{
 	char *file = argv[1];
 	int fd = open(file,O_RDWR);
 	char *line1 = get_next_line(fd);
@@ -48,18 +56,19 @@ int main(int argc, char **argv)
 	char *line4 = get_next_line(fd);
 	char *line5 = get_next_line(fd);
 	char *line6 = get_next_line(fd);
-	printf("%s--end\n",line1);
-	printf("%s--end\n",line2);
-	printf("%s--end\n",line3);
-	printf("%s--end\n",line4);
-	printf("%s--end\n",line5);
-	printf("%s--end\n",line6);
+	//printf("%s--end\n",line1);
+	//printf("%s--end\n",line2);
+	//printf("%s--end\n",line3);
+	//printf("%s--end\n",line4);
+	//printf("%s--end\n",line5);
+	//printf("%s--end\n",line6);
 	free(line1);
 	free(line2);
 	free(line3);
 	free(line4);
 	free(line5);
 	free(line6);
+	close(fd);
 	/*static t_storage storage= {
 		0,0,0,NULL,NULL
 	};
@@ -76,4 +85,8 @@ int main(int argc, char **argv)
 	printf("leftover %s \n",storage.head->content);
 	ft_lstclear(&storage);
 	*/
+	}
+	end= clock();
+	execution_time = ((double)(end - start))/ CLOCKS_PER_SEC;
+	printf("time: %lf second ",execution_time);
 }
