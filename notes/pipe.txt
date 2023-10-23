@@ -1,0 +1,75 @@
+The term "image" in this context refers to a snapshot or the entire set of resources required for a program to run.
+i.e. program's code, data, stack,heap, file descriptors, environment variable, command line argument, process identifier
+fork will copy the entire image.
+
+fork : child process get born, and start executing the following lines as well. 
+fork also returns int, its process id. 
+id of child process is always 0.
+id is -1 if there is error.
+
+if fork is called twice, the first fork creates a child. the second fork creates a child from the main. the child process creates another child too. so there will be 4 process in total.
+
+info about printf: standard output has a internal buffer. it will wait until everything is done then print. if we want to print immediately, we can use fflush(stdout).
+
+fork actually split the execution line. each process, child and main is going to get executed simultaneously. Or sometime the os will decide to execute everything for each process. This is unpredictable.
+
+To overcome this issue, use wait.
+
+getpid returns process id of of the calling process. getppid returns the process id of the parent of the calling process.
+
+if parent process terminate before the child, a new parent process id will be assigned to the child.
+
+wait from sys/wait.h will return the process id of what we waited for.
+
+wait will have issue if there is multiple forks and we wait on (null).
+the main process will not know which process to wait for. so it only wait for the fastest child process to finish and terminates. this will result in zombie child process ( its parent terminated)
+
+using wait(NULL) !=-1 || errno != ECHILD can wait for all children to finish. ECHILD is a macro for errno in errno.h, it means no child processes. so this while loop will keep looping as long as it has child processes.
+
+pipe 
+pipe takes in an int array of size 2. it returns -1 on error.
+fd[0] - read , fd[1] - write
+note: 1 pipe for each communication channel btwn 2 processes. i.e. parent to child, parent use the read, child use the write. Create another pipe if parent need to write and child to read.
+
+named pipe
+fifo
+opening read/write of a fifo blocks until other end is also opened.
+
+execlp: execute file in PATH env if it contains no slashes with all argument after FILE till a null ptr.
+i.e.
+execlp("ping","ping","-c","3","google.com",NULL);
+
+execution line will be replaced by execlp. we probably need to use a fork to use execlp. else main will just be replaced by execlp.
+use WIFEXITED and WEXITSTATUS 
+
+exec has a family of functions to replace the current process image. 
+V stands for vector. P stands for PATH. E stands for Environment.
+
+V -> need to pass in array.
+L -> pass in as a list of arguments
+
+some notes: char *str[] is used if i know the number of elements at compile time. else use char **str
+
+using dup2, we can replace STDOUT. using dup is useful because it doesnt change the process id. it also doesnt change the current opened fd.
+most of the terminal programs actually print to stdout, by replacing stdout, we can redirect the output of those program to our destinated fd. i.e. int file2 = dup2(file,1);
+
+Use Macro instead of 1, i.e. STDOUT_FILENO 
+
+exec execute the executable without involvement of shell interface. So we are unable to use pipe operator. pipe operator exist only in bash.
+
+it might be a good idea for pipex to use execve("bash"...) first to make sure all arguments are parsed correctly.
+
+we can use kill(pid, SIGNKILL) from the parent to child.
+check man 7 signal for the list of signals in linux. 
+SIGSTOP/ SIGCONT can be used to pause process at granular level.
+
+
+some random notes about two complemention. it is the bitwise not operator on the positive number and add one. it simplified the arithmetic operation especially on addition and subtraction. note that the carry in the result is ignored.
+for -ve numbers in intgeger, they are stored in two complement format, with the signed bit being 1. that is why -1 is the biggest bit. i.e. 000001 will become 111110 and add 1 to become 111111.
+
+about signal:
+ctrl z is a stop signal. it send a stop signal, SIGTSTP to the process. but the process has yet to terminate. it got sent to background.
+in terminal fg can send a continue signal SIGNCONT to the process.
+fg sees what was last stopped and resumes.
+
+
