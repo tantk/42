@@ -2,8 +2,8 @@ The term "image" in this context refers to a snapshot or the entire set of resou
 i.e. program's code, data, stack,heap, file descriptors, environment variable, command line argument, process identifier
 fork will copy the entire image.
 
-fork : child process get born, and start executing the following lines as well. 
-fork also returns int, its process id. 
+fork : child process get born, and start executing the following lines as well.
+fork also returns int, its process id.
 id of child process is always 0.
 id is -1 if there is error.
 
@@ -26,7 +26,7 @@ the main process will not know which process to wait for. so it only wait for th
 
 using wait(NULL) !=-1 || errno != ECHILD can wait for all children to finish. ECHILD is a macro for errno in errno.h, it means no child processes. so this while loop will keep looping as long as it has child processes.
 
-pipe 
+pipe
 pipe takes in an int array of size 2. it returns -1 on error.
 fd[0] - read , fd[1] - write
 note: 1 pipe for each communication channel btwn 2 processes. i.e. parent to child, parent use the read, child use the write. Create another pipe if parent need to write and child to read.
@@ -40,9 +40,9 @@ i.e.
 execlp("ping","ping","-c","3","google.com",NULL);
 
 execution line will be replaced by execlp. we probably need to use a fork to use execlp. else main will just be replaced by execlp.
-use WIFEXITED and WEXITSTATUS 
+use WIFEXITED and WEXITSTATUS
 
-exec has a family of functions to replace the current process image. 
+exec has a family of functions to replace the current process image.
 V stands for vector. P stands for PATH. E stands for Environment.
 
 V -> need to pass in array.
@@ -53,18 +53,18 @@ some notes: char *str[] is used if i know the number of elements at compile time
 using dup2, we can replace STDOUT. using dup is useful because it doesnt change the process id. it also doesnt change the current opened fd.
 most of the terminal programs actually print to stdout, by replacing stdout, we can redirect the output of those program to our destinated fd. i.e. int file2 = dup2(file,1);
 
-Use Macro instead of 1, i.e. STDOUT_FILENO 
+Use Macro instead of 1, i.e. STDOUT_FILENO
 
 exec execute the executable without involvement of shell interface. So we are unable to use pipe operator. pipe operator exist only in bash.
 
 it might be a good idea for pipex to use execve("bash"...) first to make sure all arguments are parsed correctly.
 
 we can use kill(pid, SIGNKILL) from the parent to child.
-check man 7 signal for the list of signals in linux. 
+check man 7 signal for the list of signals in linux.
 SIGSTOP/ SIGCONT can be used to pause process at granular level.
 
 
-some random notes about two complemention. it is the bitwise not operator on the positive number and add one. it simplified the arithmetic operation especially on addition and subtraction. note that the carry in the result is ignored.
+some random notes about two complement. it is the bitwise NOT operator on the positive number and add one. it makes arithmetic operation especially on addition and subtraction easier. note that the carry in the result is ignored.
 for -ve numbers in intgeger, they are stored in two complement format, with the signed bit being 1. that is why -1 is the biggest bit. i.e. 000001 will become 111110 and add 1 to become 111111.
 
 about signal:
@@ -72,4 +72,10 @@ ctrl z is a stop signal. it send a stop signal, SIGTSTP to the process. but the 
 in terminal fg can send a continue signal SIGNCONT to the process.
 fg sees what was last stopped and resumes.
 
+if we happen to use dup2 to replace stdoutput, rmb to close fd as it is now no longer in use.
+
+About here_doc
+cmd << limiter takes in input until limiter.
+The first command (>) overwrites the destination file (file2.txt) with the output.
+The second command (>>) appends the output to the end of the destination file (file2.txt) without overwriting it.
 
