@@ -3,7 +3,7 @@
 #include <stdlib.h>
 int main(int argc, char **argv)
 {
-    execve("/bin/sed",argv+1,NULL);
+    execve("/bin/tr",argv+1,NULL);
     printf("This line will not be executed.\n");
 
 /*	char* a;

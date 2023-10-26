@@ -52,6 +52,9 @@ GNL_SRC = $(addprefix $(GNL_DIR)/,\
 PIPEX_DIR = src
 PIPEX_SRC = $(addprefix $(PIPEX_DIR)/,\
 			main.c \
+			parser.c \
+			lst_func.c \
+			ft_errors.c \
 			)
 INCLUDE_DIR = includes
 

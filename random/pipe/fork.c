@@ -4,7 +4,7 @@
 
 int main()
 {
-    pid_t pid;
+    int pid;
 
     pid = fork();
     if (pid == -1)

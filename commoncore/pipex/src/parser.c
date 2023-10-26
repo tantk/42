@@ -6,45 +6,54 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 03:19:17 by titan             #+#    #+#             */
-/*   Updated: 2023/10/26 07:33:52 by titan            ###   ########.fr       */
+/*   Updated: 2023/10/27 00:14:54 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 // ./pipex file ""
 //./a.out "awk -F: " "{count++} END {printf \"count: %i\" , count}" "/etc/passwd"
 //./a.out "sed" "s/And/But/" "etc/passwd"
 
 //34 is double quote, 39 is single quote
-static int is_special(char c)
+static int	is_special(char c)
 {
 	return (c == '{' || c == 34 || c == 39);
 }
 
+// 92 is backslash
 static int	find_counter(const char *str, char c)
 {
 	char	*counterpart;
 	int		len;
 
-	counterpart = ft_strrchr(str, c);
-	len = (counterpart - str) + 1;
-	if (len > 1)
+	len = 0;
+	if (c == '{')
+	{
+		counterpart = ft_strrchr(str, '}');
+		len = (counterpart - str) + 1;
+	}
+	else
+	{
+		counterpart = ft_strchr(str + 1, c);
+		len = (counterpart - str) - 1;
+	}
+	if (len >= 1)
 		return (len);
 	else
 		return (-1);
 }
 
 //handle quotes and brackets
-static char *handle_phrase(const char *str, char c, int *skip)
+static char	*handle_phrase(const char *str, char c, int *skip)
 {
-	int len;
+	int	len;
 
 	len = find_counter(str, c);
 	if (c == 34 || c == 39)
 	{
 		str++;
-		*skip += 1;
-		len--;
+		*skip += 2;
 	}
 	if (len < 1)
 		return (NULL);
@@ -56,21 +65,22 @@ static char *handle_phrase(const char *str, char c, int *skip)
 static char	*pp_strdup(const char *str, int *skip)
 {
 	int		len;
-	char	*str_ptr
+	char	*str_ptr;
 
 	len = 0;
-	str_ptr = str;
+	str_ptr = (char *)str;
 	while (*str_ptr && *str_ptr != ' ')
 	{
 		len++;
 		str_ptr++;
 	}
+	*skip += len;
 	return (ft_substr(str, 0, len));
 }
 
-t_hld *parse(const char *cmd)
+t_hld	*pp_parse_cmd(const char *cmd)
 {
-	t_hdl	*hld;
+	t_hld	*hld;
 	int		err;
 	int		skip;
 

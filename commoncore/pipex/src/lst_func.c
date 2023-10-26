@@ -6,11 +6,11 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:23:59 by titan             #+#    #+#             */
-/*   Updated: 2023/10/26 02:18:20 by titan            ###   ########.fr       */
+/*   Updated: 2023/10/26 17:07:48 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 void pp_hdlclear(t_hld *hld)
 {
@@ -36,7 +36,7 @@ int	pp_lstadd(t_hld *hld, char const *str)
 	if (!new_node)
 		return (-1);
 	new_node -> next = NULL;
-	new_node -> content = str;
+	new_node -> content = (char *)str;
 	if (!new_node -> content)
 		return (-1);
 	if (!hld -> head)
