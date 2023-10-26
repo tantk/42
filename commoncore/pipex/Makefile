@@ -50,8 +50,8 @@ GNL_SRC = $(addprefix $(GNL_DIR)/,\
 		  get_next_line_utils.c \
 		)
 PIPEX_DIR = src
-PIPEX_SRC = $(addprefix $(GNL_DIR)/,\
-			main.c
+PIPEX_SRC = $(addprefix $(PIPEX_DIR)/,\
+			main.c \
 			)
 INCLUDE_DIR = includes
 

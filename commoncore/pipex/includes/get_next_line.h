@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 08:15:52 by titan             #+#    #+#             */
-/*   Updated: 2023/10/07 18:02:48 by titan            ###   ########.fr       */
+/*   Updated: 2023/10/25 19:24:53 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef GET_NEXT_LINE_H
@@ -19,7 +19,8 @@
 #  define BUFFER_SIZE 10
 # endif
 
-typedef struct s_lst{
+src/main.c:15:1: error: expected ‘;’, identifier or ‘(’ before ‘int’
+   15 | int     main(int argc, char **argv)typedef struct s_lst{
 	char			*content;
 	struct s_lst	*next;
 }	t_lst;

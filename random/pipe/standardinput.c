@@ -7,4 +7,6 @@ int main()
 
 	read(0,size,50);
 
+	printf("%s\n",size);
+
 }

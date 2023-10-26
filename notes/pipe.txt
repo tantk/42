@@ -79,3 +79,5 @@ cmd << limiter takes in input until limiter.
 The first command (>) overwrites the destination file (file2.txt) with the output.
 The second command (>>) appends the output to the end of the destination file (file2.txt) without overwriting it.
 
+
+https://stackoverflow.com/questions/27486873/fork-system-call-and-memory-space-of-the-process

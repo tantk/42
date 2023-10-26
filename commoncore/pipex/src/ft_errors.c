@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   ft_errors.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 20:54:24 by titan             #+#    #+#             */
-/*   Updated: 2023/09/19 22:05:31 by titan            ###   ########.fr       */
+/*   Created: 2023/10/25 19:18:24 by titan             #+#    #+#             */
+/*   Updated: 2023/10/25 22:11:40 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_puterror()
 {
-	t_list	*temptr;
-
-	while (*lst != NULL)
-	{
-		temptr = (*lst)->next;
-		del((*lst)->content);
-		free(*lst);
-		*lst = temptr;
-	}
-	*lst = NULL;
+	perror(strerror(errno));
+}
+//
+void	exit_failure()
+{
+	
+	exit(EXIT_FAILURE);
 }

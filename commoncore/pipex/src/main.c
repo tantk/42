@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 16:34:31 by titan             #+#    #+#             */
-/*   Updated: 2023/09/19 16:45:12 by titan            ###   ########.fr       */
+/*   Created: 2023/10/25 15:14:48 by titan             #+#    #+#             */
+/*   Updated: 2023/10/25 15:28:48 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_lstadd_front(t_list **lst, t_list *new_node)
+#include "pipex.h"
+int	main(int argc, char **argv)
 {
-	new_node -> next = *lst;
-	*lst = new_node;
+	(void)argc;
+	(void)argv;
+	printf("test size of my struct : %ld", sizeof(t_lst_holder));
+	return (0);
 }
