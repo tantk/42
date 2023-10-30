@@ -3,44 +3,96 @@
 /*                                                        :::      ::::::::   */
 /*   proc_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 03:34:32 by titan             #+#    #+#             */
-/*   Updated: 2023/10/27 05:29:14 by titan            ###   ########.fr       */
+/*   Created: 2023/10/29 01:48:06 by titan             #+#    #+#             */
+/*   Updated: 2023/10/31 05:23:28 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-int fork_proc(t_proc *proc)
+int	redir_fd(int fd1, int fd2)
 {
-	proc -> pid = fork();
-	if (proc -> pid == -1)
-		return(ret_errmsg("Fork:"));
+	int res;
+
+	if (fd1 == fd2)
+		return (ret_errmsg("function redir_fd dup2 same fd"));
+	res = dup2(fd1, fd2);
+	if (res == -1)
+		return (ret_errmsg("function redir_fd dup2:"));
+	res = close(fd1);
+	if (res == -1)
+		return (ret_errmsg("function redir_fd close:"));
 	return (1);
 }
 
-int	child_proc(t_proc *proc, char *prog_path, char **cmd_arr)
+// setup fd
+int	pop_filefd(t_proc *proc, char *infile, char *outfile)
 {
-	proc -> prd_pipe
+	if (infile)
+		proc -> iofile_fd[0] = open(infile,O_RDONLY);
+	if (proc -> iofile_fd[0] == -1)
+		return(ret_errmsg("error with infile"));
+	if (outfile)
+		proc -> iofile_fd[1] = open(outfile, O_WRONLY | O_TRUNC | O_CREAT);
+	if (proc -> iofile_fd[1] == -1)
+		return(ret_errmsg("error with outfile"));
+	return (1);
 }
 
-int	exec_proc(t_proc *proc)
+char	*get_envpath(char *envp[])
 {
-	char	*prog_path;
-	char	**cmd_arr;
+	int	i;
+	int	cmp;
+	char *env_var;
 
-	cmd_arr = pp_get_content(proc -> cmd_holder);
-	if (!cmd_arr)
-		return(ret_errmsg("exec_proc"));
-	prog_path = find_exec(*cmd_arr, proc->path);
-	if (!prog_path)
-		return (nil_prog_err(*cmd_arr));
-	if (proc -> pid == 0)
+	i = 0;
+	cmp =  ft_strncmp(env_var, "PATH", 4);
+	env_var = envp[i];
+	while (env_var && cmp)
 	{
-
-		execve(prog_path,cmd_arr,NULL);
-
+		i++;
+		env_var = envp[i];
+		if (env_var)
+			cmp =  ft_strncmp(env_var, "PATH", 4);
 	}
+	if (!env_var)
+		return (ret_errmsg_char("Env path not found"));
+	return (env_var);
+}
 
+int	prep_proc(t_proc *proc, char *cmd_str, char *env_path)
+{
+	int	err;
+
+	proc -> cmd_arr = pp_get_content(cmd_str);
+	if (!proc -> cmd_arr)
+		return(ret_errmsg("prep_proc_cmd_str"));
+	proc -> prog_path = find_exec(*(proc -> cmd-arr), env_path);
+	if (!proc -> prog_path)
+		return (nil_prog_err(*cmd_arr));
+	err = pipe(proc -> pipe_fd);
+	if (err == -1)
+		return (ret_errmsg("pipe err"));
+	return (1);
+}
+
+int	init_proc(t_proc *proc, int argc, char** argv, char **envp)
+{
+	int err;
+
+	err = 0;
+	proc -> pipe_fd[0] = 0;
+	proc -> pipe_fd[1] = 0;
+	err = pop_filefd(t_proc *proc, argv[1], argv[argc - 1]);
+	if (err == -1)
+		return ret_errmsg("init_proc, filefd");
+	proc -> pid = 0;
+	proc -> cmd_arr = NULL;
+	proc -> exec_env = envp;
+	if (!proc ->exec_env)
+		return ret_errmsg("init_proc, null env path");
+	proc -> prog_path = NULL;
+	return (1);
 }

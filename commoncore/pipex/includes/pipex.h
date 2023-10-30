@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:52:48 by titan             #+#    #+#             */
-/*   Updated: 2023/10/27 05:14:21 by titan            ###   ########.fr       */
+/*   Updated: 2023/10/31 02:13:06 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PIPEX_H
@@ -27,14 +27,15 @@ typedef struct s_lst_holder{
 } t_hld;
 
 typedef struct s_proc{
-	int		prd_pipe[2];
-	int		pwr_pipe[2];
-	int		pid;
-	t_hld	*cmd_holder;
-	char	*path;
+	int		pipe_fd[2];
+	int		iofile_fd[2];
+	pid_t	pid;
+	char	**cmd_arr;
+	char	**exec_env;
+	char	*prog_path;
 } t_proc;
 
-t_hld	*pp_parse_cmd(const char *cmd);
+char	**pp_parse_cmd(const char *cmd);
 void pp_hdlclear(t_hld *hld);
 int pp_lstadd(t_hld *hld, char const *str);
 char **pp_get_content(t_hld *hld);

@@ -6,13 +6,13 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:23:59 by titan             #+#    #+#             */
-/*   Updated: 2023/10/26 17:07:48 by titan            ###   ########.fr       */
+/*   Updated: 2023/10/29 00:16:21 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void pp_hdlclear(t_hld *hld)
+void pp_hdlclearstruct(t_hld *hld)
 {
 	t_lst	*i;
 	t_lst	*j;
@@ -21,7 +21,6 @@ void pp_hdlclear(t_hld *hld)
 	while (i)
 	{
 		j = i -> next;
-		free(i -> content);
 		free(i);
 		i = j;
 	}
@@ -69,6 +68,7 @@ char **pp_get_content(t_hld *hld)
 		lst = lst -> next;
 	}
 	res[hld->size] = NULL;
+	pp_hdlclearstruct(hld);
 	return (res);
 }
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_utils.c                                       :+:      :+:    :+:   */
+/*   findprog_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 23:25:53 by titan             #+#    #+#             */
-/*   Updated: 2023/10/27 05:03:26 by titan            ###   ########.fr       */
+/*   Updated: 2023/10/31 00:33:06 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,32 +29,6 @@ static char	*pp_strjoin(char const *s1, char const *s2)
 	return (result);
 }
 
-// Replace std input fd by the fd parameter
-int	redir_io(char *filepath, int fd1, int fd2,int rwx)
-{
-	int	res;
-
-	res = access(filepath, rwx);
-	if (res == -1)
-		return (ret_errmsg("function redir_io:"));
-	res = dup2(fd1, fd2);
-	if (res == -1)
-		return (ret_err());
-	close(fd1);
-	return (1);
-}
-
-int	redir_fd(int fd1, int fd2)
-{
-	int res;
-
-	res = dup2(fd1, fd2);
-	if (res == -1)
-		return ((ret_errmsg("function redir_fd:")));
-	return (1);
-
-}
-
 static char *free_arr(char *file_path, char** arr)
 {
 	while(*arr)
@@ -66,6 +40,8 @@ static char *free_arr(char *file_path, char** arr)
 }
 
 //home/titan/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+//Returns file path , a char ptr on the heap
+//Note that access returns zero on success
 char *find_exec(char *prog_name, char *path_var)
 {
 	char	**path_prefix;
@@ -85,5 +61,6 @@ char *find_exec(char *prog_name, char *path_var)
 			return(free_arr(file_path,path_prefix));
 		path_prefix_ptr++;
 	}
-	return (NULL);
+	free(file_path)
+	return (free_arr(NULL,path_prefix));
 }

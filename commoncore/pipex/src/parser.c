@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 03:19:17 by titan             #+#    #+#             */
-/*   Updated: 2023/10/27 00:14:54 by titan            ###   ########.fr       */
+/*   Updated: 2023/10/29 00:14:04 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static char	*pp_strdup(const char *str, int *skip)
 	return (ft_substr(str, 0, len));
 }
 
-t_hld	*pp_parse_cmd(const char *cmd)
+char	**pp_parse_cmd(const char *cmd)
 {
 	t_hld	*hld;
 	int		err;
@@ -102,5 +102,5 @@ t_hld	*pp_parse_cmd(const char *cmd)
 		cmd += skip;
 		skip = 0;
 	}
-	return (hld);
+	return (pp_get_content(hld));
 }
