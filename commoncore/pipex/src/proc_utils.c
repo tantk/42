@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 01:48:06 by titan             #+#    #+#             */
-/*   Updated: 2023/10/31 05:23:28 by titan            ###   ########.fr       */
+/*   Updated: 2023/10/31 09:29:55 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	pop_filefd(t_proc *proc, char *infile, char *outfile)
 	if (proc -> iofile_fd[0] == -1)
 		return(ret_errmsg("error with infile"));
 	if (outfile)
-		proc -> iofile_fd[1] = open(outfile, O_WRONLY | O_TRUNC | O_CREAT);
+		proc -> iofile_fd[1] = open(outfile, O_WRONLY | O_TRUNC | O_CREAT, 0777);
 	if (proc -> iofile_fd[1] == -1)
 		return(ret_errmsg("error with outfile"));
 	return (1);
@@ -48,8 +48,8 @@ char	*get_envpath(char *envp[])
 	char *env_var;
 
 	i = 0;
-	cmp =  ft_strncmp(env_var, "PATH", 4);
 	env_var = envp[i];
+	cmp =  ft_strncmp(env_var, "PATH", 4);
 	while (env_var && cmp)
 	{
 		i++;
@@ -66,12 +66,12 @@ int	prep_proc(t_proc *proc, char *cmd_str, char *env_path)
 {
 	int	err;
 
-	proc -> cmd_arr = pp_get_content(cmd_str);
+	proc -> cmd_arr = pp_parse_cmd(cmd_str);
 	if (!proc -> cmd_arr)
 		return(ret_errmsg("prep_proc_cmd_str"));
-	proc -> prog_path = find_exec(*(proc -> cmd-arr), env_path);
+	proc -> prog_path = find_exec(*(proc -> cmd_arr), env_path);
 	if (!proc -> prog_path)
-		return (nil_prog_err(*cmd_arr));
+		return (nil_prog_err(*proc -> cmd_arr));
 	err = pipe(proc -> pipe_fd);
 	if (err == -1)
 		return (ret_errmsg("pipe err"));
@@ -85,7 +85,7 @@ int	init_proc(t_proc *proc, int argc, char** argv, char **envp)
 	err = 0;
 	proc -> pipe_fd[0] = 0;
 	proc -> pipe_fd[1] = 0;
-	err = pop_filefd(t_proc *proc, argv[1], argv[argc - 1]);
+	err = pop_filefd(proc, argv[1], argv[argc - 1]);
 	if (err == -1)
 		return ret_errmsg("init_proc, filefd");
 	proc -> pid = 0;

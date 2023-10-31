@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:18:24 by titan             #+#    #+#             */
-/*   Updated: 2023/10/27 05:13:34 by titan            ###   ########.fr       */
+/*   Updated: 2023/10/31 09:23:33 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,17 @@ int	ret_err_cust_msg(const char *msg, int errorcode)
 	return (-1);
 }
 //
-void	exit_failure()
-{	
-	exit(EXIT_FAILURE);
+int	exit_status(int status)
+{
+	if (WIFEXITED(status))
+		ft_printf("exited, status=%d\n", WEXITSTATUS(status));
+	else if (WIFSIGNALED(status))
+		ft_printf("killed by signal %d\n", WTERMSIG(status));
+	else if (WIFSTOPPED(status))
+		ft_printf("stopped by signal %d\n", WSTOPSIG(status));
+	else if (WIFCONTINUED(status))
+		ft_printf("continued\n");
+	if (WIFEXITED(status) != 0)
+		return (-1);
+	return (1);
 }

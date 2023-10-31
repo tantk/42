@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 23:25:53 by titan             #+#    #+#             */
-/*   Updated: 2023/10/31 00:33:06 by titan            ###   ########.fr       */
+/*   Updated: 2023/10/31 09:22:43 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char *find_exec(char *prog_name, char *path_var)
 	char	*file_path;
 	int		res;
 
-	path_prefix = ft_split(prog_name, ':');
+	path_prefix = ft_split(path_var, ':');
 	if (!path_prefix || !*path_prefix)
 		return (ret_errmsg_char("Error at find_exec, ft_split"));
 	path_prefix_ptr = path_prefix;
@@ -61,6 +61,6 @@ char *find_exec(char *prog_name, char *path_var)
 			return(free_arr(file_path,path_prefix));
 		path_prefix_ptr++;
 	}
-	free(file_path)
+	free(file_path);
 	return (free_arr(NULL,path_prefix));
 }

@@ -52,9 +52,12 @@ GNL_SRC = $(addprefix $(GNL_DIR)/,\
 PIPEX_DIR = src
 PIPEX_SRC = $(addprefix $(PIPEX_DIR)/,\
 			main.c \
-			parser.c \
-			lst_func.c \
+			findprog_utils.c \
 			ft_errors.c \
+			lst_func.c \
+			parser.c \
+			proc_utils.c \
+			process.c \
 			)
 INCLUDE_DIR = includes
 
@@ -82,7 +85,7 @@ $(NAME): $(ALL_OBJS)
 	cc $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(LIBFT_OBJS) $(PRINTF_OBJS)
+	rm -f $(ALL_OBJS)
 	find . -type f -name "*.gch" -exec rm -f {} \;
 
 fclean: clean
