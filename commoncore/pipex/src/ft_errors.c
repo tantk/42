@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:18:24 by titan             #+#    #+#             */
-/*   Updated: 2023/10/31 09:23:33 by titan            ###   ########.fr       */
+/*   Updated: 2023/10/31 12:19:40 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	nil_prog_err(char *prog_name)
 {
-	ft_printf("%s program cannot be found, error: %s",prog_name,strerror(errno));
+	ft_printf("%s program cannot be found, error: %s\n",prog_name,strerror(errno));
 	return (-1);
 }
 
@@ -40,15 +40,13 @@ int	ret_err_cust_msg(const char *msg, int errorcode)
 //
 int	exit_status(int status)
 {
-	if (WIFEXITED(status))
+	if (!WIFEXITED(status))
 		ft_printf("exited, status=%d\n", WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))
 		ft_printf("killed by signal %d\n", WTERMSIG(status));
 	else if (WIFSTOPPED(status))
 		ft_printf("stopped by signal %d\n", WSTOPSIG(status));
-	else if (WIFCONTINUED(status))
-		ft_printf("continued\n");
-	if (WIFEXITED(status) != 0)
+	if (!WIFEXITED(status))
 		return (-1);
 	return (1);
 }

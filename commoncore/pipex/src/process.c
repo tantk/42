@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 03:34:32 by titan             #+#    #+#             */
-/*   Updated: 2023/10/31 09:31:09 by titan            ###   ########.fr       */
+/*   Updated: 2023/10/31 13:20:30 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,35 +25,35 @@ int fork_proc(t_proc *proc, int argc, int counter)
 		return(ret_errmsg("Fork:"));
 	if (proc -> pid != 0)
 		return (proc -> pid);
+	printf("printf: %s \nprintf %s \n",proc -> prog_path,proc -> cmd_arr[0]);
 	if (counter == 2)
 		err = redir_fd(proc -> iofile_fd[0], STDIN_FILENO);
 	else
-		err = redir_fd(proc -> pipe_fd[0], STDIN_FILENO);
+		err = redir_fd(proc -> prev_read_fd, STDIN_FILENO);
 	if (err == -1)
 		return(ret_errmsg("redir_fd stdin err"));
-	if (counter == argc - 3)
+	if (counter == argc - 2)
 		err = redir_fd(proc -> iofile_fd[1], STDOUT_FILENO);
 	else
 		err = redir_fd(proc -> pipe_fd[1], STDOUT_FILENO);
 	if (err == -1)
 		return(ret_errmsg("redir_fd stdout err"));
 	err = execve(proc -> prog_path, proc -> cmd_arr,proc -> exec_env);
+	printf("execve failed \n");
 	return (-1);
 }
 
 int	exec_pipes(t_proc *proc, int argc, char **argv)
 {
-	int	counter;
-	int	end_counter;
-	int	err;
-	int	wstatus;
+	int		counter;
+	int		err;
+	int		wstatus;
 	char	*env_path;
 
 	err = 0;
 	counter = 2;
-	end_counter = argc - 3;
 	env_path = get_envpath(proc-> exec_env);
-	while(counter <= end_counter)
+	while(counter <= (argc - 2))
 	{
 		err = prep_proc(proc, argv[counter], env_path);
 		if (err == -1)
@@ -62,9 +62,10 @@ int	exec_pipes(t_proc *proc, int argc, char **argv)
 		err = wait(&wstatus);
 		if (exit_status(wstatus) == -1 || err == -1)
 			return (ret_errmsg("fork_proc "));
-		err = close(proc -> pipe_fd[1]);
-		if (err == -1)
-			return (ret_errmsg("close pipefd 1"));
+		close(proc -> pipe_fd[1]);
+		if (counter != 2)
+			close(proc -> prev_read_fd);
+		proc -> prev_read_fd = proc -> pipe_fd[0];
 		counter++;
 	}
 	return (1);

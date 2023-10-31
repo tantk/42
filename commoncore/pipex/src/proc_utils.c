@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 01:48:06 by titan             #+#    #+#             */
-/*   Updated: 2023/10/31 09:29:55 by titan            ###   ########.fr       */
+/*   Updated: 2023/10/31 13:08:09 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int	init_proc(t_proc *proc, int argc, char** argv, char **envp)
 	err = 0;
 	proc -> pipe_fd[0] = 0;
 	proc -> pipe_fd[1] = 0;
+	proc -> prev_read_fd = 0;
 	err = pop_filefd(proc, argv[1], argv[argc - 1]);
 	if (err == -1)
 		return ret_errmsg("init_proc, filefd");

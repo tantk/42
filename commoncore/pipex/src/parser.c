@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 03:19:17 by titan             #+#    #+#             */
-/*   Updated: 2023/10/29 00:14:04 by titan            ###   ########.fr       */
+/*   Updated: 2023/10/31 12:44:46 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ char	**pp_parse_cmd(const char *cmd)
 	hld = (t_hld *)malloc(sizeof(t_hld));
 	if (!hld)
 		return (NULL);
+	pp_init_hld(hld);
 	skip = 0;
 	err = 0;
 	while (*cmd)

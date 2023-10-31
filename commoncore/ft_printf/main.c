@@ -80,4 +80,8 @@ int	main(void)
 	printf("test 25:\n");
 	printf("  ||  %i\n", ft_printf("%p", ""));
 	printf("  ||  %i\n", printf("%p", ""));
+	printf("test 25:\n");
+	printf("  ||  %i\n", printf("%s %s %s\n", "one", "two"));
+
+	printf("  ||  %i\n", ft_printf("%s %s %s\n", "one", "two"));
 }

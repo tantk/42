@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:23:59 by titan             #+#    #+#             */
-/*   Updated: 2023/10/29 00:16:21 by titan            ###   ########.fr       */
+/*   Updated: 2023/10/31 12:44:32 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ int	pp_lstadd(t_hld *hld, char const *str)
 	hld -> last = new_node;
 	hld -> size++;
 	return (1);
+}
+
+void	pp_init_hld(t_hld *hld)
+{
+	hld -> head = NULL;
+	hld -> last = NULL;
+	hld -> size = 0;
 }
 
 char **pp_get_content(t_hld *hld)
