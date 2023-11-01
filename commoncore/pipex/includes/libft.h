@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:47:12 by titan             #+#    #+#             */
-/*   Updated: 2023/10/25 15:23:40 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/01 16:06:33 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef LIBFT_H
@@ -15,7 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-typedef	struct s_list
+typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;

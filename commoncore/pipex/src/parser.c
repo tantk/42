@@ -6,14 +6,11 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 03:19:17 by titan             #+#    #+#             */
-/*   Updated: 2023/10/31 12:44:46 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/01 16:42:51 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
-// ./pipex file ""
-//./a.out "awk -F: " "{count++} END {printf \"count: %i\" , count}" "/etc/passwd"
-//./a.out "sed" "s/And/But/" "etc/passwd"
 
 //34 is double quote, 39 is single quote
 static int	is_special(char c)
@@ -41,7 +38,7 @@ static int	find_counter(const char *str, char c)
 	if (len >= 1)
 		return (len);
 	else
-		return (-1);
+		return (-99999999);
 }
 
 //handle quotes and brackets
@@ -49,7 +46,8 @@ static char	*handle_phrase(const char *str, char c, int *skip)
 {
 	int	len;
 
-	len = find_counter(str, c);
+	len = 0;
+	len += find_counter(str, c);
 	if (c == 34 || c == 39)
 	{
 		str++;

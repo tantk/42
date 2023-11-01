@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:18:24 by titan             #+#    #+#             */
-/*   Updated: 2023/10/31 12:19:40 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/01 15:54:15 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 int	nil_prog_err(char *prog_name)
 {
-	ft_printf("%s program cannot be found, error: %s\n",prog_name,strerror(errno));
+	ft_printf("%s program cannot be found,: %s\n", prog_name, strerror(errno));
 	return (-1);
 }
 
-int ret_errmsg(const char *msg)
+int	ret_errmsg(const char *msg)
 {
 	perror(msg);
 	return (-1);
 }
 
-char *ret_errmsg_char(const char *msg)
+char	*ret_errmsg_char(const char *msg)
 {
 	perror(msg);
 	return (NULL);
@@ -32,12 +32,12 @@ char *ret_errmsg_char(const char *msg)
 
 int	ret_err_cust_msg(const char *msg, int errorcode)
 {
-	ft_printf("Error related to %s \n",strerror(errorcode));
+	ft_printf("Error related to %s \n", strerror(errorcode));
 	if (msg)
 		ft_printf("%s \n", msg);
 	return (-1);
 }
-//
+
 int	exit_status(int status)
 {
 	if (!WIFEXITED(status))

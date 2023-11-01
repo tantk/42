@@ -6,40 +6,53 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 03:34:32 by titan             #+#    #+#             */
-/*   Updated: 2023/10/31 13:20:30 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/01 16:02:02 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
+static pid_t	free_ret(t_proc *proc, pid_t pid)
+{
+	char	**cmd_arr_ptr;
+
+	cmd_arr_ptr = proc -> cmd_arr;
+	while (*cmd_arr_ptr)
+	{
+		free(*cmd_arr_ptr);
+		cmd_arr_ptr++;
+	}
+	free(proc -> cmd_arr);
+	free(proc -> prog_path);
+	return (pid);
+}
+
 // Fork and exec child process
 // if counter == 2 means first process
 // if counter == argc - 3 means last process
-int fork_proc(t_proc *proc, int argc, int counter)
+int	fork_proc(t_proc *proc, int argc, int counter)
 {
 	int	err;
 
 	err = 0;
 	proc -> pid = fork();
 	if (proc -> pid == -1)
-		return(ret_errmsg("Fork:"));
+		return (ret_errmsg("Fork:"));
 	if (proc -> pid != 0)
-		return (proc -> pid);
-	printf("printf: %s \nprintf %s \n",proc -> prog_path,proc -> cmd_arr[0]);
+		return (free_ret(proc, proc -> pid));
 	if (counter == 2)
 		err = redir_fd(proc -> iofile_fd[0], STDIN_FILENO);
 	else
 		err = redir_fd(proc -> prev_read_fd, STDIN_FILENO);
 	if (err == -1)
-		return(ret_errmsg("redir_fd stdin err"));
+		return (ret_errmsg("redir_fd stdin err"));
 	if (counter == argc - 2)
 		err = redir_fd(proc -> iofile_fd[1], STDOUT_FILENO);
 	else
 		err = redir_fd(proc -> pipe_fd[1], STDOUT_FILENO);
 	if (err == -1)
-		return(ret_errmsg("redir_fd stdout err"));
-	err = execve(proc -> prog_path, proc -> cmd_arr,proc -> exec_env);
-	printf("execve failed \n");
+		return (ret_errmsg("redir_fd stdout err"));
+	err = execve(proc -> prog_path, proc -> cmd_arr, proc -> exec_env);
 	return (-1);
 }
 
@@ -53,7 +66,7 @@ int	exec_pipes(t_proc *proc, int argc, char **argv)
 	err = 0;
 	counter = 2;
 	env_path = get_envpath(proc-> exec_env);
-	while(counter <= (argc - 2))
+	while (counter <= (argc - 2))
 	{
 		err = prep_proc(proc, argv[counter], env_path);
 		if (err == -1)

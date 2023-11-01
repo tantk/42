@@ -6,11 +6,12 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 23:25:53 by titan             #+#    #+#             */
-/*   Updated: 2023/10/31 11:52:52 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/01 15:52:37 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include  "../includes/pipex.h"
+#include "../includes/pipex.h"
+
 static char	*pp_strjoin(char const *s1, char const *s2)
 {
 	size_t	s1_len;
@@ -29,15 +30,20 @@ static char	*pp_strjoin(char const *s1, char const *s2)
 	return (result);
 }
 
-static char *free_arr(char *file_path, char** arr)
+static char	*free_arr(char *file_path, char **arr)
 {
-	while(*arr)
+	char	**arr_ptr;
+
+	arr_ptr = arr;
+	while (*arr_ptr)
 	{
-		free(*arr);
-		arr++;
+		free(*arr_ptr);
+		arr_ptr++;
 	}
-	return(file_path);
+	free(arr);
+	return (file_path);
 }
+
 static char	*skip_path(char *file_path)
 {
 	int	result;
@@ -46,12 +52,11 @@ static char	*skip_path(char *file_path)
 	if (!result)
 		return (file_path + 5);
 	return (file_path);
-
 }
-//home/titan/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
 //Returns file path , a char ptr on the heap
 //Note that access returns zero on success
-char *find_exec(char *prog_name, char *path_var)
+char	*find_exec(char *prog_name, char *path_var)
 {
 	char	**path_prefix;
 	char	**path_prefix_ptr;
@@ -62,16 +67,14 @@ char *find_exec(char *prog_name, char *path_var)
 	if (!path_prefix || !*path_prefix)
 		return (ret_errmsg_char("Error at find_exec, ft_split"));
 	path_prefix_ptr = path_prefix;
-	file_path = pp_strjoin(skip_path(*path_prefix_ptr), prog_name);
-	while(*path_prefix_ptr)
+	while (*path_prefix_ptr)
 	{
+		file_path = pp_strjoin(skip_path(*path_prefix_ptr), prog_name);
 		res = access(file_path, X_OK);
 		if (!res)
-			return(free_arr(file_path,path_prefix));
+			return (free_arr(file_path, path_prefix));
 		path_prefix_ptr++;
-		if (*path_prefix_ptr)
-			file_path = pp_strjoin(*path_prefix_ptr,prog_name);
+		free(file_path);
 	}
-	free(file_path);
-	return (free_arr(NULL,path_prefix));
+	return (free_arr(NULL, path_prefix));
 }
