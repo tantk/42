@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 03:34:32 by titan             #+#    #+#             */
-/*   Updated: 2023/11/04 08:06:17 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/04 19:29:22 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ int	fork_proc(t_proc *proc, int argc, int counter)
 		err = redir_fd(proc -> pipe_fd[1], STDOUT_FILENO);
 	if (err == -1)
 		return (ret_errmsg("redir_fd stdout err"));
-	err = execve(proc -> prog_path, proc -> cmd_arr, proc -> exec_env);
+	if (proc -> prog_path != NULL)
+		err = execve(proc -> prog_path, proc -> cmd_arr, proc -> exec_env);
+	free_ret(proc, 0);
 	exit(EXIT_FAILURE);
 	return (-1);
 }
