@@ -59,6 +59,17 @@ PIPEX_SRC = $(addprefix $(PIPEX_DIR)/,\
 			proc_utils.c \
 			process.c \
 			)
+
+PIPEX_SRC_BONUS = $(addprefix $(PIPEX_DIR)/,\
+			main_bonus.c \
+			findprog_utils_bonus.c \
+			ft_errors_bonus.c \
+			lst_func_bonus.c \
+			parser_bonus.c \
+			proc_utils_bonus.c \
+			process_bonus.c \
+			)
+
 INCLUDE_DIR = includes
 
 CFLAGS = -g -Wall -Wextra -Werror -I $(INCLUDE_DIR)
@@ -71,24 +82,36 @@ GNL_OBJS = $(GNL_SRC:%.c=%.o)
 
 PIPEX_OBJS = $(PIPEX_SRC:%.c=%.o)
 
-ALL_OBJS = $(LIBFT_OBJS) \
+PIPEX_BONUS_OBJS = $(PIPEX_SRC_BONUS:%.c=%.o)
+
+MAN_OBJS = $(LIBFT_OBJS) \
 		   $(PRINTF_OBJS) \
 		   $(GNL_OBJS) \
 		   $(PIPEX_OBJS) \
 
+BONUS_OBJS = $(LIBFT_OBJS) \
+			 $(PRINTF_OBJS) \
+			 $(GNL_OBJS) \
+			 $(PIPEX_BONUS_OBJS) \
+
 all: $(NAME)
 
-$(NAME): $(ALL_OBJS)
-	cc $(CFLAGS) -o $(NAME) $(ALL_OBJS)
+$(NAME): $(MAN_OBJS)
+	cc $(CFLAGS) -o $(NAME) $(MAN_OBJS)
+
+bonus: $(BONUS_OBJS)
+	cc $(CFLAGS) -o $(NAME) $(BONUS_OBJS)
 
 %.o: %.c
 	cc $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(ALL_OBJS)
+	rm -f $(MAN_OBJS) $(BONUS_OBJS)
 	find . -type f -name "*.gch" -exec rm -f {} \;
 
 fclean: clean
-	rm -f $(NAME) $(LIBFT_NAME)
+	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: clean fclean re bonus

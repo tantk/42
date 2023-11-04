@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 09:10:55 by titan             #+#    #+#             */
-/*   Updated: 2023/09/30 05:21:23 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/04 06:37:39 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	get_flags_index(char c)
 	return (-1);
 }
 
-static int	ft_parse(char c, va_list *va_ptr)
+static int	ft_parse(char c, va_list *va_ptr, int fd)
 {
 	int						flags_index;
 	static const t_parsers	parse_table[] = {
@@ -54,7 +54,7 @@ static int	ft_parse(char c, va_list *va_ptr)
 
 	flags_index = get_flags_index(c);
 	if (flags_index != -1)
-		return (parse_table[flags_index](va_ptr));
+		return (parse_table[flags_index](va_ptr, fd));
 	return (0);
 }
 
@@ -71,13 +71,41 @@ int	ft_printf(const char *input, ...)
 		{
 			if (valid_flags(input[1]))
 			{
-				char_printed += ft_parse(input[1], &va_ptr);
+				char_printed += ft_parse(input[1], &va_ptr, STDIN_FILENO);
 				input++;
 			}
 		}
 		else
 		{
-			ft_putchar_fd(*input, 1);
+			ft_putchar_fd(*input, STDIN_FILENO);
+			char_printed++;
+		}
+		input++;
+	}
+	va_end(va_ptr);
+	return (char_printed);
+}
+
+int	ft_printf_err(const char *input, ...)
+{
+	va_list	va_ptr;
+	int		char_printed;
+
+	char_printed = 0;
+	va_start(va_ptr, input);
+	while (*input)
+	{
+		if (*input == '%')
+		{
+			if (valid_flags(input[1]))
+			{
+				char_printed += ft_parse(input[1], &va_ptr, STDERR_FILENO);
+				input++;
+			}
+		}
+		else
+		{
+			ft_putchar_fd(*input, STDERR_FILENO);
 			char_printed++;
 		}
 		input++;

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process.c                                          :+:      :+:    :+:   */
+/*   process_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 03:34:32 by titan             #+#    #+#             */
-/*   Updated: 2023/11/04 09:22:16 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/04 08:06:17 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes/pipex_bonus.h"
 
 static pid_t	free_ret(t_proc *proc, pid_t pid)
 {
@@ -53,7 +53,6 @@ int	fork_proc(t_proc *proc, int argc, int counter)
 	if (err == -1)
 		return (ret_errmsg("redir_fd stdout err"));
 	err = execve(proc -> prog_path, proc -> cmd_arr, proc -> exec_env);
-	free_ret(proc, 0);
 	exit(EXIT_FAILURE);
 	return (-1);
 }
