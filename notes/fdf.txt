@@ -1,0 +1,7 @@
+bresenham line drawing algorithmn
+
+
+for m < 1, y value may or may not increment for every x.
+ddl algo  use double/float for y to decide which pixel it should be using.
+bresenham algo serve to avoid usage of float. the disadvantage for using float is processing time.
+bresenham attempt to calculate the closer pixel to decide which pixel it should be using.
