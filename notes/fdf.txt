@@ -5,3 +5,29 @@ for m < 1, y value may or may not increment for every x.
 ddl algo  use double/float for y to decide which pixel it should be using.
 bresenham algo serve to avoid usage of float. the disadvantage for using float is processing time.
 bresenham attempt to calculate the closer pixel to decide which pixel it should be using.
+the derivation is quite long, i dont fully understand it but it is not required to undersand derivation of bresenham.
+use the following :
+draw_line(x1,y1,x2,y2)
+{
+	int x = x1;
+	int y = y1;
+
+	dx = x2 -x1;
+	dy = y2 -y1;
+
+	p = 2dy-dx;
+
+	while (x <= x2)
+	{
+		putpixel(x,y);
+		x++;
+		if (p < 0)
+			p = p + 2 * dy;
+		else
+		{
+			p = p+2 * dy - 2* dx;
+			y++;
+		}
+
+	}
+}
