@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:48 by titan             #+#    #+#             */
-/*   Updated: 2023/11/11 20:50:28 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/11 22:14:14 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ typedef struct s_mlst_holder{
 	unsigned int	cur_x;
 	unsigned int	cur_y;
 } t_mlst_hld;
+
+void	fdf_lstadd(t_mlst_hld *hld);
+
+t_mlst_hld	parse_file(char *file_path, t_map *map);
+void		fdf_parse_line(t_mlst_hld *hld, char *line);
 
 int	ret_errmsg(const char *msg);
 char	*ret_errmsg_char(const char *msg);

@@ -6,19 +6,11 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:31:20 by titan             #+#    #+#             */
-/*   Updated: 2023/11/11 21:04:46 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/11 23:19:21 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-void	extract_color(t_map *map, char *str)
-{
-	char buf[2];
-
-	buf[0] = str[2];
-	buf[1] = str[3];
-
-}
 
 int	fdf_atoi(char **str_add)
 {
@@ -42,13 +34,14 @@ int	fdf_atoi(char **str_add)
 	return (result * sign);
 }
 
-void	parse_num(t_mlst_hld *hld, char **line_add)
+void	extract_color(t_map *map, char **line_add)
 {
-	char	*ptr;
+	char buf[2];
+	char *ptr;
 
 	ptr = *line_add;
-	
-	fdf_atoi(line_add);
+	buf[0] = ptr[2];
+	buf[1] = ptr[3];
 	
 }
 
@@ -57,9 +50,21 @@ void	parse_hex(t_mlst_hld *hld, char **line_add)
 	char	*ptr;
 
 	ptr = *line_add;
+
 }
 
-char	**fdf_parse_line(t_mlst_hld *hld, char *line)
+static void	assign_coord(t_mlst_hld *hld, char **line_add)
+{
+	char	*ptr;
+
+	ptr = *line_add;
+	hld -> last -> content -> x = hld -> cur_x;
+	hld -> last -> content -> y = hld -> cur_y;
+	hld -> last -> content -> z = fdf_atoi(line_add);
+	hld -> cur_x++;
+}
+
+void	fdf_parse_line(t_mlst_hld *hld, char *line)
 {
 	hld -> cur_x = 0;
 
@@ -68,9 +73,16 @@ char	**fdf_parse_line(t_mlst_hld *hld, char *line)
 		if (*line == ' ' || *line == ',')
 			line++;
 		else if (*line == '0' && line[1] == 'x')
-			parse_hex();
+		{
+			extract_color
+			fdf_lstadd(hld);
+			assign_coord(hld, &line);
+		}
 		else if ('0' <= *line && *line <= '9')
-			parse_num();
+		{
+			fdf_lstadd(hld);
+			assign_coord(hld, &line);
+		}
 		else
 			exit_error("fdf_parse_line: unidentified character");
 	}
@@ -79,4 +91,3 @@ char	**fdf_parse_line(t_mlst_hld *hld, char *line)
 	hld -> cur_y++;
 	hld -> row = hld -> cur_x;
 }
-
