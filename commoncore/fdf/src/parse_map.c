@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 21:43:08 by titan             #+#    #+#             */
-/*   Updated: 2023/11/11 21:57:11 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/13 04:40:44 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_mlst_hld	parse_file(char *file_path, t_map *map)
 	hld.size = 0;
 	hld.row = 0;
 	hld.col = 0;
-	hld.cur_x = 0;
-	hld.cur_y = 0;
+	hld.cur_col = 0;
+	hld.cur_row = 0;
 	fd = open(file_path,O_RDONLY);
 	if (fd == -1)
 		exit_error("parse_file: open file error fd");
@@ -35,4 +35,19 @@ t_mlst_hld	parse_file(char *file_path, t_map *map)
 		line = get_next_line(fd);
 	}
 	return (hld);
+}
+
+t_matrix	create_matrix(char *file_path)
+{
+	
+}
+
+t_map	create_map(char *file_path)
+{
+	t_map	*map;
+	
+	map = (t_map *)malloc(sizeof(t_map));
+	if (!map)
+		exit_error("load_map: malloc map fails");
+	
 }

@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:48 by titan             #+#    #+#             */
-/*   Updated: 2023/11/11 22:14:14 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/13 04:10:01 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,27 @@ typedef struct s_3Dpoint{
 } t_3Dpoint;
 
 typedef struct s_matrix{
-	unsigned int	row;
-	unsigned int	col;
+	unsigned int	mat_row;
+	unsigned int	mat_col;
 	t_3Dpoint		*content;
 } t_matrix;
 
 typedef struct s_map
 {
-	t_matrix	matrix;
+	t_matrix		*matrix;
+	unsigned int	map_row;
+	unsigned int	map_col;
 
 } t_map;
 
 //lst for parsing file into *t_matrix
-//used only during parsing,free afterwards
+//used only during parsing,free lst and point tmatrix to content;
+//motivation is to reduce operation during parsing by using linklst
+//linklst doesnt need to find out all memory needed for the entire map first
+//lst uses more memory,need 8 byte for 1 point on the map.
+//reduce memory usage by changing to just *content after parsing, and free lst
+//optimization done here are probably insignficant to modern computer
+// im just trying to pick up the habit to be efficient while learning
 typedef struct s_mlst{
 	t_3Dpoint		*content;
 	struct s_mlst	*next;
@@ -59,10 +67,9 @@ typedef struct s_mlst_holder{
 	t_mlst			*head;
 	t_mlst			*last;
 	unsigned int	size;
-	unsigned int	row;
 	unsigned int	col;
-	unsigned int	cur_x;
-	unsigned int	cur_y;
+	unsigned int	cur_col;
+	unsigned int	cur_row;
 } t_mlst_hld;
 
 void	fdf_lstadd(t_mlst_hld *hld);
