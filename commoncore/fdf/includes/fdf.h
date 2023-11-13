@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:48 by titan             #+#    #+#             */
-/*   Updated: 2023/11/13 04:10:01 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/13 12:20:30 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_3Dpoint{
 	int	x;
 	int	y;
 	int	z;
-	int color;
+	unsigned int color;
 } t_3Dpoint;
 
 typedef struct s_matrix{
@@ -74,7 +74,7 @@ typedef struct s_mlst_holder{
 
 void	fdf_lstadd(t_mlst_hld *hld);
 
-t_mlst_hld	parse_file(char *file_path, t_map *map);
+t_mlst_hld	parse_file(char *file_path);
 void		fdf_parse_line(t_mlst_hld *hld, char *line);
 
 int	ret_errmsg(const char *msg);

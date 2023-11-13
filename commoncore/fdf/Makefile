@@ -53,6 +53,10 @@ GNL_SRC = $(addprefix $(GNL_DIR)/,\
 FDF_DIR = src
 FDF_SRC = $(addprefix $(FDF_DIR)/,\
 			main.c \
+			parse_map.c \
+			fdf_errors.c \
+			parse_utils.c \
+			lst_func.c \
 		)
 
 INCLUDE_DIR = includes
