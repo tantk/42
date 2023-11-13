@@ -6,21 +6,21 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:48 by titan             #+#    #+#             */
-/*   Updated: 2023/11/13 12:20:30 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/14 01:11:56 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
-#include <errno.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <math.h>
-#include "../mlx_linux/mlx.h"
-#include "libft.h"
-#include "ft_printf.h"
-#include "get_next_line.h"
+# include <errno.h>
+# include <stdio.h>
+# include <string.h>
+# include <stdlib.h>
+# include <math.h>
+# include "../mlx_linux/mlx.h"
+# include "libft.h"
+# include "ft_printf.h"
+# include "get_next_line.h"
 
 /*
  * 4. Transformation Matrices:
@@ -30,17 +30,17 @@
  * 8. Rendering Loop:
  */
 typedef struct s_3Dpoint{
-	int	x;
-	int	y;
-	int	z;
-	unsigned int color;
-} t_3Dpoint;
+	int				x;
+	int				y;
+	int				z;
+	unsigned int	color;
+}	t_3Dpoint;
 
 typedef struct s_matrix{
 	unsigned int	mat_row;
 	unsigned int	mat_col;
 	t_3Dpoint		*content;
-} t_matrix;
+}	t_matrix;
 
 typedef struct s_map
 {
@@ -48,7 +48,7 @@ typedef struct s_map
 	unsigned int	map_row;
 	unsigned int	map_col;
 
-} t_map;
+}	t_map;
 
 //lst for parsing file into *t_matrix
 //used only during parsing,free lst and point tmatrix to content;
@@ -61,7 +61,7 @@ typedef struct s_map
 typedef struct s_mlst{
 	t_3Dpoint		*content;
 	struct s_mlst	*next;
-} t_mlst;
+}	t_mlst;
 
 typedef struct s_mlst_holder{
 	t_mlst			*head;
@@ -70,16 +70,16 @@ typedef struct s_mlst_holder{
 	unsigned int	col;
 	unsigned int	cur_col;
 	unsigned int	cur_row;
-} t_mlst_hld;
+}	t_mlst_hld;
 
-void	fdf_lstadd(t_mlst_hld *hld);
+void		fdf_lstadd(t_mlst_hld *hld);
 
 t_mlst_hld	parse_file(char *file_path);
 void		fdf_parse_line(t_mlst_hld *hld, char *line);
 
-int	ret_errmsg(const char *msg);
-char	*ret_errmsg_char(const char *msg);
-int		ret_errmsg_cust_msg(const char *msg, int errorcode);
-void	exit_error(const char *msg);
-
+int			ret_errmsg(const char *msg);
+char		*ret_errmsg_char(const char *msg);
+int			ret_errmsg_cust_msg(const char *msg, int errorcode);
+void		exit_error(const char *msg);
+void		error_unknown_char(char c, char*line);
 #endif

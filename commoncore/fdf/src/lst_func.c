@@ -6,13 +6,13 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 18:53:38 by titan             #+#    #+#             */
-/*   Updated: 2023/11/11 22:14:37 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/14 01:12:30 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static t_3Dpoint	*create_empty_pt()
+static t_3Dpoint	*create_empty_pt(void)
 {
 	t_3Dpoint	*pt;
 
@@ -44,4 +44,3 @@ void	fdf_lstadd(t_mlst_hld *hld)
 	hld -> last = new_node;
 	hld -> size ++;
 }
-
