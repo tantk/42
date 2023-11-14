@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:48 by titan             #+#    #+#             */
-/*   Updated: 2023/11/14 01:11:56 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/14 04:46:42 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_map
 //lst uses more memory,need 8 byte for 1 point on the map.
 //reduce memory usage by changing to just *content after parsing, and free lst
 //optimization done here are probably insignficant to modern computer
-// im just trying to pick up the habit to be efficient while learning
+// All these are for learning purpose
 typedef struct s_mlst{
 	t_3Dpoint		*content;
 	struct s_mlst	*next;
@@ -73,9 +73,11 @@ typedef struct s_mlst_holder{
 }	t_mlst_hld;
 
 void		fdf_lstadd(t_mlst_hld *hld);
-
-t_mlst_hld	parse_file(char *file_path);
+t_3Dpoint	*lst_to_pts(t_mlst_hld hld);
 void		fdf_parse_line(t_mlst_hld *hld, char *line);
+
+t_map	*create_map(char *file_path);
+
 
 int			ret_errmsg(const char *msg);
 char		*ret_errmsg_char(const char *msg);

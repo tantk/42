@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:31:20 by titan             #+#    #+#             */
-/*   Updated: 2023/11/14 01:13:51 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/14 12:50:35 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static void	assign_coord(t_mlst_hld *hld, char **line_add)
 	hld -> last -> content -> y = hld -> cur_row;
 	hld -> last -> content -> z = fdf_atoi(line_add);
 	hld -> cur_col++;
+	hld -> size++;
 }
 
 void	fdf_parse_line(t_mlst_hld *hld, char *line)
@@ -93,7 +94,7 @@ void	fdf_parse_line(t_mlst_hld *hld, char *line)
 			extract_color(hld, &line);
 			assign_coord(hld, &line);
 		}
-		else if ('0' <= *line && *line <= '9')
+		else if (ft_isdigit(*line) || (*line == '-' && ft_isdigit(line[1])))
 		{
 			fdf_lstadd(hld);
 			assign_coord(hld, &line);

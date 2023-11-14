@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 18:53:38 by titan             #+#    #+#             */
-/*   Updated: 2023/11/14 01:12:30 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/14 12:42:29 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,29 @@ void	fdf_lstadd(t_mlst_hld *hld)
 		hld -> last -> next = new_node;
 	hld -> last = new_node;
 	hld -> size ++;
+}
+
+t_3Dpoint	*lst_to_pts(t_mlst_hld hld)
+{
+	t_3Dpoint	*pts;
+	t_3Dpoint	*pts_ptr;
+	t_mlst		*temp_mlst;
+
+	pts = (t_3Dpoint *)malloc(hld.size * sizeof(t_3Dpoint));
+	if (!pts)
+		exit_error("lst_to_pts: malloc fails");
+	pts_ptr = pts;
+	while (hld.head)
+	{
+		pts_ptr -> x = hld.head -> content -> x;
+		pts_ptr -> y = hld.head -> content -> y;
+		pts_ptr -> z = hld.head -> content -> z;
+		pts_ptr -> color = hld.head -> content -> color;
+		temp_mlst = hld.head;
+		hld.head = hld.head -> next;
+		free(temp_mlst -> content);
+		free(temp_mlst);
+		pts_ptr++;
+	}
+	return (pts);
 }

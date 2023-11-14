@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 21:43:08 by titan             #+#    #+#             */
-/*   Updated: 2023/11/14 01:14:11 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/14 05:04:13 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,25 @@ void	init_hld(t_mlst_hld *hld)
 	hld -> cur_col = 0;
 	hld -> cur_row = 0;
 }
-/*
-t_matrix	create_matrix(char *file_path)
+
+t_matrix	*create_matrix(t_mlst_hld hld)
 {
-	
+	t_matrix	*mat;
+
+	mat = (t_matrix *)malloc(sizeof(t_matrix));
+	if (!mat)
+		exit_error("create_matrix malloc fails");
+	mat -> mat_row = hld.size;
+	mat -> mat_col = sizeof(t_3Dpoint) / sizeof(int);
+	mat -> content = lst_to_pts(hld);
+	return (mat);
 }
-*/
-t_mlst_hld	parse_file(char *file_path)
+
+t_matrix	*parse_file(t_map *map, char *file_path)
 {
 	int			fd;
 	char		*line;
+	t_matrix	*mat;
 	t_mlst_hld	hld;
 
 	init_hld(&hld);
@@ -41,22 +50,23 @@ t_mlst_hld	parse_file(char *file_path)
 	while (line)
 	{
 		fdf_parse_line(&hld, line);
+		free(line);
 		line = get_next_line(fd);
 	}
-	while (hld.head != NULL)
-	{
-		printf("content x: %d , y: %d z: %d , color : %x \n",hld.head->content->x,hld.head->content->y,hld.head->content->z,hld.head->content->color);
-		hld.head = hld.head->next;
-	}
-	return (hld);
+	if (line)
+		free(line);
+	map -> map_row = hld.cur_row;
+	map -> map_col = hld.col;
+	mat = create_matrix(hld);
+	return (mat);
 }
 
 t_map	*create_map(char *file_path)
 {
 	t_map	*map;
-	(void) file_path;	
 	map = (t_map *)malloc(sizeof(t_map));
 	if (!map)
 		exit_error("load_map: malloc map fails");
-	return map;	
+	map -> matrix = parse_file(map, file_path);
+	return (map);
 }
