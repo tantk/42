@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 21:43:08 by titan             #+#    #+#             */
-/*   Updated: 2023/11/14 05:04:13 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/14 14:10:14 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_hld(t_mlst_hld *hld)
 	hld -> cur_row = 0;
 }
 
+//color not regarded as part of the matrix
 t_matrix	*create_matrix(t_mlst_hld hld)
 {
 	t_matrix	*mat;
@@ -30,7 +31,7 @@ t_matrix	*create_matrix(t_mlst_hld hld)
 	if (!mat)
 		exit_error("create_matrix malloc fails");
 	mat -> mat_row = hld.size;
-	mat -> mat_col = sizeof(t_3Dpoint) / sizeof(int);
+	mat -> mat_col = 3;
 	mat -> content = lst_to_pts(hld);
 	return (mat);
 }
@@ -43,7 +44,7 @@ t_matrix	*parse_file(t_map *map, char *file_path)
 	t_mlst_hld	hld;
 
 	init_hld(&hld);
-	fd = open(file_path,O_RDONLY);
+	fd = open(file_path, O_RDONLY);
 	if (fd == -1)
 		exit_error("parse_file: open file error fd");
 	line = get_next_line(fd);
@@ -64,6 +65,7 @@ t_matrix	*parse_file(t_map *map, char *file_path)
 t_map	*create_map(char *file_path)
 {
 	t_map	*map;
+
 	map = (t_map *)malloc(sizeof(t_map));
 	if (!map)
 		exit_error("load_map: malloc map fails");

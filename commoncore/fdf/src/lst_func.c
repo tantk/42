@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 18:53:38 by titan             #+#    #+#             */
-/*   Updated: 2023/11/14 12:42:29 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/14 23:23:38 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	fdf_lstadd(t_mlst_hld *hld)
 	if (!new_node)
 		exit_error("fdf_lstadd malloc failure");
 	new_node -> content = create_empty_pt();
+	new_node -> next = NULL;
 	if (!hld -> head)
 	{
 		hld -> head = new_node;
@@ -68,4 +69,41 @@ t_3Dpoint	*lst_to_pts(t_mlst_hld hld)
 		pts_ptr++;
 	}
 	return (pts);
+}
+
+int 	*gen_row(int x, int y, int z, int color)
+{
+	int	*row;
+
+	row = (int *)malloc(sizeof(int) * 4);
+	if (!row)
+		exit_error("gen_row: malloc fails");
+	row[0] = x;
+	row[1] = y;
+	row[2] = z;
+	row[3] = color;
+	return (row);
+}
+
+int	**lst_to_mat(t_mlst_hld hld)
+{
+	int		**matrix;
+	int		**mat_ptr;
+	t_mlst	*temp_mlst;
+
+	matrix = (int **)malloc(hld.cur_row * sizeof(int *));
+	if (!matrix)
+		exit_error("lst_to_pts: malloc fails");
+	mat_ptr = matrix;
+	while (hld.head)
+	{
+		*mat_ptr = gen_row(hld.head -> content -> x,hld.head -> content -> y,
+				hld.head -> content -> z, (int)hld.head -> content ->color);
+		temp_mlst = hld.head;
+		hld.head = hld.head -> next;
+		free(temp_mlst -> content);
+		free(temp_mlst);
+		mat_ptr++;
+	}
+	return (matrix);
 }
