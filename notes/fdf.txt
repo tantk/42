@@ -31,3 +31,8 @@ draw_line(x1,y1,x2,y2)
 
 	}
 }
+
+https://www.scratchapixel.com/
+https://mathworld.wolfram.com/RotationMatrix.html
+https://planetcalc.com/8316/
+
