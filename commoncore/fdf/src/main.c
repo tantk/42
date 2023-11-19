@@ -6,11 +6,11 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 01:10:50 by titan             #+#    #+#             */
-/*   Updated: 2023/11/14 12:44:07 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/19 22:16:59 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../includes/fdf.h"
 
 int	main(int argc, char **argv)
 {
@@ -32,7 +32,7 @@ int	main(int argc, char **argv)
 	int i = 0;
 	while (i < size)
 	{
-		printf("matrix --- x:%d , y:%d z:%d color:%x\n",
+		printf("matrix --- x:%.6f , y:%.6f z:%.6f color:%x\n",
 				map -> matrix -> content -> x,
 				map -> matrix -> content -> y,
 				map -> matrix -> content -> z,

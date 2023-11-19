@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:31:20 by titan             #+#    #+#             */
-/*   Updated: 2023/11/14 12:50:35 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/19 20:43:26 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ void	extract_color(t_mlst_hld *hld, char **line_add)
 
 static void	assign_coord(t_mlst_hld *hld, char **line_add)
 {
-	hld -> last -> content -> x = hld -> cur_col;
-	hld -> last -> content -> y = hld -> cur_row;
-	hld -> last -> content -> z = fdf_atoi(line_add);
+	hld -> last -> content -> x = (double)hld -> cur_col;
+	hld -> last -> content -> y = (double)hld -> cur_row;
+	hld -> last -> content -> z = (double)fdf_atoi(line_add);
 	hld -> cur_col++;
 	hld -> size++;
 }

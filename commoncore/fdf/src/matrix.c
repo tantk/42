@@ -6,13 +6,19 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:36:56 by titan             #+#    #+#             */
-/*   Updated: 2023/11/15 08:00:37 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/19 23:00:58 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../includes/fdf.h"
 
-t_matrix	*matmul_loop(t_matrix *mat_a, t_mat *mat_b, t_matrix *new_mat, int ik[2])
+void	assign_mat(double x, double y, double z)
+
+t_matrix	*loop(
+		t_matrix *mat_a,
+		t_matrix *mat_b,
+		t_matrix *new_mat,
+		int ik[2])
 {
 	t_3Dpoint	point;
 	t_3Dpoint	new_point;
@@ -22,7 +28,8 @@ t_matrix	*matmul_loop(t_matrix *mat_a, t_mat *mat_b, t_matrix *new_mat, int ik[2
 		point = mat_a -> content[ik[0]];
 		while (ik[1] < mat_b -> mat_col)
 		{
-			new_mat -> content[ik[0]];
+			new_mat -> content[ik[0]] += point;
+			new_mat -> content
 			ik[1] += 1;
 		}
 		ijk[1] = 0;

@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:48 by titan             #+#    #+#             */
-/*   Updated: 2023/11/14 04:46:42 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/19 22:31:24 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@
  * 8. Rendering Loop:
  */
 typedef struct s_3Dpoint{
-	int				x;
-	int				y;
-	int				z;
+	double			x;
+	double			y;
+	double			z;
 	unsigned int	color;
 }	t_3Dpoint;
 
@@ -42,12 +42,21 @@ typedef struct s_matrix{
 	t_3Dpoint		*content;
 }	t_matrix;
 
+typedef struct s_render_pt{
+	unsigned int	x;
+	unsigned int	y;
+}	t_render_pt;
+
 typedef struct s_map
 {
 	t_matrix		*matrix;
+	t_render_pt		*ren_mat;
 	unsigned int	map_row;
 	unsigned int	map_col;
-
+	unsigned int	resolution_x : 2;
+	unsigned int	resolution_y : 2;
+	unsigned int	scaling_x :2;
+	unsigned int	scaling_y :2;
 }	t_map;
 
 //lst for parsing file into *t_matrix
