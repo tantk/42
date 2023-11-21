@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 01:10:50 by titan             #+#    #+#             */
-/*   Updated: 2023/11/19 22:16:59 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/22 06:01:30 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,16 @@ int	main(int argc, char **argv)
 	int i = 0;
 	while (i < size)
 	{
-		printf("matrix --- x:%.6f , y:%.6f z:%.6f color:%x\n",
+		printf("matrix --- x:%.6f , y:%.6f z:%.6f color:%x",
 				map -> matrix -> content -> x,
 				map -> matrix -> content -> y,
 				map -> matrix -> content -> z,
 				map -> matrix -> content -> color);
+		printf("rndr --- x:%.6f , y:%6f \n",
+				map -> ren_mat -> x,
+				map -> ren_mat -> y);
 		map -> matrix -> content++;
+		map -> ren_mat ++;
 		i++;
 	}
 	free(ptr);

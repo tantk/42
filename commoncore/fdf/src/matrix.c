@@ -6,48 +6,41 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:36:56 by titan             #+#    #+#             */
-/*   Updated: 2023/11/19 23:00:58 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/22 05:43:44 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	assign_mat(double x, double y, double z)
 
-t_matrix	*loop(
-		t_matrix *mat_a,
-		t_matrix *mat_b,
-		t_matrix *new_mat,
-		int ik[2])
+
+static t_render_pt	assign_ren_mat(t_3Dpoint mat,t_map *map)
 {
-	t_3Dpoint	point;
-	t_3Dpoint	new_point;
-
-	while (ik[0] < mat_a -> mat_row)
-	{
-		point = mat_a -> content[ik[0]];
-		while (ik[1] < mat_b -> mat_col)
-		{
-			new_mat -> content[ik[0]] += point;
-			new_mat -> content
-			ik[1] += 1;
-		}
-		ijk[1] = 0;
-		ijk[0] += 1;
-	}
+	t_render_pt	new_pt;
+	(void) map;
+	new_pt.x = (-0.8660254 * mat.x) + (0.8660254 * mat.y);
+	new_pt.y = (-0.5 * mat.x) - (0.5 * mat.y) + mat.z;
+	return (new_pt);
 }
-// only works for (x row * 3 col )matrix & (3 row * 3 col)
-t_matrix	*fdf_matmul(t_matrix *mat_a, t_mat *mat_b)
+
+// only works for (x row * 3 col )matrix & (3 row * 2 col)
+void	fdf_matmul_rndr(t_map *map)
 {
-	int			ik[2];
-	t_3Dpoint	*new_mat;
+	unsigned int	i;
+	t_render_pt		*ren_mat;
+	t_matrix		*mat;
 
-	ik[0] = 0;
-	ik[1] = 0;
-	if (mat_a -> mat_col != mat_b -> mat_row)
-		exit_error("matmul: mat a col need to match mat b row");
-	new_mat = (t_3Dpoint *)ft_calloc(mat_b -> mat_col * 3 * sizeof(t_3Dpoint));
-	if (!new_mat)
-		exit_error("matmul: malloc failed");
-
+	mat = map -> matrix;
+	if (mat -> mat_col != 3)
+		exit_error("matmul: mat col must be 3");
+	ren_mat = (t_render_pt *)ft_calloc(mat -> mat_row, sizeof(t_render_pt));
+	if (!ren_mat)
+		exit_error("matmul_rndr: malloc failed");
+	i = 0;
+	while (i < mat->mat_row)
+	{
+		ren_mat[i] = assign_ren_mat(mat -> content[i], map);
+		i++;
+	}
+	map -> ren_mat = ren_mat;
 }

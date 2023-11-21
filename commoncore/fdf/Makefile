@@ -57,6 +57,7 @@ FDF_SRC = $(addprefix $(FDF_DIR)/,\
 			fdf_errors.c \
 			parse_utils.c \
 			lst_func.c \
+			matrix.c \
 		)
 
 INCLUDE_DIR = includes

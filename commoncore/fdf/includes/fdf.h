@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:48 by titan             #+#    #+#             */
-/*   Updated: 2023/11/19 22:31:24 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/22 05:34:08 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef struct s_matrix{
 }	t_matrix;
 
 typedef struct s_render_pt{
-	unsigned int	x;
-	unsigned int	y;
+	double	x;
+	double	y;
 }	t_render_pt;
 
 typedef struct s_map
@@ -53,20 +53,16 @@ typedef struct s_map
 	t_render_pt		*ren_mat;
 	unsigned int	map_row;
 	unsigned int	map_col;
-	unsigned int	resolution_x : 2;
-	unsigned int	resolution_y : 2;
-	unsigned int	scaling_x :2;
-	unsigned int	scaling_y :2;
+	unsigned int	resolution_x;
+	unsigned int	resolution_y;
+	unsigned int	scaling_x;
+	unsigned int	scaling_y;
+	double	min_x;
+	double	max_x;
+	double	min_y;
+	double	max_y;
 }	t_map;
 
-//lst for parsing file into *t_matrix
-//used only during parsing,free lst and point tmatrix to content;
-//motivation is to reduce operation during parsing by using linklst
-//linklst doesnt need to find out all memory needed for the entire map first
-//lst uses more memory,need 8 byte for 1 point on the map.
-//reduce memory usage by changing to just *content after parsing, and free lst
-//optimization done here are probably insignficant to modern computer
-// All these are for learning purpose
 typedef struct s_mlst{
 	t_3Dpoint		*content;
 	struct s_mlst	*next;
@@ -87,6 +83,7 @@ void		fdf_parse_line(t_mlst_hld *hld, char *line);
 
 t_map	*create_map(char *file_path);
 
+void	fdf_matmul_rndr(t_map *map);
 
 int			ret_errmsg(const char *msg);
 char		*ret_errmsg_char(const char *msg);

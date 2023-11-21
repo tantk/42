@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 21:43:08 by titan             #+#    #+#             */
-/*   Updated: 2023/11/14 14:10:14 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/22 05:25:19 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,8 @@ t_map	*create_map(char *file_path)
 	if (!map)
 		exit_error("load_map: malloc map fails");
 	map -> matrix = parse_file(map, file_path);
+	map -> resolution_x = 1024;
+	map -> resolution_y = 1024;
+	fdf_matmul_rndr(map);
 	return (map);
 }
