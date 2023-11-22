@@ -55,12 +55,11 @@ typedef struct s_map
 	unsigned int	map_col;
 	unsigned int	resolution_x;
 	unsigned int	resolution_y;
-	unsigned int	scaling_x;
-	unsigned int	scaling_y;
-	double	min_x;
-	double	max_x;
-	double	min_y;
-	double	max_y;
+	double          scale;
+	double	        min_x;
+	double	        max_x;
+	double	        min_y;
+	double	        max_y;
 }	t_map;
 
 typedef struct s_mlst{
