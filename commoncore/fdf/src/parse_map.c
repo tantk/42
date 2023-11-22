@@ -62,6 +62,51 @@ t_matrix	*parse_file(t_map *map, char *file_path)
 	return (mat);
 }
 
+static double   preset_scale()
+
+void    create_scale(t_map *map)
+{
+    double  x_range;
+    double  y_range;
+
+    x_range = map -> max_x - map -> min_x;
+    y_range = map -> max_y - map -> min_y;
+    if (x_range > y_range)
+        map -> scale = (map -> resolution_x * 0.9) / x_range;
+    else
+        map -> scale = (map -> resolution_y * 0.9) / y_range;
+}
+
+int pos_position(t_map *map)
+{
+    int shift;
+
+    shift = 0;
+    if (map -> min_x > 0 && map -> min_y > 0)
+        return (shift);
+    if (map -> min_x < map -> min_y)
+        shift = -1 * map -> min_x;
+    else
+        shift = -1 * map -> min_y;
+    return (shift);
+}
+
+void    pixelize(t_map *map)
+{
+    int i;
+    int shift;
+
+    i = 0;
+    shift = pos_position(map);
+    while (i < map -> map_row)
+    {
+        map -> ren_mat -> x +=shift;
+        map -> ren_mat -> x *= map -> scale;
+        map -> ren_mat -> y += shift;
+        map -> ren_mat -> y *= map -> scale;
+    }
+}
+
 t_map	*create_map(char *file_path)
 {
 	t_map	*map;
@@ -72,6 +117,11 @@ t_map	*create_map(char *file_path)
 	map -> matrix = parse_file(map, file_path);
 	map -> resolution_x = 1024;
 	map -> resolution_y = 1024;
+    map -> min_x = 0;
+    map -> max_x = 0;
+    map -> min_y = 0;
+    map -> max_y = 0;
 	fdf_matmul_rndr(map);
+    create_scale(map);
 	return (map);
 }

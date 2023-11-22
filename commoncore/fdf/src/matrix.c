@@ -20,6 +20,14 @@ static t_render_pt	assign_ren_mat(t_3Dpoint mat,t_map *map)
 	(void) map;
 	new_pt.x = (-0.8660254 * mat.x) + (0.8660254 * mat.y);
 	new_pt.y = (-0.5 * mat.x) - (0.5 * mat.y) + mat.z;
+    if (map -> min_x > new_pt.x)
+        map -> min_x = new_pt.x;
+    else if (map -> max_x < new_pt.x)
+        map -> max_x = new_pt.x;
+    if (map -> min_y > new_pt.y)
+        map -> min_y = new_pt.y;
+    else if (map -> max_y < new_pt.y)
+        map -> max_y = new_pt.y;
 	return (new_pt);
 }
 
