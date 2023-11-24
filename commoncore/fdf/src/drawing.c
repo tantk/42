@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 06:58:40 by titan             #+#    #+#             */
-/*   Updated: 2023/11/24 15:00:12 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/24 17:48:26 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,27 @@ void	draw_line(t_img *img, t_render_pt p1, t_render_pt p2)
 
 void	draw_map(t_map *map,t_display *disp)
 {
-	int i;
-	int j;
+	int 		i;
+	int			j;
+	int			idx;
+	t_render_pt	*ren_mat;
 
 	i = 0;
 	j = 0;
-	while (i < map -> map_row)
+	ren_mat = map -> ren_mat;
+	while (i < map -> map_row - 1)
 	{
-		while (j < map -> map_col)
+		while (j < map -> map_col - 1)
 		{
-			
+			idx = i * map -> map_col + j;
+			draw_line(disp -> img, ren_mat[idx], ren_mat[idx]);
+			draw_line(disp -> img, ren_mat[idx], ren_mat[idx + map -> map_col]);
+			j++;
 		}
+		idx++;
+		draw_line(disp -> img, ren_mat[idx], ren_mat[idx + map -> map_col]);
+		j = 0;
+		i++;
 	}
-	draw_line(disp -> img, p1, p2);
 	mlx_put_image_to_window(disp -> mlx, disp -> mlx_win, disp -> img -> img, 0, 0);
 }
