@@ -47,6 +47,18 @@ void	draw_line(t_img *img, t_render_pt p1, t_render_pt p2)
 	line.dy = line.y2 - line.y1;
 	draw_line_ba(img, line);
 }
+void	draw_last(t_map *map,t_display *disp)
+{
+	int	i;
+	int	idx;
+
+	idx = (map -> map_row - 1) * map -> map_col + 1;
+	while (i < map -> map_col - 1)
+	{
+		draw_line(disp -> img, map -> ren_mat[idx],map -> ren_mat[idx+1]);
+		idx++;
+	}
+}
 
 void	draw_map(t_map *map,t_display *disp)
 {
