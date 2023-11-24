@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 01:10:50 by titan             #+#    #+#             */
-/*   Updated: 2023/11/22 06:01:30 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/24 08:16:04 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int	main(int argc, char **argv)
 {
 	/*
+	(void) argc;
+	(void) argv;
 	void	*mlx;
 	void	*mlx_win;
 	
@@ -22,12 +24,18 @@ int	main(int argc, char **argv)
 	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
 	(void) mlx_win;
 	mlx_loop(mlx);*/
-	(void) argc;
-	t_map	*map;
-	t_3Dpoint	*ptr;
-
+	
+	t_map		*map;
+	t_display	*disp;
+	//void *mlx;
+	//void *mlx_win;
+	if (argc != 2)
+		exit_error("argument must be 2");
+	//mlx = mlx_init();
+	//mlx_win = mlx_new_window(mlx, RESO_X, RESO_Y, "FDF");
+	//(void)mlx_win;
 	map = create_map(argv[1]);
-	ptr = map -> matrix -> content;
+	disp = create_display();
 	int size = map -> map_row * map -> map_col;
 	int i = 0;
 	while (i < size)
@@ -44,7 +52,19 @@ int	main(int argc, char **argv)
 		map -> ren_mat ++;
 		i++;
 	}
-	free(ptr);
-	free(map -> matrix);
-	free(map);
+printf("min --- x:%.6f , y:%6f \n",
+				map -> min_x,
+				map -> min_y);
+printf("max --- x:%.6f , y:%6f \n",
+				map -> max_x,
+				map -> max_y);
+	//mlx_new_image(mlx, RESO_X,RESO_Y);
+	//(void) disp;
+	draw_map(map, disp);
+	//mlx_put_image_to_window(disp -> mlx, disp -> mlx_win, disp -> img, 0,0);
+	//mlx_loop(disp -> mlx);
+	mlx_loop(disp -> mlx);
+	//free(map -> matrix);
+	//free(map);
+	return(0);
 }

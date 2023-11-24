@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 21:43:08 by titan             #+#    #+#             */
-/*   Updated: 2023/11/22 05:25:19 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/24 10:37:49 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,7 @@ t_matrix	*parse_file(t_map *map, char *file_path)
 	mat = create_matrix(hld);
 	return (mat);
 }
-
-static double   preset_scale()
-
+//populate scale and shift
 void    create_scale(t_map *map)
 {
     double  x_range;
@@ -72,39 +70,52 @@ void    create_scale(t_map *map)
     x_range = map -> max_x - map -> min_x;
     y_range = map -> max_y - map -> min_y;
     if (x_range > y_range)
-        map -> scale = (map -> resolution_x * 0.9) / x_range;
+	{
+        map -> scale = (map -> reso_x * 0.9) / x_range;
+		map -> shift = (map -> reso_x * 0.05) / x_range;
+	}
     else
-        map -> scale = (map -> resolution_y * 0.9) / y_range;
+	{
+        map -> scale = (map -> reso_y * 0.90) / y_range;
+		map -> shift = (map -> reso_y * 0.05) / y_range;
+	}
 }
 
-int pos_position(t_map *map)
+void	adjust_position(t_map *map)
 {
-    int shift;
-
-    shift = 0;
-    if (map -> min_x > 0 && map -> min_y > 0)
-        return (shift);
-    if (map -> min_x < map -> min_y)
-        shift = -1 * map -> min_x;
-    else
-        shift = -1 * map -> min_y;
-    return (shift);
+	if (map -> min_x > 0 && map -> min_y > 0)
+		return;
+	if (map -> min_x < map -> min_y)
+		map -> shift += -1 * map -> min_x;
+	else
+		map -> shift += -1 * map -> min_y;
 }
 
-void    pixelize(t_map *map)
+void	pixelize(t_map *map)
 {
-    int i;
-    int shift;
+	unsigned int i;
 
-    i = 0;
-    shift = pos_position(map);
-    while (i < map -> map_row)
-    {
-        map -> ren_mat -> x +=shift;
-        map -> ren_mat -> x *= map -> scale;
-        map -> ren_mat -> y += shift;
-        map -> ren_mat -> y *= map -> scale;
-    }
+	i = 0;
+	adjust_position(map);
+	while (i < map -> matrix -> mat_row)
+	{
+		map -> ren_mat[i].x += map -> shift;
+		map -> ren_mat[i].x *= map -> scale;
+		map -> ren_mat[i].y += map -> shift;
+		map -> ren_mat[i].y *= map -> scale;
+		map -> ren_mat[i].y = RESO_Y - map -> ren_mat[i].y;
+		i++;
+	}
+	map ->min_x += map -> shift;
+	map -> min_x *= map -> scale;
+	map ->max_x += map -> shift;
+	map -> max_x *= map -> scale;
+	map ->min_y += map -> shift;
+	map -> min_y *= map -> scale;
+	map -> min_y = RESO_Y - map -> min_y;
+	map ->max_y += map -> shift;
+	map -> max_y *= map -> scale;
+	map -> max_y = RESO_Y - map -> max_y;
 }
 
 t_map	*create_map(char *file_path)
@@ -115,13 +126,14 @@ t_map	*create_map(char *file_path)
 	if (!map)
 		exit_error("load_map: malloc map fails");
 	map -> matrix = parse_file(map, file_path);
-	map -> resolution_x = 1024;
-	map -> resolution_y = 1024;
+	map -> reso_x = RESO_X;
+	map -> reso_y = RESO_Y;
     map -> min_x = 0;
     map -> max_x = 0;
     map -> min_y = 0;
     map -> max_y = 0;
 	fdf_matmul_rndr(map);
-    create_scale(map);
+	create_scale(map);
+	pixelize(map);
 	return (map);
 }

@@ -58,6 +58,8 @@ FDF_SRC = $(addprefix $(FDF_DIR)/,\
 			parse_utils.c \
 			lst_func.c \
 			matrix.c \
+			drawing.c \
+			display.c \
 		)
 
 INCLUDE_DIR = includes
@@ -66,7 +68,7 @@ MLX_INCLUDE_DIR = mlx_linux
 
 OBJ_CFLAGS = -g -Wall -Wextra -Werror -I $(INCLUDE_DIR) -I $(MLX_INCLUDE_DIR)
 
-EX_CFLAGS =  -g -Wall -Wextra -Werror -I $(MLX_INCLUDE_DIR) -L $(MLX_INCLUDE_DIR) -l mlx  -lXext -lX11
+EX_CFLAGS =  -g -Wall -Wextra -Werror -I $(MLX_INCLUDE_DIR) -L $(MLX_INCLUDE_DIR) -l mlx  -lXext -lX11 -lm
 
 
 LIBFT_OBJS = $(LIBFT_SRCS:%.c=%.o)

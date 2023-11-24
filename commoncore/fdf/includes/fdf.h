@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:48 by titan             #+#    #+#             */
-/*   Updated: 2023/11/22 05:34:08 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/24 08:15:54 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,9 @@
 # include "ft_printf.h"
 # include "get_next_line.h"
 
-/*
- * 4. Transformation Matrices:
- * 5. Rotation and Transformation Functions:
- * 6. Camera Perspective:
- * 7. User Interaction: rotate/zoom
- * 8. Rendering Loop:
- */
+#define RESO_X 1024
+#define RESO_Y 1024
+
 typedef struct s_3Dpoint{
 	double			x;
 	double			y;
@@ -53,14 +49,41 @@ typedef struct s_map
 	t_render_pt		*ren_mat;
 	unsigned int	map_row;
 	unsigned int	map_col;
-	unsigned int	resolution_x;
-	unsigned int	resolution_y;
+	unsigned int	reso_x;
+	unsigned int	reso_y;
 	double          scale;
 	double	        min_x;
 	double	        max_x;
 	double	        min_y;
 	double	        max_y;
+	double			shift;
 }	t_map;
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		b_in_pix;
+	int		l_len;
+	int		endian;
+}	t_img;
+
+typedef struct s_display
+{
+	void	*mlx;
+	void	*mlx_win;
+	t_img	*img;
+}	t_display;
+
+typedef struct s_line
+{
+	int	dx;
+	int	dy;
+	int	x1;
+	int	y1;
+	int	x2;
+	int	y2;
+}	t_line;
 
 typedef struct s_mlst{
 	t_3Dpoint		*content;
@@ -84,6 +107,10 @@ t_map	*create_map(char *file_path);
 
 void	fdf_matmul_rndr(t_map *map);
 
+t_display	*create_display();
+void fdf_put_pixel(t_img *img, int x, int y,int color);
+
+void	draw_map(t_map *map, t_display *disp);
 int			ret_errmsg(const char *msg);
 char		*ret_errmsg_char(const char *msg);
 int			ret_errmsg_cust_msg(const char *msg, int errorcode);
