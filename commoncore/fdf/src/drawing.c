@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 06:58:40 by titan             #+#    #+#             */
-/*   Updated: 2023/11/24 17:48:26 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/25 01:35:48 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,24 @@ void	draw_line(t_img *img, t_render_pt p1, t_render_pt p2)
 }
 void	draw_last(t_map *map,t_display *disp)
 {
-	int	i;
-	int	idx;
+	unsigned int	i;
+	int				idx;
 
+	i = 0;
 	idx = (map -> map_row - 1) * map -> map_col + 1;
 	while (i < map -> map_col - 1)
 	{
 		draw_line(disp -> img, map -> ren_mat[idx],map -> ren_mat[idx+1]);
 		idx++;
+		i++;
 	}
 }
 
 void	draw_map(t_map *map,t_display *disp)
 {
-	int 		i;
-	int			j;
-	int			idx;
+	unsigned int 	i;
+	unsigned int	j;
+	int				idx;
 	t_render_pt	*ren_mat;
 
 	i = 0;
@@ -75,7 +77,7 @@ void	draw_map(t_map *map,t_display *disp)
 		while (j < map -> map_col - 1)
 		{
 			idx = i * map -> map_col + j;
-			draw_line(disp -> img, ren_mat[idx], ren_mat[idx]);
+			draw_line(disp -> img, ren_mat[idx], ren_mat[idx + 1]);
 			draw_line(disp -> img, ren_mat[idx], ren_mat[idx + map -> map_col]);
 			j++;
 		}
@@ -84,5 +86,6 @@ void	draw_map(t_map *map,t_display *disp)
 		j = 0;
 		i++;
 	}
+	draw_last(map, disp);
 	mlx_put_image_to_window(disp -> mlx, disp -> mlx_win, disp -> img -> img, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 21:43:08 by titan             #+#    #+#             */
-/*   Updated: 2023/11/24 10:37:49 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/25 09:52:06 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,26 +71,53 @@ void    create_scale(t_map *map)
     y_range = map -> max_y - map -> min_y;
     if (x_range > y_range)
 	{
-        map -> scale = (map -> reso_x * 0.9) / x_range;
-		map -> shift = (map -> reso_x * 0.05) / x_range;
+        map -> scale = (RESO_X * 0.9) / x_range;
+		map -> shift = 0;
 	}
     else
 	{
-        map -> scale = (map -> reso_y * 0.90) / y_range;
-		map -> shift = (map -> reso_y * 0.05) / y_range;
+        map -> scale = (RESO_Y * 0.90) / y_range;
+		map -> shift = 0;
 	}
 }
 
 void	adjust_position(t_map *map)
 {
-	if (map -> min_x > 0 && map -> min_y > 0)
+	if (map -> min_x >= 0 && map -> min_y >= 0)
 		return;
 	if (map -> min_x < map -> min_y)
 		map -> shift += -1 * map -> min_x;
 	else
 		map -> shift += -1 * map -> min_y;
 }
+/*
+void	pixelize(t_map *map)
+{
+	unsigned int i;
 
+	i = 0;
+	adjust_position(map);
+	while (i < map -> matrix -> mat_row)
+	{
+		map -> ren_mat[i].x += map -> shift;
+		map -> ren_mat[i].x *= map -> scale;
+		map -> ren_mat[i].x = RESO_X - map -> ren_mat[i].x;
+		map -> ren_mat[i].y += map -> shift;
+		map -> ren_mat[i].y *= map -> scale;
+		map -> ren_mat[i].y = RESO_Y - map -> ren_mat[i].y;
+		i++;
+	}
+	map ->min_x += map -> shift;
+	map -> min_x *= map -> scale;
+	map ->max_x += map -> shift;
+	map -> max_x *= map -> scale;
+	map ->min_y += map -> shift;
+	map -> min_y *= map -> scale;
+	map -> min_y = RESO_Y - map -> min_y;
+	map ->max_y += map -> shift;
+	map -> max_y *= map -> scale;
+	map -> max_y = RESO_Y - map -> max_y;
+}*/
 void	pixelize(t_map *map)
 {
 	unsigned int i;
@@ -117,7 +144,6 @@ void	pixelize(t_map *map)
 	map -> max_y *= map -> scale;
 	map -> max_y = RESO_Y - map -> max_y;
 }
-
 t_map	*create_map(char *file_path)
 {
 	t_map	*map;
