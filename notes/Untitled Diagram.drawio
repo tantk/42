@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-11-08T12:08:45.261Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="755ers0RlcmjOyhg0hRT" version="22.0.8" type="github">
+<mxfile host="app.diagrams.net" modified="2023-11-25T06:56:29.965Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="CFN4edcPltk36eK6njry" version="22.1.4" type="github">
   <diagram name="Page-1" id="S5-0JtYaMWdxEyBJnW1v">
-    <mxGraphModel dx="3718" dy="2700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2359" dy="1942" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -391,8 +391,11 @@
         <mxCell id="T_XelG2kcNuDPpH44jGu-1" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;pp_parse_cmd&lt;br&gt;&lt;ul&gt;&lt;li&gt;&lt;font style=&quot;font-size: 20px;&quot;&gt;if single/ double quote or if curly bracket handle&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 20px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/li&gt;&lt;/ul&gt;&lt;br&gt;&lt;br&gt;find exec&lt;br&gt;&lt;ul&gt;&lt;li&gt;&lt;font style=&quot;font-size: 20px;&quot;&gt;ft_split on path_var,&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 20px;&quot;&gt;str join on splitted path_var + program name&lt;/font&gt;&lt;/li&gt;&lt;li&gt;&lt;font style=&quot;font-size: 20px;&quot;&gt;check access on program name if it is executable&lt;/font&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" parent="1" vertex="1">
           <mxGeometry x="195" y="820" width="330" height="580" as="geometry" />
         </mxCell>
-        <mxCell id="q_wyKocJMwh8O5hQHoiE-1" value="execve(&quot;/usr/bin/ls&quot;, {&quot;ls -l&quot;, &quot;wc -l&quot;, NULL}, Environment var);" style="rounded=0;whiteSpace=wrap;html=1;fontSize=20;" vertex="1" parent="1">
+        <mxCell id="q_wyKocJMwh8O5hQHoiE-1" value="execve(&quot;/usr/bin/ls&quot;, {&quot;ls -l&quot;, &quot;wc -l&quot;, NULL}, Environment var);" style="rounded=0;whiteSpace=wrap;html=1;fontSize=20;" parent="1" vertex="1">
           <mxGeometry x="880" y="-250" width="370" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="VqFqQFyQl1MyijEA1yjv-1" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 31px; background-color: initial;&quot;&gt;Dup2(oldfd,newfd)&lt;/span&gt;&lt;/div&gt;&lt;font style=&quot;font-size: 25px;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 31px; background-color: initial;&quot;&gt;old fd is 3 to 6&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;font-size: 31px;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;newfd is 1 or 0&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 31px;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;duplication&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;div style=&quot;text-align: left;&quot;&gt;When i do dup(fd,1), the Operating System will close fd 1 because it is an existing fd. Then it will create another fd with the number 1 but it is associated to fd/&quot;oldfd&quot;, this is because we are creating a copy of fd. so 1 is no longer associated to terminal(original), it is now associated with the &quot;oldfd&quot; which can be the outfile or the write fd or the pipe /&amp;nbsp; pipefd[1].&lt;/div&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1691" y="1140" width="710" height="540" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
