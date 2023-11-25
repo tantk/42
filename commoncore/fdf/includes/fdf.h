@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:48 by titan             #+#    #+#             */
-/*   Updated: 2023/11/24 08:15:54 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/25 20:56:34 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,25 @@ typedef struct s_render_pt{
 	double	y;
 }	t_render_pt;
 
+typedef struct s_int_pt{
+	int	x;
+	int	y;
+}	t_int_pt;
+
 typedef struct s_map
 {
 	t_matrix		*matrix;
 	t_render_pt		*ren_mat;
 	unsigned int	map_row;
 	unsigned int	map_col;
-	unsigned int	reso_x;
-	unsigned int	reso_y;
 	double          scale;
 	double	        min_x;
 	double	        max_x;
 	double	        min_y;
 	double	        max_y;
 	double			shift;
+	double			offset_x;
+	double			offset_y;
 }	t_map;
 
 typedef struct s_img
@@ -79,10 +84,16 @@ typedef struct s_line
 {
 	int	dx;
 	int	dy;
-	int	x1;
-	int	y1;
-	int	x2;
-	int	y2;
+	t_int_pt pt1;
+	t_int_pt pt2;
+	int s1;
+	int s2;
+	int	x;
+	int	y;
+	int	E;
+	int A;
+	int B;
+	int itc;
 }	t_line;
 
 typedef struct s_mlst{

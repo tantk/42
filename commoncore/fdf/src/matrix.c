@@ -6,18 +6,18 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:36:56 by titan             #+#    #+#             */
-/*   Updated: 2023/11/25 01:50:57 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/25 22:43:58 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
 
-/*
+
 static t_render_pt	assign_ren_mat(t_3Dpoint mat,t_map *map)
 {
 	t_render_pt	new_pt;
-	new_pt.x = (-0.8660254 * mat.x) + (0.8660254 * mat.y);
+	new_pt.x = (0.8660254 * mat.x) - (0.8660254 * mat.y);
 	new_pt.y = (-0.5 * mat.x) - (0.5 * mat.y) + mat.z;
     if (map -> min_x > new_pt.x)
 		map -> min_x = new_pt.x;
@@ -28,8 +28,8 @@ static t_render_pt	assign_ren_mat(t_3Dpoint mat,t_map *map)
     else if (map -> max_y < new_pt.y)
 		map -> max_y = new_pt.y;
 	return (new_pt);
-}*/
-
+}
+/*
 static t_render_pt	assign_ren_mat(t_3Dpoint mat,t_map *map)
 {
 	t_render_pt	new_pt;
@@ -44,7 +44,7 @@ static t_render_pt	assign_ren_mat(t_3Dpoint mat,t_map *map)
     else if (map -> max_y < new_pt.y)
 		map -> max_y = new_pt.y;
 	return (new_pt);
-}
+}*/
 
 // only works for (x row * 3 col )matrix & (3 row * 2 col)
 void	fdf_matmul_rndr(t_map *map)
