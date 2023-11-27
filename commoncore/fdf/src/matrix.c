@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:36:56 by titan             #+#    #+#             */
-/*   Updated: 2023/11/27 09:24:22 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/27 17:18:47 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 
 
-static t_render_pt	assign_ren_mat(t_3Dpoint mat,t_map *map)
+static t_render_pt	assign_ren_mat(t_3D mat,t_map *map)
 {
 	t_render_pt	new_pt;
 	new_pt.x = (0.8660254 * mat.x) - (0.8660254 * mat.y);
@@ -38,8 +38,6 @@ void	fdf_matmul_rndr(t_map *map)
 	t_matrix		*mat;
 
 	mat = map -> matrix;
-	if (mat -> mat_col != 3)
-		exit_error("matmul: mat col must be 3");
 	ren_mat = (t_render_pt *)ft_calloc(mat -> mat_row, sizeof(t_render_pt));
 	if (!ren_mat)
 		exit_error("matmul_rndr: malloc failed");
@@ -50,4 +48,21 @@ void	fdf_matmul_rndr(t_map *map)
 		i++;
 	}
 	map -> ren_mat = ren_mat;
+}
+
+void	fdf_matmul_rotate(t_map *map, t_matrix *mat33)
+{
+	unsigned int	i;
+	t_matrix		*m;
+	
+	m = map -> matrix;
+	if (mat33 -> mat_col != 3 && mat33 -> mat_row != 3)
+		exit_error("matmul: mat must be 3*3");
+	m -> content = (t_3D *)malloc(map -> matrix -> mat_row * sizeof(t_3D));
+	if (!m -> content)
+		exit_error("matmul_rotate: malloc failed");
+	while (i < map -> matrix -> mat_row)
+	{
+		mat -> x
+	}
 }

@@ -60,6 +60,7 @@ FDF_SRC = $(addprefix $(FDF_DIR)/,\
 			matrix.c \
 			drawing.c \
 			display.c \
+			hooks.c \
 		)
 
 INCLUDE_DIR = includes

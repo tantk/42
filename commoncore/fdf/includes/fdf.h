@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:48 by titan             #+#    #+#             */
-/*   Updated: 2023/11/27 08:52:18 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/27 17:24:34 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ typedef struct s_3Dpoint{
 	double			y;
 	double			z;
 	unsigned int	color;
-}	t_3Dpoint;
+}	t_3D;
 
 typedef struct s_matrix{
-	t_3Dpoint		*content;
+	t_3D		*content;
 	unsigned int	mat_row;
 	unsigned int	mat_col;
 	}	t_matrix;
@@ -86,12 +86,19 @@ typedef struct s_draw_map
 	unsigned int	map_row;
 	unsigned int	map_col;
 } t_draw_map;
+
 typedef struct s_display
 {
 	void	*mlx;
 	void	*mlx_win;
 	t_img	*img;
 }	t_display;
+
+typedef struct s_param
+{
+	t_display	*d;
+	t_map		*m;
+}	t_param;
 
 typedef struct s_line
 {
@@ -106,7 +113,7 @@ typedef struct s_line
 }	t_line;
 
 typedef struct s_mlst{
-	t_3Dpoint		*content;
+	t_3D		*content;
 	struct s_mlst	*next;
 }	t_mlst;
 
@@ -120,7 +127,7 @@ typedef struct s_mlst_holder{
 }	t_mlst_hld;
 
 void		fdf_lstadd(t_mlst_hld *hld);
-t_3Dpoint	*lst_to_pts(t_mlst_hld hld);
+t_3D		*lst_to_pts(t_mlst_hld hld);
 void		fdf_parse_line(t_mlst_hld *hld, char *line);
 
 t_map	*create_map(char *file_path);
@@ -130,7 +137,9 @@ void	fdf_matmul_rndr(t_map *map);
 t_display	*create_display();
 void fdf_put_pixel(t_img *img, int x, int y,int color);
 
-void	draw_map(t_map *map, t_img *img);
+void	hook_all(t_display *d, t_map *m);
+
+void	draw_map(t_map *map, t_display *disp);
 int			ret_errmsg(const char *msg);
 char		*ret_errmsg_char(const char *msg);
 int			ret_errmsg_cust_msg(const char *msg, int errorcode);

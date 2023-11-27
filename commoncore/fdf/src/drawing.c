@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 06:58:40 by titan             #+#    #+#             */
-/*   Updated: 2023/11/27 09:22:35 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/27 13:06:16 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	draw_last(t_draw_map d)
 		i++;
 	}
 }
+
 void	draw_map_loop(t_draw_map d)
 {
 
@@ -126,9 +127,10 @@ void	draw_map_loop(t_draw_map d)
 	draw_last(d);
 }
 
-void	draw_map(t_map *map,t_img *img)
+void	draw_map(t_map *map,t_display *disp)
 {
 	t_draw_map	draw;
+	t_img		*img;
 
 	draw.i = 0;
 	draw.j = 0;
@@ -137,7 +139,8 @@ void	draw_map(t_map *map,t_img *img)
 	draw.map_col = map -> map_col;
 	draw.ren_mat = map -> ren_mat;
 	draw.matrix = map -> matrix;
-	draw.img = img;
+	draw.img = disp -> img;
+	img = disp -> img;
 	draw_map_loop(draw);
-	mlx put image;
+	mlx_put_image_to_window(disp -> mlx, disp -> mlx_win, img -> img, 0, 0);
 }
