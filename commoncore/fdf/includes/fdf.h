@@ -34,10 +34,10 @@ typedef struct s_3Dpoint{
 }	t_3Dpoint;
 
 typedef struct s_matrix{
+	t_3Dpoint		*content;
 	unsigned int	mat_row;
 	unsigned int	mat_col;
-	t_3Dpoint		*content;
-}	t_matrix;
+	}	t_matrix;
 
 typedef struct s_render_pt{
 	double	x;
@@ -47,14 +47,13 @@ typedef struct s_render_pt{
 typedef struct s_int_pt{
 	int	x;
 	int	y;
+	unsigned int color;
 }	t_int_pt;
 
 typedef struct s_map
 {
 	t_matrix		*matrix;
 	t_render_pt		*ren_mat;
-	unsigned int	map_row;
-	unsigned int	map_col;
 	double          scale;
 	double	        min_x;
 	double	        max_x;
@@ -63,6 +62,8 @@ typedef struct s_map
 	double			shift;
 	double			offset_x;
 	double			offset_y;
+	unsigned int	map_row;
+	unsigned int	map_col;
 }	t_map;
 
 typedef struct s_img
@@ -74,6 +75,17 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+typedef struct s_draw_map
+{
+	t_render_pt		*ren_mat;
+	t_matrix		*matrix;
+	t_img			*img;
+	unsigned int 	i;
+	unsigned int	j;
+	unsigned int	idx;
+	unsigned int	map_row;
+	unsigned int	map_col;
+} t_draw_map;
 typedef struct s_display
 {
 	void	*mlx;
@@ -91,10 +103,6 @@ typedef struct s_line
 	int s2;
 	int	x;
 	int	y;
-	int	E;
-	int A;
-	int B;
-	int itc;
 }	t_line;
 
 typedef struct s_mlst{
@@ -122,7 +130,7 @@ void	fdf_matmul_rndr(t_map *map);
 t_display	*create_display();
 void fdf_put_pixel(t_img *img, int x, int y,int color);
 
-void	draw_map(t_map *map, t_display *disp);
+void	draw_map(t_map *map, t_img *img);
 int			ret_errmsg(const char *msg);
 char		*ret_errmsg_char(const char *msg);
 int			ret_errmsg_cust_msg(const char *msg, int errorcode);

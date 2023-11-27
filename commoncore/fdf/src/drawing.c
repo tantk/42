@@ -92,45 +92,52 @@ void	draw_line(t_img *img, t_render_pt pt1, t_render_pt pt2)
 	general_line(img, line.pt1,line.pt2);
 }
 
-void	draw_last(t_map *map,t_display *disp)
+void	draw_last(t_draw_map d)
 {
 	unsigned int	i;
 	int				idx;
 
 	i = 0;
-	idx = (map -> map_row - 1) * map -> map_col;
-	while (i < map -> map_col - 1)
+	idx = (d.map_row - 1) * d.map_col;
+	while (i < d.map_col - 1)
 	{
-		draw_line(disp -> img, map -> ren_mat[idx],map -> ren_mat[idx+1]);
+		draw_line(d.img, d.ren_mat[idx], d.ren_mat[idx+1]);
 		idx++;
 		i++;
 	}
 }
-
-void	draw_map(t_map *map,t_display *disp)
+void	draw_map_loop(t_draw_map d)
 {
-	unsigned int 	i;
-	unsigned int	j;
-	int				idx;
-	t_render_pt	*ren_mat;
 
-	i = 0;
-	j = 0;
-	ren_mat = map -> ren_mat;
-	while (i < map -> map_row - 1)
+	while (d.i < d.map_row - 1)
 	{
-		while (j < map -> map_col - 1)
+		while (d.j < d.map_col - 1)
 		{
-			idx = i * map -> map_col + j;
-			draw_line(disp -> img, ren_mat[idx], ren_mat[idx + 1]);
-			draw_line(disp -> img, ren_mat[idx], ren_mat[idx + map -> map_col]);
-			j++;
+			d.idx = d.i * d.map_col + d.j;
+			draw_line(d.img, d.ren_mat[d.idx], d.ren_mat[d.idx + 1]);
+			draw_line(d.img, d.ren_mat[d.idx], d.ren_mat[d.idx + d.map_col]);
+			d.j++;
 		}
-		idx++;
-		draw_line(disp -> img, ren_mat[idx], ren_mat[idx + map -> map_col]);
-		j = 0;
-		i++;
+		d.idx++;
+		draw_line(d.img, d.ren_mat[d.idx], d.ren_mat[d.idx + d.map_col]);
+		d.j = 0;
+		d.i++;
 	}
-	draw_last(map, disp);
-	mlx_put_image_to_window(disp -> mlx, disp -> mlx_win, disp -> img -> img, 0, 0);
+	draw_last(d);
+}
+
+void	draw_map(t_map *map,t_img *img)
+{
+	t_draw_map	draw;
+
+	draw.i = 0;
+	draw.j = 0;
+	draw.idx = 0;
+	draw.map_row = map -> map_row;
+	draw.map_col = map -> map_col;
+	draw.ren_mat = map -> ren_mat;
+	draw.matrix = map -> matrix;
+	draw.img = img;
+	draw_map_loop(draw);
+	mlx put image;
 }
