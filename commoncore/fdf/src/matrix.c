@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:36:56 by titan             #+#    #+#             */
-/*   Updated: 2023/11/25 22:43:58 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/27 09:24:22 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,6 @@ static t_render_pt	assign_ren_mat(t_3Dpoint mat,t_map *map)
 		map -> max_y = new_pt.y;
 	return (new_pt);
 }
-/*
-static t_render_pt	assign_ren_mat(t_3Dpoint mat,t_map *map)
-{
-	t_render_pt	new_pt;
-	new_pt.x = mat.x;
-	new_pt.y = mat.y;
-    if (map -> min_x > new_pt.x)
-		map -> min_x = new_pt.x;
-    else if (map -> max_x < new_pt.x)
-		map -> max_x = new_pt.x;
-    if (map -> min_y > new_pt.y)
-		map -> min_y = new_pt.y;
-    else if (map -> max_y < new_pt.y)
-		map -> max_y = new_pt.y;
-	return (new_pt);
-}*/
 
 // only works for (x row * 3 col )matrix & (3 row * 2 col)
 void	fdf_matmul_rndr(t_map *map)

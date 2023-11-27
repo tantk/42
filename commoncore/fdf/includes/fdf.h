@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:48 by titan             #+#    #+#             */
-/*   Updated: 2023/11/25 20:56:34 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/27 08:52:18 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 
 #define RESO_X 1024
 #define RESO_Y 1024
+#define TARGET 0.9
 
 typedef struct s_3Dpoint{
 	double			x;

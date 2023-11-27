@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 21:43:08 by titan             #+#    #+#             */
-/*   Updated: 2023/11/25 22:31:57 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/27 08:59:46 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ void    create_scale(t_map *map)
     x_range = map -> max_x - map -> min_x;
     y_range = map -> max_y - map -> min_y;
     if (x_range > y_range)
-        map -> scale = (RESO_X * 0.9) / x_range;
+        map -> scale = (RESO_X * TARGET) / x_range;
     else
-        map -> scale = (RESO_Y * 0.9) / y_range;
-	
+        map -> scale = (RESO_Y * TARGET) / y_range;
+
 }
 
 void	create_shift(t_map *map)
@@ -104,16 +104,13 @@ void	create_offset(t_map *map)
 {
 	const unsigned int x_range = map -> max_x - map -> min_x;
 	const unsigned int y_range = map -> max_y - map -> min_y;
-	int	min_near;
+	unsigned int	start;
 
-	map -> offset_x = (RESO_X - x_range)/2;
 	map -> offset_y =  (RESO_Y - y_range)/2;
-	min_near = RESO_X - map -> min_x;
-	if (min_near < map -> max_x)
-		map -> offset_x *= -1;
-	min_near = RESO_Y - map -> min_y;
-	if (min_near < map -> max_y)
-		map -> offset_y *= -1;
+	start = (RESO_X - x_range)/2;
+	map -> offset_x = start - map -> min_x;
+	start = (RESO_Y - y_range)/2;
+	map -> offset_y = start - map -> min_y;
 }
 
 
