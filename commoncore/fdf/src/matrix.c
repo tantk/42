@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:36:56 by titan             #+#    #+#             */
-/*   Updated: 2023/11/27 17:18:47 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/28 21:58:56 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ void	fdf_matmul_rndr(t_map *map)
 		i++;
 	}
 	map -> ren_mat = ren_mat;
+}
+void	rotation_mul(t_matrix *m, t_matrix *mat33)
+{
+	//algo to get 9 of the items
+	mat->content[0];
+	//idx to get
+	m->content[i]
 }
 
 void	fdf_matmul_rotate(t_map *map, t_matrix *mat33)

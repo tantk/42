@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:48 by titan             #+#    #+#             */
-/*   Updated: 2023/11/27 17:24:34 by titan            ###   ########.fr       */
+/*   Updated: 2023/11/28 21:55:38 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_matrix{
 	t_3D		*content;
 	unsigned int	mat_row;
 	unsigned int	mat_col;
-	}	t_matrix;
+}	t_matrix;
 
 typedef struct s_render_pt{
 	double	x;
