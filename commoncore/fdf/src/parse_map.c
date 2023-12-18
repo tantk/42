@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 21:43:08 by titan             #+#    #+#             */
-/*   Updated: 2023/11/27 08:59:46 by titan            ###   ########.fr       */
+/*   Updated: 2023/12/11 17:07:44 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,27 @@ void	init_hld(t_mlst_hld *hld)
 }
 
 //color not regarded as part of the matrix
-t_matrix	*create_matrix(t_mlst_hld hld)
+t_matrix	create_matrix(t_mlst_hld hld)
 {
 	t_matrix	*mat;
 
-	mat = (t_matrix *)malloc(sizeof(t_matrix));
+	mat = malloc(sizeof(t_matrix));
 	if (!mat)
-		exit_error("create_matrix malloc fails");
+		exit_error("create_matrix: mat malloc fails");
 	mat -> mat_row = hld.size;
 	mat -> mat_col = 3;
-	mat -> content = lst_to_pts(hld);
+	mat -> content = (t_3Dpoint *)malloc(hld.size * sizeof(t_3Dpoint));
+	mat -> color_arr = (unsigned int *)malloc(hld.size * sizeof(unsigned int));
+	if (!mat -> content || !mat -> color_arr)
+		exit_error("create_matrix: mat content malloc fails")
 	return (mat);
 }
 
-t_matrix	*parse_file(t_map *map, char *file_path)
+t_matrix	parse_file(t_map *map, char *file_path)
 {
 	int			fd;
 	char		*line;
-	t_matrix	*mat;
+	t_matrix	mat;
 	t_mlst_hld	hld;
 
 	init_hld(&hld);
@@ -126,7 +129,7 @@ void	adjust_map(t_map *map)
 	create_offset(map);
 	map -> min_y = RESO_Y - map -> min_y;
 	map -> max_y = RESO_Y - map -> max_y;
-	while (i < map -> matrix -> mat_row)
+	while (i < map -> matrix.mat_row)
 	{
 		shift_scale(&map -> ren_mat[i].x ,map -> shift, map -> scale);
 		shift_scale(&map -> ren_mat[i].y ,map -> shift, map -> scale);

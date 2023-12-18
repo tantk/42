@@ -6,24 +6,24 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 18:53:38 by titan             #+#    #+#             */
-/*   Updated: 2023/11/14 23:23:38 by titan            ###   ########.fr       */
+/*   Updated: 2023/12/11 16:35:30 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static t_3Dpoint	*create_empty_pt(void)
+static t_read	*create_empty_rd(void)
 {
-	t_3Dpoint	*pt;
+	t_read	*rd;
 
-	pt = (t_3Dpoint *)malloc(sizeof(t_3Dpoint));
-	if (!pt)
+	rd = (t_read *)malloc(sizeof(t_read));
+	if (!rd)
 		exit_error("create_empty_pt:malloc error");
-	pt -> x = 0;
-	pt -> y = 0;
-	pt -> z = 0;
-	pt -> color = 0;
-	return (pt);
+	rd -> x = 0;
+	rd -> y = 0;
+	rd -> z = 0;
+	rd -> color = 0;
+	return (rd);
 }
 
 void	fdf_lstadd(t_mlst_hld *hld)
@@ -33,7 +33,7 @@ void	fdf_lstadd(t_mlst_hld *hld)
 	new_node = (t_mlst *)malloc(sizeof(t_mlst));
 	if (!new_node)
 		exit_error("fdf_lstadd malloc failure");
-	new_node -> content = create_empty_pt();
+	new_node -> content = create_empty_rd();
 	new_node -> next = NULL;
 	if (!hld -> head)
 	{

@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:48 by titan             #+#    #+#             */
-/*   Updated: 2023/11/28 21:55:38 by titan            ###   ########.fr       */
+/*   Updated: 2023/12/11 17:05:06 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,26 @@
 #define RESO_Y 1024
 #define TARGET 0.9
 
-typedef struct s_3Dpoint{
+
+typedef struct s_read{
 	double			x;
 	double			y;
 	double			z;
 	unsigned int	color;
+}	t_read;
+
+typedef struct s_3Dpoint{
+	double			x;
+	double			y;
+	double			z;
 }	t_3D;
 
 typedef struct s_matrix{
 	t_3D		*content;
+	unsigned int	*color_arr;
 	unsigned int	mat_row;
 	unsigned int	mat_col;
 }	t_matrix;
-
-typedef struct s_render_pt{
-	double	x;
-	double	y;
-}	t_render_pt;
 
 typedef struct s_int_pt{
 	int	x;
@@ -53,7 +56,6 @@ typedef struct s_int_pt{
 typedef struct s_map
 {
 	t_matrix		*matrix;
-	t_render_pt		*ren_mat;
 	double          scale;
 	double	        min_x;
 	double	        max_x;
@@ -77,7 +79,6 @@ typedef struct s_img
 
 typedef struct s_draw_map
 {
-	t_render_pt		*ren_mat;
 	t_matrix		*matrix;
 	t_img			*img;
 	unsigned int 	i;
@@ -113,7 +114,7 @@ typedef struct s_line
 }	t_line;
 
 typedef struct s_mlst{
-	t_3D		*content;
+	t_read			*content;
 	struct s_mlst	*next;
 }	t_mlst;
 
