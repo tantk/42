@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 06:58:40 by titan             #+#    #+#             */
-/*   Updated: 2024/01/16 17:06:53 by titan            ###   ########.fr       */
+/*   Updated: 2024/01/16 18:53:30 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,5 +141,5 @@ void	draw_map(t_map *map,t_display *disp)
 	draw.img = disp -> img;
 	img = disp -> img;
 	draw_map_loop(draw);
-	mlx_put_image_to_window(disp -> mlx, disp -> mlx_win, img -> img, 0, 0);
+	mlx_put_image_to_window(disp->mlx, disp -> mlx_win, img -> img, 0, 0);
 }

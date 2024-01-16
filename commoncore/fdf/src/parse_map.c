@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 21:43:08 by titan             #+#    #+#             */
-/*   Updated: 2024/01/16 15:04:14 by titan            ###   ########.fr       */
+/*   Updated: 2024/01/16 20:00:47 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_matrix	*parse_file(t_map *map, char *file_path)
 	map -> map_row = hld.cur_row;
 	map -> map_col = hld.col;
 	mat = create_matrix(hld);
+	mat -> content = lst_to_pts(hld);
 	return (mat);
 }
 //populate scale and shift
