@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 21:43:08 by titan             #+#    #+#             */
-/*   Updated: 2023/12/11 17:07:44 by titan            ###   ########.fr       */
+/*   Updated: 2024/01/16 15:04:14 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_hld(t_mlst_hld *hld)
 }
 
 //color not regarded as part of the matrix
-t_matrix	create_matrix(t_mlst_hld hld)
+t_matrix	*create_matrix(t_mlst_hld hld)
 {
 	t_matrix	*mat;
 
@@ -32,18 +32,18 @@ t_matrix	create_matrix(t_mlst_hld hld)
 		exit_error("create_matrix: mat malloc fails");
 	mat -> mat_row = hld.size;
 	mat -> mat_col = 3;
-	mat -> content = (t_3Dpoint *)malloc(hld.size * sizeof(t_3Dpoint));
+	mat -> content = (t_3D *)malloc(hld.size * sizeof(t_3D));
 	mat -> color_arr = (unsigned int *)malloc(hld.size * sizeof(unsigned int));
 	if (!mat -> content || !mat -> color_arr)
-		exit_error("create_matrix: mat content malloc fails")
+		exit_error("create_matrix: mat content malloc fails");
 	return (mat);
 }
 
-t_matrix	parse_file(t_map *map, char *file_path)
+t_matrix	*parse_file(t_map *map, char *file_path)
 {
 	int			fd;
 	char		*line;
-	t_matrix	mat;
+	t_matrix	*mat;
 	t_mlst_hld	hld;
 
 	init_hld(&hld);
@@ -89,10 +89,12 @@ void	create_shift(t_map *map)
 		map -> shift = -1 * map -> min_y;
 }
 
-void	shift_scale(double *i, double shift, double scale)
+void	shift_scale(t_3D *mat ,int i, double shift, double scale)
 {
-	*i += shift;
-	*i *= scale;
+	mat[i].x += shift;
+	mat[i].x *= scale;
+	mat[i].y += shift;
+	mat[i].y *= scale;
 }
 
 void	shift_scale2(double *i,double *j, double shift, double scale)
@@ -117,7 +119,7 @@ void	create_offset(t_map *map)
 }
 
 
-void	adjust_map(t_map *map)
+void	adjust_map(t_map *map, t_3D *mat)
 {
 	unsigned int i;
 
@@ -129,13 +131,13 @@ void	adjust_map(t_map *map)
 	create_offset(map);
 	map -> min_y = RESO_Y - map -> min_y;
 	map -> max_y = RESO_Y - map -> max_y;
-	while (i < map -> matrix.mat_row)
+	while (i < map -> matrix -> mat_row)
 	{
-		shift_scale(&map -> ren_mat[i].x ,map -> shift, map -> scale);
-		shift_scale(&map -> ren_mat[i].y ,map -> shift, map -> scale);
-		map -> ren_mat[i].x += map -> offset_x;
-		map -> ren_mat[i].y += map -> offset_y;
-		map -> ren_mat[i].y = RESO_Y - map -> ren_mat[i].y;
+		shift_scale(mat, i, map -> shift, map -> scale);
+		shift_scale(mat, i, map -> shift, map -> scale);
+		mat[i].x += map -> offset_x;
+		mat[i].y += map -> offset_y;
+		mat[i].y = RESO_Y - mat[i].y;
 		i++;
 	}
 }
@@ -154,6 +156,6 @@ t_map	*create_map(char *file_path)
     map -> min_y = 0;
     map -> max_y = 0;
 	fdf_matmul_rndr(map);
-	adjust_map(map);
+	adjust_map(map, map -> matrix -> rndr);
 	return (map);
 }

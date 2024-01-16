@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 06:58:40 by titan             #+#    #+#             */
-/*   Updated: 2023/11/27 13:06:16 by titan            ###   ########.fr       */
+/*   Updated: 2024/01/16 17:06:53 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	linehigh(t_img *img, t_int_pt pt1, t_int_pt pt2)
 	int x = pt1.x;
 	for (int y = pt1.y; y < pt2.y;y++)
 	{
-		fdf_put_pixel(img, x, y, 0xffff00);
+		fdf_put_pixel(img, x, y, 0xff0000);
 		if (D > 0)
 		{
 			x += xi;
@@ -80,7 +80,7 @@ void	general_line(t_img *img, t_int_pt pt1, t_int_pt pt2)
 	}
 }
 
-void	draw_line(t_img *img, t_render_pt pt1, t_render_pt pt2)
+void	draw_line(t_img *img, t_3D pt1, t_3D pt2)
 {
 	t_line	line;
 
@@ -101,7 +101,7 @@ void	draw_last(t_draw_map d)
 	idx = (d.map_row - 1) * d.map_col;
 	while (i < d.map_col - 1)
 	{
-		draw_line(d.img, d.ren_mat[idx], d.ren_mat[idx+1]);
+		draw_line(d.img, d.rndr[idx], d.rndr[idx+1]);
 		idx++;
 		i++;
 	}
@@ -115,12 +115,12 @@ void	draw_map_loop(t_draw_map d)
 		while (d.j < d.map_col - 1)
 		{
 			d.idx = d.i * d.map_col + d.j;
-			draw_line(d.img, d.ren_mat[d.idx], d.ren_mat[d.idx + 1]);
-			draw_line(d.img, d.ren_mat[d.idx], d.ren_mat[d.idx + d.map_col]);
+			draw_line(d.img, d.rndr[d.idx], d.rndr[d.idx + 1]);
+			draw_line(d.img, d.rndr[d.idx], d.rndr[d.idx + d.map_col]);
 			d.j++;
 		}
 		d.idx++;
-		draw_line(d.img, d.ren_mat[d.idx], d.ren_mat[d.idx + d.map_col]);
+		draw_line(d.img, d.rndr[d.idx], d.rndr[d.idx + d.map_col]);
 		d.j = 0;
 		d.i++;
 	}
@@ -137,8 +137,7 @@ void	draw_map(t_map *map,t_display *disp)
 	draw.idx = 0;
 	draw.map_row = map -> map_row;
 	draw.map_col = map -> map_col;
-	draw.ren_mat = map -> ren_mat;
-	draw.matrix = map -> matrix;
+	draw.rndr = map -> matrix -> rndr;
 	draw.img = disp -> img;
 	img = disp -> img;
 	draw_map_loop(draw);

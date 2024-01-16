@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:48 by titan             #+#    #+#             */
-/*   Updated: 2023/12/11 17:05:06 by titan            ###   ########.fr       */
+/*   Updated: 2024/01/16 16:49:19 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ typedef struct s_3Dpoint{
 }	t_3D;
 
 typedef struct s_matrix{
-	t_3D		*content;
+	t_3D			*content;
+	t_3D			*rndr;
 	unsigned int	*color_arr;
 	unsigned int	mat_row;
 	unsigned int	mat_col;
@@ -79,7 +80,7 @@ typedef struct s_img
 
 typedef struct s_draw_map
 {
-	t_matrix		*matrix;
+	t_3D			*rndr;
 	t_img			*img;
 	unsigned int 	i;
 	unsigned int	j;
