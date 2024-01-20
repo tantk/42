@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 01:10:50 by titan             #+#    #+#             */
-/*   Updated: 2024/01/16 17:08:12 by titan            ###   ########.fr       */
+/*   Updated: 2024/01/20 18:09:23 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 	//mlx_new_image(mlx, RESO_X,RESO_Y);
 	//(void) disp;
 	draw_map(map, disp);
-	//hook_all(disp,map);
+	hook_all(disp,map);
 	//mlx_put_image_to_window(disp -> mlx, disp -> mlx_win, disp -> img, 0,0);
 	//mlx_loop(disp -> mlx);
 	mlx_loop(disp -> mlx);

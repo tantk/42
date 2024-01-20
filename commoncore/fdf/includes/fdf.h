@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:48 by titan             #+#    #+#             */
-/*   Updated: 2024/01/16 16:49:19 by titan            ###   ########.fr       */
+/*   Updated: 2024/01/20 18:08:14 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <math.h>
+# include <X11/keysym.h>
 # include "../mlx_linux/mlx.h"
 # include "libft.h"
 # include "ft_printf.h"

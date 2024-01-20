@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 21:43:08 by titan             #+#    #+#             */
-/*   Updated: 2024/01/16 20:00:47 by titan            ###   ########.fr       */
+/*   Updated: 2024/01/20 15:42:56 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ void	adjust_map(t_map *map, t_3D *mat)
 	map -> max_y = RESO_Y - map -> max_y;
 	while (i < map -> matrix -> mat_row)
 	{
-		shift_scale(mat, i, map -> shift, map -> scale);
 		shift_scale(mat, i, map -> shift, map -> scale);
 		mat[i].x += map -> offset_x;
 		mat[i].y += map -> offset_y;

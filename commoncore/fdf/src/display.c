@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 07:02:37 by titan             #+#    #+#             */
-/*   Updated: 2023/11/24 08:20:37 by titan            ###   ########.fr       */
+/*   Updated: 2024/01/20 15:12:16 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_display	*create_display()
 void	fdf_put_pixel(t_img	*img, int x, int y, int color)
 {
 	char 	*dst;
+
 
 	dst = img -> addr + (y * img -> l_len + x * (img -> b_in_pix / 8));
 	*(unsigned int *)dst = color;

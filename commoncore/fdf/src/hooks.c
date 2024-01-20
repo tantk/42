@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 15:22:11 by titan             #+#    #+#             */
-/*   Updated: 2023/11/27 16:34:45 by titan            ###   ########.fr       */
+/*   Updated: 2024/01/20 18:13:18 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ void	hook_all(t_display *d, t_map *m)
 
 	p.d = d;
 	p.m = m;
-	mlx_hook(d -> mlx_win, 17, 0L,close_prog, &p);
+	mlx_hook(d -> mlx_win, 2, XK_Escape,close_prog, &p);
 }
