@@ -6,17 +6,16 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 07:02:37 by titan             #+#    #+#             */
-/*   Updated: 2024/01/22 20:45:42 by titan            ###   ########.fr       */
+/*   Updated: 2024/01/23 19:18:58 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static t_display *init_display()
+static t_display	*init_display(void)
 {
 	t_display	*disp;
 	t_img		*disp_img;
-	void		*mlx;
 
 	disp = (t_display *)malloc(sizeof(t_display));
 	if (!disp)
@@ -24,18 +23,14 @@ static t_display *init_display()
 	disp_img = (t_img *)malloc(sizeof(t_img));
 	if (!disp_img)
 		exit_error("create display disp_img malloc error");
-	mlx = (void *)malloc(sizeof(void *));
-	if (!mlx)
-		exit_error("create display mlx malloc error");
 	disp -> img = disp_img;
-	disp -> mlx = mlx;
 	return (disp);
 }
 
-t_display	*create_display()
+t_display	*create_display(void)
 {
 	t_display	*disp;
-	t_img 		*img;
+	t_img		*img;
 
 	disp = init_display();
 	img = disp -> img;
@@ -43,14 +38,14 @@ t_display	*create_display()
 	disp -> mlx_win = mlx_new_window(disp -> mlx, RESO_X, RESO_Y, "FDF");
 	disp -> img -> img = mlx_new_image(disp -> mlx, RESO_X, RESO_Y);
 	disp -> img = disp -> img;
-	img -> addr = mlx_get_data_addr(img -> img, &img -> b_in_pix,&img -> l_len, &img -> endian);
+	img -> addr = mlx_get_data_addr(img -> img,
+			&img -> b_in_pix, &img -> l_len, &img -> endian);
 	return (disp);
 }
 
 void	fdf_put_pixel(t_img	*img, int x, int y, int color)
 {
-	char 	*dst;
-
+	char	*dst;
 
 	dst = img -> addr + (y * img -> l_len + x * (img -> b_in_pix / 8));
 	*(unsigned int *)dst = color;

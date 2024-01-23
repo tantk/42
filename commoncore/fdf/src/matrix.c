@@ -6,27 +6,27 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 13:36:56 by titan             #+#    #+#             */
-/*   Updated: 2024/01/16 16:37:57 by titan            ###   ########.fr       */
+/*   Updated: 2024/01/23 19:40:59 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-
-
-static t_3D	assign_ren_mat(t_3D mat,t_map *map)
+static t_3D	assign_ren_mat(t_3D mat, t_map *map)
 {
 	t_3D	new_pt;
 
+	new_pt.x = 0;
+	new_pt.y = 0;
 	new_pt.x = (0.8660254 * mat.x) - (0.8660254 * mat.y);
 	new_pt.y = (-0.5 * mat.x) - (0.5 * mat.y) + mat.z;
-    if (map -> min_x > new_pt.x)
+	if (map -> min_x > new_pt.x)
 		map -> min_x = new_pt.x;
-    else if (map -> max_x < new_pt.x)
+	else if (map -> max_x < new_pt.x)
 		map -> max_x = new_pt.x;
-    if (map -> min_y > new_pt.y)
+	if (map -> min_y > new_pt.y)
 		map -> min_y = new_pt.y;
-    else if (map -> max_y < new_pt.y)
+	else if (map -> max_y < new_pt.y)
 		map -> max_y = new_pt.y;
 	return (new_pt);
 }
@@ -34,6 +34,7 @@ static t_3D	assign_ren_mat(t_3D mat,t_map *map)
 t_3D	rdnr_mat(t_3D mat)
 {
 	t_3D	new_pt;
+
 	new_pt.x = (0.8660254 * mat.x) - (0.8660254 * mat.y);
 	new_pt.y = (-0.5 * mat.x) - (0.5 * mat.y) + mat.z;
 	return (new_pt);
@@ -47,7 +48,7 @@ void	fdf_matmul_rndr(t_map *map)
 	t_3D			*rndr;
 
 	mat = map -> matrix;
-	rndr = (t_3D *)malloc((mat -> mat_row + 10) * sizeof(t_3D));
+	rndr = (t_3D *)malloc((mat -> mat_row) * sizeof(t_3D));
 	if (!rndr)
 		exit_error("matmul_rndr: malloc failed");
 	i = 0;
@@ -59,13 +60,13 @@ void	fdf_matmul_rndr(t_map *map)
 	mat -> rndr = rndr;
 }
 
-static t_3D	rotate_mul_row(t_3D row, t_3D *content)
+static t_3D	rotate_mul_row(t_3D row, t_3D *cnt)
 {
 	t_3D	new_row;
 
-	new_row.x = row.x * content[0].x + row.y * content[1].x + row.z * content[2].x;
-	new_row.y = row.x * content[0].y + row.y * content[1].y + row.z * content[2].y;
-	new_row.z = row.x * content[0].z + row.y * content[1].z + row.z * content[2].z;
+	new_row.x = row.x * cnt[0].x + row.y * cnt[1].x + row.z * cnt[2].x;
+	new_row.y = row.x * cnt[0].y + row.y * cnt[1].y + row.z * cnt[2].y;
+	new_row.z = row.x * cnt[0].z + row.y * cnt[1].z + row.z * cnt[2].z;
 	return (new_row);
 }
 

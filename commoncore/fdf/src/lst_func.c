@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 18:53:38 by titan             #+#    #+#             */
-/*   Updated: 2024/01/16 15:20:06 by titan            ###   ########.fr       */
+/*   Updated: 2024/01/23 19:37:10 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ void	fdf_lstadd(t_mlst_hld *hld)
 
 t_3D	*lst_to_pts(t_mlst_hld hld)
 {
-	t_3D	*pts;
-	t_3D	*pts_ptr;
+	t_3D		*pts;
+	t_3D		*pts_ptr;
 	t_mlst		*temp_mlst;
 
-	pts = (t_3D *)malloc(hld.size * sizeof(t_3D));
+	pts = (t_3D *)calloc(hld.size, sizeof(t_3D));
 	if (!pts)
 		exit_error("lst_to_pts: malloc fails");
 	pts_ptr = pts;
@@ -70,7 +70,7 @@ t_3D	*lst_to_pts(t_mlst_hld hld)
 	return (pts);
 }
 
-int 	*gen_row(int x, int y, int z, int color)
+int	*gen_row(int x, int y, int z, int color)
 {
 	int	*row;
 
@@ -96,7 +96,7 @@ int	**lst_to_mat(t_mlst_hld hld)
 	mat_ptr = matrix;
 	while (hld.head)
 	{
-		*mat_ptr = gen_row(hld.head -> content -> x,hld.head -> content -> y,
+		*mat_ptr = gen_row(hld.head -> content -> x, hld.head -> content -> y,
 				hld.head -> content -> z, (int)hld.head -> content ->color);
 		temp_mlst = hld.head;
 		hld.head = hld.head -> next;

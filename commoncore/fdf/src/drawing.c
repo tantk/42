@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 06:58:40 by titan             #+#    #+#             */
-/*   Updated: 2024/01/16 18:53:30 by titan            ###   ########.fr       */
+/*   Updated: 2024/01/23 19:25:13 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	linelow(t_img *img, t_int_pt pt1, t_int_pt pt2)
 {
-	int dx = pt2.x - pt1.x;
+	int	dx = pt2.x - pt1.x;
 	int dy = pt2.y - pt1.y;
 	int yi = 1;
 	if (dy < 0)
@@ -75,7 +75,7 @@ void	general_line(t_img *img, t_int_pt pt1, t_int_pt pt2)
 	{
 		if (pt1.y > pt2.y)
 			linehigh(img, pt2, pt1);
-		else
+		 else
 			linehigh(img, pt1, pt2);
 	}
 }

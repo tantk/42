@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 21:43:08 by titan             #+#    #+#             */
-/*   Updated: 2024/01/20 15:42:56 by titan            ###   ########.fr       */
+/*   Updated: 2024/01/23 21:07:39 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ t_matrix	*create_matrix(t_mlst_hld hld)
 		exit_error("create_matrix: mat malloc fails");
 	mat -> mat_row = hld.size;
 	mat -> mat_col = 3;
-	mat -> content = (t_3D *)malloc(hld.size * sizeof(t_3D));
+	mat -> content = 0;
 	mat -> color_arr = (unsigned int *)malloc(hld.size * sizeof(unsigned int));
-	if (!mat -> content || !mat -> color_arr)
+	if (!mat -> color_arr)
 		exit_error("create_matrix: mat content malloc fails");
 	return (mat);
 }
@@ -64,46 +64,6 @@ t_matrix	*parse_file(t_map *map, char *file_path)
 	mat = create_matrix(hld);
 	mat -> content = lst_to_pts(hld);
 	return (mat);
-}
-//populate scale and shift
-void    create_scale(t_map *map)
-{
-    double  x_range;
-    double  y_range;
-
-    x_range = map -> max_x - map -> min_x;
-    y_range = map -> max_y - map -> min_y;
-    if (x_range > y_range)
-        map -> scale = (RESO_X * TARGET) / x_range;
-    else
-        map -> scale = (RESO_Y * TARGET) / y_range;
-
-}
-
-void	create_shift(t_map *map)
-{
-	if (map -> min_x >= 0 && map -> min_y >= 0)
-		return;
-	if (map -> min_x < map -> min_y)
-		map -> shift = -1 * map -> min_x;
-	else
-		map -> shift = -1 * map -> min_y;
-}
-
-void	shift_scale(t_3D *mat ,int i, double shift, double scale)
-{
-	mat[i].x += shift;
-	mat[i].x *= scale;
-	mat[i].y += shift;
-	mat[i].y *= scale;
-}
-
-void	shift_scale2(double *i,double *j, double shift, double scale)
-{
-	*i += shift;
-	*i *= scale;
-	*j += shift;
-	*j *= scale;
 }
 
 void	create_offset(t_map *map)
