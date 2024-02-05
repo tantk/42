@@ -54,11 +54,13 @@ FDF_DIR = src
 FDF_SRC = $(addprefix $(FDF_DIR)/,\
 			main.c \
 			parse_map.c \
+			parse_map_utils.c \
 			fdf_errors.c \
 			parse_utils.c \
 			lst_func.c \
 			matrix.c \
 			drawing.c \
+			drawing_util.c \
 			display.c \
 			hooks.c \
 		)

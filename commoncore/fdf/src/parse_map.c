@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 21:43:08 by titan             #+#    #+#             */
-/*   Updated: 2024/01/23 21:07:39 by titan            ###   ########.fr       */
+/*   Updated: 2024/02/05 18:00:08 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,23 +66,9 @@ t_matrix	*parse_file(t_map *map, char *file_path)
 	return (mat);
 }
 
-void	create_offset(t_map *map)
-{
-	const unsigned int x_range = map -> max_x - map -> min_x;
-	const unsigned int y_range = map -> max_y - map -> min_y;
-	unsigned int	start;
-
-	map -> offset_y =  (RESO_Y - y_range)/2;
-	start = (RESO_X - x_range)/2;
-	map -> offset_x = start - map -> min_x;
-	start = (RESO_Y - y_range)/2;
-	map -> offset_y = start - map -> min_y;
-}
-
-
 void	adjust_map(t_map *map, t_3D *mat)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	i = 0;
 	create_scale(map);
@@ -102,7 +88,6 @@ void	adjust_map(t_map *map, t_3D *mat)
 	}
 }
 
-
 t_map	*create_map(char *file_path)
 {
 	t_map	*map;
@@ -111,10 +96,10 @@ t_map	*create_map(char *file_path)
 	if (!map)
 		exit_error("load_map: malloc map fails");
 	map -> matrix = parse_file(map, file_path);
-    map -> min_x = 0;
-    map -> max_x = 0;
-    map -> min_y = 0;
-    map -> max_y = 0;
+	map -> min_x = 0;
+	map -> max_x = 0;
+	map -> min_y = 0;
+	map -> max_y = 0;
 	fdf_matmul_rndr(map);
 	adjust_map(map, map -> matrix -> rndr);
 	return (map);

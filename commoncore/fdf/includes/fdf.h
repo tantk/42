@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:48 by titan             #+#    #+#             */
-/*   Updated: 2024/01/20 18:08:14 by titan            ###   ########.fr       */
+/*   Updated: 2024/02/05 17:59:32 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,15 @@ typedef struct s_line
 {
 	int	dx;
 	int	dy;
+	int yi;
+	int xi;
 	t_int_pt pt1;
 	t_int_pt pt2;
 	int s1;
 	int s2;
 	int	x;
 	int	y;
+	int D;
 }	t_line;
 
 typedef struct s_mlst{
@@ -141,6 +144,14 @@ t_display	*create_display();
 void fdf_put_pixel(t_img *img, int x, int y,int color);
 
 void	hook_all(t_display *d, t_map *m);
+
+void	general_line(t_img *img, t_int_pt pt1, t_int_pt pt2);
+
+void	create_scale(t_map *map);
+void	create_shift(t_map *map);
+void	shift_scale(t_3D *mat, int i, double shift, double scale);
+void	shift_scale2(double *i, double *j, double shift, double scale);
+void	create_offset(t_map *map);
 
 void	draw_map(t_map *map, t_display *disp);
 int			ret_errmsg(const char *msg);
