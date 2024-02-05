@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:21:40 by titan             #+#    #+#             */
-/*   Updated: 2024/02/05 18:35:04 by titan            ###   ########.fr       */
+/*   Updated: 2024/02/05 22:29:43 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	linehigh_help(t_img *img, t_line l)
 	while (l.y < l.pt2.y)
 	{
 		fdf_put_pixel(img, l.x, l.y, 0xff0000);
-		if (l.D > 0)
+		if (l.d > 0)
 		{
 			l.x += l.xi;
-			l.D += (2 * (l.dx - l.dy));
+			l.d += (2 * (l.dx - l.dy));
 		}
 		else
-			l.D += 2 * l.dx;
+			l.d += 2 * l.dx;
 		l.y++;
 	}
 }
@@ -35,13 +35,13 @@ void	linelow_help(t_img *img, t_line l)
 	while (l.x < l.pt2.x)
 	{
 		fdf_put_pixel(img, l.x, l.y, 0x00ff00);
-		if (l.D > 0)
+		if (l.d > 0)
 		{
 			l.y += l.yi;
-			l.D += (2 * (l.dy - l.dx));
+			l.d += (2 * (l.dy - l.dx));
 		}
 		else
-			l.D += 2 * l.dy;
+			l.d += 2 * l.dy;
 		l.x++;
 	}
 }
@@ -58,7 +58,7 @@ void	linelow(t_img *img, t_int_pt pt1, t_int_pt pt2)
 		l.yi = -1;
 		l.dy *= -1;
 	}
-	l.D = (2 * l.dy) - l.dx;
+	l.d = (2 * l.dy) - l.dx;
 	l.pt1 = pt1;
 	l.pt2 = pt2;
 	l.x = pt1.x;
@@ -78,7 +78,7 @@ void	linehigh(t_img *img, t_int_pt pt1, t_int_pt pt2)
 		l.xi = -1;
 		l.dx *= -1;
 	}
-	l.D = (2 * l.dx) - l.dy;
+	l.d = (2 * l.dx) - l.dy;
 	l.x = pt1.x;
 	l.pt1 = pt1;
 	l.pt2 = pt2;

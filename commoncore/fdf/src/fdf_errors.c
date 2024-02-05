@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:18:24 by titan             #+#    #+#             */
-/*   Updated: 2023/11/14 01:11:18 by titan            ###   ########.fr       */
+/*   Updated: 2024/02/05 22:21:04 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ int	ret_err_cust_msg(const char *msg, int errorcode)
 
 void	exit_error(const char *msg)
 {
-	perror(msg);
+	if (errno == 0)
+		ft_printf_err("Functional Error: %s", msg);
+	else
+		perror(msg);
 	exit(EXIT_FAILURE);
 }
 

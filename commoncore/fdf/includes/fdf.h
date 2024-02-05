@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:48 by titan             #+#    #+#             */
-/*   Updated: 2024/02/05 17:59:32 by titan            ###   ########.fr       */
+/*   Updated: 2024/02/05 22:29:03 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@
 # include "ft_printf.h"
 # include "get_next_line.h"
 
-#define RESO_X 1024
-#define RESO_Y 1024
-#define TARGET 0.9
-
+# define RESO_X 1024
+# define RESO_Y 1024
+# define TARGET 0.9
 
 typedef struct s_read{
 	double			x;
@@ -50,19 +49,19 @@ typedef struct s_matrix{
 }	t_matrix;
 
 typedef struct s_int_pt{
-	int	x;
-	int	y;
-	unsigned int color;
+	int				x;
+	int				y;
+	unsigned int	color;
 }	t_int_pt;
 
 typedef struct s_map
 {
 	t_matrix		*matrix;
-	double          scale;
-	double	        min_x;
-	double	        max_x;
-	double	        min_y;
-	double	        max_y;
+	double			scale;
+	double			min_x;
+	double			max_x;
+	double			min_y;
+	double			max_y;
 	double			shift;
 	double			offset_x;
 	double			offset_y;
@@ -83,12 +82,12 @@ typedef struct s_draw_map
 {
 	t_3D			*rndr;
 	t_img			*img;
-	unsigned int 	i;
+	unsigned int	i;
 	unsigned int	j;
 	unsigned int	idx;
 	unsigned int	map_row;
 	unsigned int	map_col;
-} t_draw_map;
+}	t_draw_map;
 
 typedef struct s_display
 {
@@ -105,17 +104,17 @@ typedef struct s_param
 
 typedef struct s_line
 {
-	int	dx;
-	int	dy;
-	int yi;
-	int xi;
-	t_int_pt pt1;
-	t_int_pt pt2;
-	int s1;
-	int s2;
-	int	x;
-	int	y;
-	int D;
+	int			dx;
+	int			dy;
+	int			yi;
+	int			xi;
+	t_int_pt	pt1;
+	t_int_pt	pt2;
+	int			s1;
+	int			s2;
+	int			x;
+	int			y;
+	int			d;
 }	t_line;
 
 typedef struct s_mlst{

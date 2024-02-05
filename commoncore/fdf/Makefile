@@ -59,6 +59,7 @@ FDF_SRC = $(addprefix $(FDF_DIR)/,\
 			parse_utils.c \
 			lst_func.c \
 			matrix.c \
+			rotate.c \
 			drawing.c \
 			drawing_util.c \
 			display.c \
