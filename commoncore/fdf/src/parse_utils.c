@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:31:20 by titan             #+#    #+#             */
-/*   Updated: 2023/11/19 20:43:26 by titan            ###   ########.fr       */
+/*   Updated: 2024/02/07 17:45:19 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	assign_coord(t_mlst_hld *hld, char **line_add)
 	hld -> size++;
 }
 
-void	fdf_parse_line(t_mlst_hld *hld, char *line)
+void	fdf_parse_line(t_mlst_hld *hld, char *line, t_map *map, char *line2)
 {
 	hld -> cur_col = 0;
 	while (*line && *line != '\n')
@@ -103,7 +103,7 @@ void	fdf_parse_line(t_mlst_hld *hld, char *line)
 			error_unknown_char(*line, line);
 	}
 	if (hld -> cur_row != 0 && hld -> cur_col != hld -> col)
-		exit_error("fdf_parse_line: map must be rectangle or square.");
+		map_error(hld, line2, map);
 	hld -> cur_row++;
 	if (!hld -> col)
 		hld -> col = hld -> cur_col;

@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 21:43:08 by titan             #+#    #+#             */
-/*   Updated: 2024/02/05 18:00:08 by titan            ###   ########.fr       */
+/*   Updated: 2024/02/07 18:19:44 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@ t_matrix	*parse_file(t_map *map, char *file_path)
 	if (fd == -1)
 		exit_error("parse_file: open file error fd");
 	line = get_next_line(fd);
+	map -> fd = fd;
 	while (line)
 	{
-		fdf_parse_line(&hld, line);
+		fdf_parse_line(&hld, line, map, line);
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -100,6 +101,8 @@ t_map	*create_map(char *file_path)
 	map -> max_x = 0;
 	map -> min_y = 0;
 	map -> max_y = 0;
+	map -> shift = 0;
+	map -> scale = 0;
 	fdf_matmul_rndr(map);
 	adjust_map(map, map -> matrix -> rndr);
 	return (map);
