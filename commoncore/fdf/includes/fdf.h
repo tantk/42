@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 13:18:48 by titan             #+#    #+#             */
-/*   Updated: 2024/02/07 18:29:18 by titan            ###   ########.fr       */
+/*   Updated: 2024/02/07 19:26:49 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,31 +134,33 @@ typedef struct s_mlst_holder{
 
 void		fdf_lstadd(t_mlst_hld *hld);
 t_3D		*lst_to_pts(t_mlst_hld hld);
-void		fdf_parse_line(t_mlst_hld *hld, char *line, t_map *map, char *line2);
+void		fdf_parse_line(t_mlst_hld *hld,
+				char *line, t_map *map, char *line2);
 
-t_map	*create_map(char *file_path);
+t_map		*create_map(char *file_path);
 
-void	fdf_matmul_rndr(t_map *map);
+void		fdf_matmul_rndr(t_map *map);
 
-t_display	*create_display();
-void fdf_put_pixel(t_img *img, int x, int y,int color);
+t_display	*create_display(void);
+void		fdf_put_pixel(t_img *img, int x, int y, int color);
 
-void	hook_all(t_display *d, t_map *m);
+void		hook_all(t_display *d, t_map *m);
 
-void	general_line(t_img *img, t_int_pt pt1, t_int_pt pt2);
+void		general_line(t_img *img, t_int_pt pt1, t_int_pt pt2);
 
-void	create_scale(t_map *map);
-void	create_shift(t_map *map);
-void	shift_scale(t_3D *mat, int i, double shift, double scale);
-void	shift_scale2(double *i, double *j, double shift, double scale);
-void	create_offset(t_map *map);
+void		create_scale(t_map *map);
+void		create_shift(t_map *map);
+void		shift_scale(t_3D *mat, int i, double shift, double scale);
+void		shift_scale2(double *i, double *j, double shift, double scale);
+void		create_offset(t_map *map);
 
-void	draw_map(t_map *map, t_display *disp);
+void		draw_map(t_map *map, t_display *disp);
 int			ret_errmsg(const char *msg);
 char		*ret_errmsg_char(const char *msg);
 int			ret_errmsg_cust_msg(const char *msg, int errorcode);
 void		exit_error(const char *msg);
-void		error_unknown_char(char c, char*line);
+void		error_unknown_char(char c, t_mlst_hld *hld, char*line, t_map *map);
 
-void	map_error(t_mlst_hld *hld, char *line, t_map *map);
+void		free_hld(t_mlst_hld *hld);
+void		map_error(t_mlst_hld *hld, char *line, t_map *map);
 #endif

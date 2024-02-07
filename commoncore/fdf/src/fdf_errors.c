@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:18:24 by titan             #+#    #+#             */
-/*   Updated: 2024/02/05 22:21:04 by titan            ###   ########.fr       */
+/*   Updated: 2024/02/07 19:25:47 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,16 @@ void	exit_error(const char *msg)
 	exit(EXIT_FAILURE);
 }
 
-void	error_unknown_char(char c, char *line)
+void	error_unknown_char(char c, t_mlst_hld *hld, char *line, t_map *map)
 {
 	ft_printf_err("Error fdf_parse_line unknown char: %c at line %s", c, line);
+	free_hld(hld);
+	while (line)
+	{
+		if (line)
+			free(line);
+		line = get_next_line(map -> fd);
+	}
+	free(map);
 	exit(EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 15:31:20 by titan             #+#    #+#             */
-/*   Updated: 2024/02/07 17:45:19 by titan            ###   ########.fr       */
+/*   Updated: 2024/02/07 19:28:10 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	fdf_parse_line(t_mlst_hld *hld, char *line, t_map *map, char *line2)
 			assign_coord(hld, &line);
 		}
 		else
-			error_unknown_char(*line, line);
+			error_unknown_char(*line, hld, line2, map);
 	}
 	if (hld -> cur_row != 0 && hld -> cur_col != hld -> col)
 		map_error(hld, line2, map);

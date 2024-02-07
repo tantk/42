@@ -6,17 +6,17 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 22:36:29 by titan             #+#    #+#             */
-/*   Updated: 2024/02/07 17:50:22 by titan            ###   ########.fr       */
+/*   Updated: 2024/02/07 19:26:30 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static void	free_hld(t_mlst_hld *hld)
+void	free_hld(t_mlst_hld *hld)
 {
 	t_mlst	*temp;
 
-	while(hld -> head)
+	while (hld -> head)
 	{
 		temp = hld -> head;
 		hld -> head = hld -> head -> next;
