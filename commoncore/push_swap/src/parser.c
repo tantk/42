@@ -1,4 +1,4 @@
-int	check_num(char **str
+int	check_num(char **str)
 {
 
 

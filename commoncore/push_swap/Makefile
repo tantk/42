@@ -51,8 +51,9 @@ GNL_SRC = $(addprefix $(GNL_DIR)/,\
 		)
 PS_DIR = src
 PS_SRC = $(addprefix $(PS_DIR)/,\
-			main.c \
-			)
+main.c \
+lst.c \
+)
 
 INCLUDE_DIR = includes
 
