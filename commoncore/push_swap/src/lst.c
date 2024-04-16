@@ -1,5 +1,10 @@
 # include "pushswap.h"
 
+int check_bit(int check, int val)
+{
+    return (check | val);
+}
+
 int stk_add(t_hld *hld, int val)
 {
     t_llst  *node;
@@ -14,9 +19,14 @@ int stk_add(t_hld *hld, int val)
         hld -> head = node;
         hld -> last = node;
         hld -> size = 1;
+        hld -> check = 0;
+        hld -> check = check_bit(hld-> check, val);
         return (1);
     }
     node -> next = hld -> head;
     hld -> head = node;
+    hld -> check = check_bit(hld-> check, val);
     return (1);
 }
+
+

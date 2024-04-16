@@ -22,5 +22,6 @@ int	main(int argc, char **argv)
         node = node -> next;
         i++;
     }
+    ft_printf("check: %d\n", hld -> check);
 	return (1);
 }
