@@ -7,15 +7,11 @@ int	main(int argc, char **argv)
     t_hld   *hld;
     t_llst  *node;
 
-    hld =(t_hld *) malloc(sizeof(t_hld));    
-    i = 1;
-    while(i < argc)
-    {
-        stk_add(hld, ft_atoi(argv[i]));
-        i++;
-    }
-    i = 1;
-    node = hld -> head;
+   i = 1; 
+	hld =(t_hld *) malloc(sizeof(t_hld));    
+    hld = parse_args(argc, argv);
+
+	node = hld -> head;
     while (i < argc)
     {
         ft_printf("number : %d\n",node -> val);

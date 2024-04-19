@@ -7,6 +7,8 @@
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
+# include "limits.h"
+
 
 typedef struct s_llst{
     int             val;
@@ -22,5 +24,5 @@ typedef struct s_lst_holder{
 
 
 int stk_add(t_hld *hld, int val);
-
+t_hld	*parse_args(int argc, char **argv);
 #endif
