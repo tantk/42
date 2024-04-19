@@ -26,6 +26,7 @@ int stk_add(t_hld *hld, int val)
     node -> next = hld -> head;
     hld -> head = node;
     hld -> check = check_bit(hld-> check, val);
+	hld -> size++;
     return (1);
 }
 
