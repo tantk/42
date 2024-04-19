@@ -48,7 +48,7 @@ t_hld *from_str(char *str)
 	{
 		l_val = ft_atol(*split);
 		if (check_limit(l_val))
-			stk_add(hld, (int)l_val);
+			stk_push(hld, (int)l_val);
 		else
 			//free and return NULL
 			return (NULL);
@@ -72,7 +72,7 @@ t_hld *from_arr(char **arr)
 	{
 		l_val = ft_atol(*arr);
 		if (check_limit(l_val))
-			stk_add(hld, (int)l_val);
+			stk_push(hld, (int)l_val);
 		else
 			//free and return NULL
 			return (NULL);

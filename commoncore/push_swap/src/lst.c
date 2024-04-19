@@ -5,12 +5,27 @@ int check_bit(int check, int val)
     return (check | val);
 }
 
-int stk_add(t_hld *hld, int val)
+int dup_check(t_hld *hld, int val)
+{
+	t_llst *node;
+
+	node = hld -> head;
+	while (node)
+	{
+		if (val == node -> val)
+			return (0); 
+		node = node -> next;
+	}
+	return (1);
+}
+
+int stk_push(t_hld *hld, int val)
+	}
 {
     t_llst  *node;
     
     node =  (t_llst *)malloc(sizeof(t_llst));
-    if (!node)
+    if (!node && dup_check(hld, val))
         return (0);
     node -> val = val;
     node -> next = NULL;
@@ -30,4 +45,13 @@ int stk_add(t_hld *hld, int val)
     return (1);
 }
 
+int	stk_pop(t_hld *hld)
+{
+	t_llst	*tmp;
 
+	tmp = hld -> head;
+	hld->head = hld -> head -> next;
+	if (!hld -> head)
+		hld -> last = NULL;
+	free(tmp);
+}

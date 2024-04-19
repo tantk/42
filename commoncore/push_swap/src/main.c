@@ -10,7 +10,8 @@ int	main(int argc, char **argv)
    i = 1; 
 	hld =(t_hld *) malloc(sizeof(t_hld));    
     hld = parse_args(argc, argv);
-
+	if (!hld)
+		return (0);
 	node = hld -> head;
     while (i < argc)
     {
