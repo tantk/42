@@ -1,6 +1,6 @@
-# include "push_swap.h"
+# include "pushswap.h"
 
-int	push_b(t_hld *a, t_hld *b)
+int	push_oth(t_hld *a, t_hld *b)
 {
 	t_llst	*tmp;
 
@@ -11,46 +11,16 @@ int	push_b(t_hld *a, t_hld *b)
 	return (1);
 }
 
-int	push_a(t_hld *a, t_hld *b)
-{
-	t_llst	*tmp;
-
-	tmp = b -> head;
-	stk_pop(b);
-	stk_push(a, tmp -> val);
-	free(tmp);
-	return (1);
-}
-
-int	rotate_a(t_hld *a)
+int	rotate(t_hld *hld)
 {
 	t_llst *tmp;
 
-	tmp = a -> head;
-	stk_pop(a);
+	tmp = hld -> head;
+	stk_pop(hld);
 	if (!hld -> last)
 	{
 		hld -> last -> next = tmp;
-		hld -> head = tmp -> head -> next;
-	}
-	else
-	{
-		hld -> head = tmp;
-		hld -> last = tmp;
-	}
-	return (1);
-}
-
-int	rotate_b(t_hld *b)
-{
-	t_llst *tmp;
-
-	tmp = b -> head;
-	stk_pop(b);
-	if (!hld -> last)
-	{
-		hld -> last -> next = tmp;
-		hld -> head = tmp -> head -> next;
+		hld -> head = tmp -> next;
 	}
 	else
 	{

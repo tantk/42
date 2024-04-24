@@ -20,12 +20,11 @@ int dup_check(t_hld *hld, int val)
 }
 
 int stk_push(t_hld *hld, int val)
-	}
 {
     t_llst  *node;
-    
     node =  (t_llst *)malloc(sizeof(t_llst));
-    if (!node && dup_check(hld, val))
+	if (!(node && dup_check(hld,val)))
+		//free and return 0
         return (0);
     node -> val = val;
     node -> next = NULL;
@@ -54,4 +53,21 @@ int	stk_pop(t_hld *hld)
 	if (!hld -> head)
 		hld -> last = NULL;
 	free(tmp);
+	return (1);
+}
+
+void	free_hld(t_hld *hld)
+{
+	t_llst *node;
+	t_llst *tmp;
+
+	node = hld -> head;
+
+	while (node)
+	{
+		tmp = node;	
+		node = node -> next;
+		free(tmp);
+	}
+	free(hld);
 }

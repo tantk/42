@@ -1,6 +1,5 @@
 #include "pushswap.h"
 
-
 int	main(int argc, char **argv)
 {
     int i;
@@ -13,6 +12,7 @@ int	main(int argc, char **argv)
 	if (!hld)
 		return (0);
 	node = hld -> head;
+	//rotate(hld);
     while (i < argc)
     {
         ft_printf("number : %d\n",node -> val);
