@@ -19,13 +19,37 @@ int dup_check(t_hld *hld, int val)
 	return (1);
 }
 
+void	free_hld(t_hld *hld)
+{
+	t_llst *node;
+	t_llst *tmp;
+
+	node = hld -> head;
+
+	while (node)
+	{
+		tmp = node;	
+		free(node);
+		node =  NULL;
+		node = tmp -> next;
+
+	}
+	free(hld);
+	hld = NULL;
+}
+
+int	free_exit_hld(t_hld *hld, char *msg)
+{
+	free_hld(hld);
+	ft_printf_err("Error: %s", msg);
+	return (0);
+}
 int stk_push(t_hld *hld, int val)
 {
     t_llst  *node;
     node =  (t_llst *)malloc(sizeof(t_llst));
 	if (!(node && dup_check(hld,val)))
-		//free and return 0
-        return (0);
+        return (free_exit_hld(hld, "Malloc fail or duplicated val"));
     node -> val = val;
     node -> next = NULL;
     if (!hld -> head)
@@ -56,18 +80,3 @@ int	stk_pop(t_hld *hld)
 	return (1);
 }
 
-void	free_hld(t_hld *hld)
-{
-	t_llst *node;
-	t_llst *tmp;
-
-	node = hld -> head;
-
-	while (node)
-	{
-		tmp = node;	
-		node = node -> next;
-		free(tmp);
-	}
-	free(hld);
-}

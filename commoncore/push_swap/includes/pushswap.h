@@ -24,5 +24,11 @@ typedef struct s_lst_holder{
 
 
 int stk_add(t_hld *hld, int val);
+int	stk_pop(t_hld *hld);
+int	stk_push(t_hld *hld, int val);
 t_hld	*parse_args(int argc, char **argv);
+int	push_oth(t_hld *a, t_hld *b);
+int	rotate(t_hld *hld);
+
+void	ft_err_exit(char *msg);
 #endif

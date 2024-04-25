@@ -54,6 +54,8 @@ PS_SRC = $(addprefix $(PS_DIR)/,\
 main.c \
 lst.c \
 parser.c \
+instructions.c \
+error.c \
 )
 
 INCLUDE_DIR = includes
