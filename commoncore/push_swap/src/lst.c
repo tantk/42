@@ -28,14 +28,12 @@ void	free_hld(t_hld *hld)
 
 	while (node)
 	{
-		tmp = node;	
+		tmp = node -> next;	
 		free(node);
-		node =  NULL;
-		node = tmp -> next;
+		node = tmp;
 
 	}
 	free(hld);
-	hld = NULL;
 }
 
 int	free_exit_hld(t_hld *hld, char *msg)

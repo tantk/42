@@ -36,7 +36,9 @@ t_hld *from_str(char *str)
 	char	**split;
 	long	l_val;
 	t_hld	*hld;
+	int		cont;
 
+	cont = 1;
 	hld = (t_hld *) malloc(sizeof(t_hld));
 	if (!hld)
 		return (NULL);
@@ -44,11 +46,11 @@ t_hld *from_str(char *str)
 	if (!check_num_arr(split))
 		//free and return NULL
 		return (NULL);
-	while (split)
+	while (split && cont)
 	{
 		l_val = ft_atol(*split);
 		if (check_limit(l_val))
-			stk_push(hld, (int)l_val);
+			cont = stk_push(hld, (int)l_val);
 		else
 			//free and return NULL
 			return (NULL);
