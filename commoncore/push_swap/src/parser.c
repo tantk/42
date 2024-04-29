@@ -31,56 +31,66 @@ int check_num_arr(char **str)
 	return (1);
 }
 
-t_hld *from_str(char *str)
+t_hld *from_str(char *str, t_hld *hld)
 {
 	char	**split;
+	char	**split_st;
 	long	l_val;
-	t_hld	*hld;
 	int		cont;
 
 	cont = 1;
-	hld = (t_hld *) malloc(sizeof(t_hld));
-	if (!hld)
-		return (NULL);
 	split = ft_split(str, ' ');
+	split_st = split;
 	if (!check_num_arr(split))
-		//free and return NULL
-		return (NULL);
+		cont = ft_err_int("non num found");
 	while (split && cont)
 	{
 		l_val = ft_atol(*split);
 		if (check_limit(l_val))
 			cont = stk_push(hld, (int)l_val);
 		else
-			//free and return NULL
-			return (NULL);
+			cont = ft_err_int("digit not within limits");
 		split++;
+	}
+	if (!cont)
+		return (free_exit_hld(hld, split_st));
+	return (hld);
+}
+
+t_hld *from_arr(char **arr, t_hld *hld)
+{
+	long	l_val;
+	int		cont;
+
+	cont = 1;
+	if (!check_num_arr(arr))
+		cont = ft_err_int("non num found");
+	while (*arr && cont)
+	{
+		l_val = ft_atol(*arr);
+		if (check_limit(l_val))
+			cont = stk_push(hld, (int)l_val,-1);
+		else
+			cont = ft_err_int("digit not within limits");
+		arr++;
+	}
+	if (!cont)
+	{
+		free_hld(hld);
+		return (NULL);
 	}
 	return (hld);
 }
 
-t_hld *from_arr(char **arr)
+void	init_idx(t_hld *hld)
 {
-	t_hld	*hld;
-	long	l_val;
+	t_llst	*node;
 
-	hld = (t_hld *) malloc(sizeof(t_hld));
-	if(!hld)
-		return (NULL);
-	if (!check_num_arr(arr))
-		//free and return NULL
-		return (NULL);
-	while (*arr)
+	node = hld -> head;
+	while (node)
 	{
-		l_val = ft_atol(*arr);
-		if (check_limit(l_val))
-			stk_push(hld, (int)l_val);
-		else
-			//free and return NULL
-			return (NULL);
-		arr++;
+
 	}
-	return (hld);
 }
 
 
@@ -88,11 +98,13 @@ t_hld	*parse_args(int argc, char **argv)
 {
 	t_hld	*hld;
 
+	hld = (t_hld *) malloc(sizeof(t_hld));
+	if (!hld)
+		return (NULL);
 	argv++;
 	if (argc == 2)
-		hld = from_str(*argv);		
-
+		hld = from_str(*argv, hld);		
 	if (argc > 2)
-		hld = from_arr(argv);
+		hld = from_arr(argv, hld);
 	return (hld);
 }

@@ -12,7 +12,8 @@ int	main(int argc, char **argv)
 	if (!hld)
 		return (0);
 	node = hld -> head;
-	//rotate(hld);
+	rotate(hld);
+	node = hld -> head;
 	while (i < argc && node)
     {
 		ft_printf("number : %d\n",node -> val);

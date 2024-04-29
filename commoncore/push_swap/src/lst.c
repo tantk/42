@@ -19,6 +19,20 @@ int dup_check(t_hld *hld, int val)
 	return (1);
 }
 
+void	free_split(char **split)
+{
+	char **split_st;
+
+	split_st = split;
+	while (*split)
+	{
+		free(*split);
+		split++;
+	}
+	free(split_st);
+}
+
+
 void	free_hld(t_hld *hld)
 {
 	t_llst *node;
@@ -31,24 +45,24 @@ void	free_hld(t_hld *hld)
 		tmp = node -> next;	
 		free(node);
 		node = tmp;
-
 	}
 	free(hld);
 }
 
-int	free_exit_hld(t_hld *hld, char *msg)
+void	*free_exit_hld(t_hld *hld, char **split)
 {
 	free_hld(hld);
-	ft_printf_err("Error: %s", msg);
-	return (0);
+	free_split(split);
+	return (NULL);
 }
-int stk_push(t_hld *hld, int val)
+int stk_push(t_hld *hld, int val, int idx)
 {
     t_llst  *node;
     node =  (t_llst *)malloc(sizeof(t_llst));
 	if (!(node && dup_check(hld,val)))
-        return (free_exit_hld(hld, "Malloc fail or duplicated val"));
+		return (ft_err_int("duplicated digit"));
     node -> val = val;
+	node -> idx = idx;
     node -> next = NULL;
     if (!hld -> head)
     {
