@@ -82,14 +82,40 @@ t_hld *from_arr(char **arr, t_hld *hld)
 	return (hld);
 }
 
+t_llst	*min_val(t_hld *hld)
+{
+	t_llst	*node;
+	t_llst	*min_node;
+	int		min;
+
+	node = hld -> head;
+	min_node = node;
+	while (node)
+	{
+		if (min_node -> val > node -> val && node -> idx != -1)
+			min_node = node;
+		node = node -> next;
+	}
+	return (min_node);
+}
+
+
 void	init_idx(t_hld *hld)
 {
 	t_llst	*node;
+	t_llst	*min_node;
+	int		idx;
+	int		lim;
 
+	idx = 0;
+	lim = hld -> size - 1;
 	node = hld -> head;
-	while (node)
+	while (node && idx < lim)
 	{
-
+		min_node = min_val(hld);
+		min_node -> idx = idx;
+		idx++;
+		node = node -> next;
 	}
 }
 
