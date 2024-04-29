@@ -20,13 +20,12 @@ typedef struct s_lst_holder{
 	t_llst			*head;
 	t_llst			*last;
 	unsigned int	size;
-    int             check;
 }	t_hld;
 
 
-int		stk_add(t_hld *hld, int val);
+int		stk_rev_ins(t_hld *hld, int val, int idx);
 int		stk_pop(t_hld *hld);
-int		stk_push(t_hld *hld, int val);
+int		stk_push(t_hld *hld, int val, int idx);
 void	free_split(char **split);
 void	free_hld(t_hld *hld);
 void	*free_exit_hld(t_hld *hld, char **split);

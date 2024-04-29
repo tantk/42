@@ -1,10 +1,5 @@
 # include "pushswap.h"
 
-int check_bit(int check, int val)
-{
-    return (check | val);
-}
-
 int dup_check(t_hld *hld, int val)
 {
 	t_llst *node;
@@ -55,6 +50,7 @@ void	*free_exit_hld(t_hld *hld, char **split)
 	free_split(split);
 	return (NULL);
 }
+
 int stk_push(t_hld *hld, int val, int idx)
 {
     t_llst  *node;
@@ -69,13 +65,32 @@ int stk_push(t_hld *hld, int val, int idx)
         hld -> head = node;
         hld -> last = node;
         hld -> size = 1;
-        hld -> check = 0;
-        hld -> check = check_bit(hld-> check, val);
         return (1);
     }
     node -> next = hld -> head;
     hld -> head = node;
-    hld -> check = check_bit(hld-> check, val);
+	hld -> size++;
+    return (1);
+}
+
+int stk_rev_ins(t_hld *hld, int val, int idx)
+{
+    t_llst  *node;
+    node =  (t_llst *)malloc(sizeof(t_llst));
+	if (!(node && dup_check(hld,val)))
+		return (ft_err_int("duplicated digit"));
+    node -> val = val;
+	node -> idx = idx;
+    node -> next = NULL;
+    if (!hld -> head)
+    {
+        hld -> head = node;
+        hld -> last = node;
+        hld -> size = 1;
+        return (1);
+    }
+    hld -> last -> next = node;
+	hld -> last = node;
 	hld -> size++;
     return (1);
 }

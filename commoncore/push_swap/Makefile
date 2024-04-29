@@ -1,4 +1,4 @@
-NAME = pushswap
+NAME = push_swap
 LIBFT_DIR = Libft
 LIBFT_SRCS =  $(addprefix $(LIBFT_DIR)/,\
 		ft_isalpha.c \
