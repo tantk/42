@@ -56,7 +56,7 @@ int stk_push(t_hld *hld, int val, int idx)
     t_llst  *node;
     node =  (t_llst *)malloc(sizeof(t_llst));
 	if (!(node && dup_check(hld,val)))
-		return (ft_err_int("duplicated digit"));
+		return (ft_err_int("Error\n"));
     node -> val = val;
 	node -> idx = idx;
     node -> next = NULL;
@@ -78,7 +78,7 @@ int stk_rev_ins(t_hld *hld, int val, int idx)
     t_llst  *node;
     node =  (t_llst *)malloc(sizeof(t_llst));
 	if (!(node && dup_check(hld,val)))
-		return (ft_err_int("duplicated digit"));
+		return (ft_err_int("Error\n"));
     node -> val = val;
 	node -> idx = idx;
     node -> next = NULL;
@@ -104,6 +104,7 @@ int	stk_pop(t_hld *hld)
 	if (!hld -> head)
 		hld -> last = NULL;
 	free(tmp);
+	hld -> size --;
 	return (1);
 }
 

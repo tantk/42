@@ -44,14 +44,14 @@ t_hld *from_str(char *str, t_hld *hld)
 	split = ft_split(str, ' ');
 	split_st = split;
 	if (!check_num_arr(split))
-		cont = ft_err_int("non num found");
+		cont = ft_err_int("Error\n");
 	while (*split && cont)
 	{
 		l_val = ft_atol(*split);
 		if (check_limit(l_val))
 			cont = stk_rev_ins(hld, (int)l_val, -1);
 		else
-			cont = ft_err_int("digit not within limits");
+			cont = ft_err_int("Error\n");
 		split++;
 	}
 	if (!cont)
@@ -66,14 +66,14 @@ t_hld *from_arr(char **arr, t_hld *hld)
 
 	cont = 1;
 	if (!check_num_arr(arr))
-		cont = ft_err_int("non num found");
+		cont = ft_err_int("Error\n");
 	while (*arr && cont)
 	{
 		l_val = ft_atol(*arr);
 		if (check_limit(l_val))
 			cont = stk_rev_ins(hld, (int)l_val,-1);
 		else
-			cont = ft_err_int("digit not within limits");
+			cont = ft_err_int("Error\n");
 		arr++;
 	}
 	if (!cont)
@@ -128,6 +128,7 @@ void	init_idx(t_hld *hld)
 		min_node -> idx = idx;
 		idx++;
 	}
+	hld -> max_idx = idx;
 }
 
 t_hld	*parse_args(int argc, char **argv)
@@ -137,6 +138,7 @@ t_hld	*parse_args(int argc, char **argv)
 	hld = (t_hld *) malloc(sizeof(t_hld));
 	if (!hld)
 		return (NULL);
+	hld -> max_idx = 0;
 	argv++;
 	if (argc == 2)
 		hld = from_str(*argv, hld);		
@@ -144,5 +146,16 @@ t_hld	*parse_args(int argc, char **argv)
 		hld = from_arr(argv, hld);
 	if (hld)
 		init_idx(hld);
+	return (hld);
+}
+
+t_hld	*empty_stk()
+{
+	t_hld	*hld;
+	
+	hld = (t_hld *) malloc(sizeof(t_hld));
+	if (!hld)
+		return (NULL);
+	hld -> max_idx = 0;
 	return (hld);
 }

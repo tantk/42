@@ -3,17 +3,18 @@
 int	main(int argc, char **argv)
 {
 	//int		i;
-	t_hld	*hld;
-	t_llst	*node;
+	t_hld	*a;
+	t_hld 	*b;
 
 	//i = 1;
-	hld = (t_hld *) malloc(sizeof(t_hld));
-	hld = parse_args(argc, argv);
-	if (!hld)
+	a = parse_args(argc, argv);
+	b = empty_stk();
+	if (!a || !b)
 		return (0);
-	node = hld -> head;
-	//rotate(hld);
-	node = hld -> head;
+	rdx_srt(a, b);
+	/*
+	t_llst	*node;
+	node = a -> head;
 	while ( node)
     {
 		ft_printf("number : %d, ",node -> val);
@@ -21,6 +22,6 @@ int	main(int argc, char **argv)
 
 		node = node -> next;
 		//i++;
-    }
+    }*/
 	return (1);
 }

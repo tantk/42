@@ -56,6 +56,7 @@ lst.c \
 parser.c \
 instructions.c \
 error.c \
+sortings.c \
 )
 
 INCLUDE_DIR = includes
