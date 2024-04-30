@@ -17,4 +17,8 @@ int	find_idx(t_hld *hld, int val)
 	return (-1);
 }
 
-
+void	sort_2(t_hld *hld)
+{
+	if (hld -> head -> rk > hld -> head -> next -> rk)
+		
+}
