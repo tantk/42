@@ -77,7 +77,7 @@ int	ft_printf(const char *input, ...)
 		}
 		else
 		{
-			ft_putchar_fd(*input, STDIN_FILENO);
+			ft_putchar_fd(*input, STDOUT_FILENO);
 			char_printed++;
 		}
 		input++;
