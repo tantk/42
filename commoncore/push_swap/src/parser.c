@@ -56,6 +56,7 @@ t_hld *from_str(char *str, t_hld *hld)
 	}
 	if (!cont)
 		return (free_exit_hld(hld, split_st));
+	free_split(split_st);
 	return (hld);
 }
 
@@ -91,7 +92,7 @@ t_llst	*first_node(t_hld *hld)
 		node = hld -> head;
 		while (node)
 		{
-			if (node -> idx == -1)
+			if (node -> rk == -1)
 				return (node);
 			node = node -> next;
 		}
@@ -107,55 +108,57 @@ t_llst	*min_val(t_hld *hld)
 	min_node = first_node(hld);
 	while (node)
 	{
-		if (min_node -> val > node -> val && node -> idx == -1)
+		if (min_node -> val > node -> val && node -> rk == -1)
 			min_node = node;
 		node = node -> next;
 	}
 	return (min_node);
 }
 
-void	init_idx(t_hld *hld)
+void	init_rk(t_hld *hld)
 {
 	t_llst	*min_node;
-	int		idx;
+	int		rk;
 	int		lim;
 
-	idx = 0;
+	rk = 0;
 	lim = hld -> size - 1;
-	while (idx <= lim)
+	while (rk <= lim)
 	{
 		min_node = min_val(hld);
-		min_node -> idx = idx;
-		idx++;
+		min_node -> rk = rk;
+		rk++;
 	}
-	hld -> max_idx = idx;
+	hld -> max_rk = rk;
 }
 
-t_hld	*parse_args(int argc, char **argv)
-{
-	t_hld	*hld;
-
-	hld = (t_hld *) malloc(sizeof(t_hld));
-	if (!hld)
-		return (NULL);
-	hld -> max_idx = 0;
-	argv++;
-	if (argc == 2)
-		hld = from_str(*argv, hld);		
-	else if (argc > 2)
-		hld = from_arr(argv, hld);
-	if (hld)
-		init_idx(hld);
-	return (hld);
-}
-
-t_hld	*empty_stk()
+t_hld	*init_hld()
 {
 	t_hld	*hld;
 	
 	hld = (t_hld *) malloc(sizeof(t_hld));
 	if (!hld)
 		return (NULL);
-	hld -> max_idx = 0;
+	hld -> head = NULL;
+	hld -> last = NULL;
+	hld -> size = 0;
+	hld -> max_rk = 0;
+	return (hld);
+}
+
+t_hld	*parse_args(int argc, char **argv)
+{
+	t_hld	*hld;
+
+	hld = init_hld();
+	if (!hld)
+		return (NULL);
+	argv++;
+	if (argc == 2)
+		hld = from_str(*argv, hld);		
+	else if (argc > 2)
+		hld = from_arr(argv, hld);
+	if (hld)
+		init_rk(hld);
 	return (hld);
 }

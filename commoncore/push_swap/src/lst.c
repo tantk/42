@@ -51,14 +51,17 @@ void	*free_exit_hld(t_hld *hld, char **split)
 	return (NULL);
 }
 
-int stk_push(t_hld *hld, int val, int idx)
+int stk_push(t_hld *hld, int val, int rk)
 {
     t_llst  *node;
-    node =  (t_llst *)malloc(sizeof(t_llst));
-	if (!(node && dup_check(hld,val)))
+	if (!dup_check(hld,val))
 		return (ft_err_int("Error\n"));
+    node =  (t_llst *)malloc(sizeof(t_llst));
+	if (!node)
+		return (ft_err_int("Error\n"));
+
     node -> val = val;
-	node -> idx = idx;
+	node -> rk = rk;
     node -> next = NULL;
     if (!hld -> head)
     {
@@ -73,14 +76,17 @@ int stk_push(t_hld *hld, int val, int idx)
     return (1);
 }
 
-int stk_rev_ins(t_hld *hld, int val, int idx)
+int stk_rev_ins(t_hld *hld, int val, int rk)
 {
     t_llst  *node;
+	
+	if (!dup_check(hld,val))
+		return (ft_err_int("Error\n"));
     node =  (t_llst *)malloc(sizeof(t_llst));
-	if (!(node && dup_check(hld,val)))
+	if (!node)
 		return (ft_err_int("Error\n"));
     node -> val = val;
-	node -> idx = idx;
+	node -> rk = rk;
     node -> next = NULL;
     if (!hld -> head)
     {

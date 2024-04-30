@@ -12,7 +12,7 @@
 
 typedef struct s_llst{
     int             val;
-	int				idx;
+	int				rk;
     struct s_llst   *next;
 }   t_llst;
 
@@ -20,18 +20,18 @@ typedef struct s_lst_holder{
 	t_llst			*head;
 	t_llst			*last;
 	unsigned int	size;
-	unsigned int	max_idx;
+	unsigned int	max_rk;
 }	t_hld;
 
 
-int		stk_rev_ins(t_hld *hld, int val, int idx);
+int		stk_rev_ins(t_hld *hld, int val, int rk);
 int		stk_pop(t_hld *hld);
-int		stk_push(t_hld *hld, int val, int idx);
+int		stk_push(t_hld *hld, int val, int rk);
 void	free_split(char **split);
 void	free_hld(t_hld *hld);
 void	*free_exit_hld(t_hld *hld, char **split);
 t_hld	*parse_args(int argc, char **argv);
-t_hld	*empty_stk();
+t_hld	*init_hld();
 int		push_oth(t_hld *a, t_hld *b);
 int		rotate(t_hld *hld);
 

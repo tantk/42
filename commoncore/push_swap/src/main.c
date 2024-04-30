@@ -8,10 +8,14 @@ int	main(int argc, char **argv)
 
 	//i = 1;
 	a = parse_args(argc, argv);
-	b = empty_stk();
+	if (!a)
+		return (0);
+	b = init_hld();
 	if (!a || !b)
 		return (0);
 	rdx_srt(a, b);
+	free_hld(a);
+	free_hld(b);
 	/*
 	t_llst	*node;
 	node = a -> head;

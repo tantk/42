@@ -2,13 +2,13 @@
 
 int	push_oth(t_hld *a, t_hld *b)
 {
-	int	tmp_idx;
+	int	tmp_rk;
 	int tmp_val;
 
-	tmp_idx = a -> head -> idx;
+	tmp_rk = a -> head -> rk;
 	tmp_val = a -> head -> val;
 	stk_pop(a);
-	stk_push(b, tmp_val, tmp_idx);
+	stk_push(b, tmp_val, tmp_rk);
 	return (1);
 }
 

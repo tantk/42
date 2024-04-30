@@ -41,7 +41,7 @@ void	sep_stk(t_hld *a, t_hld *b, int shift)
 	max = a -> size;
 	while (ctr < max)
 	{
-		if ((a -> head -> idx >> shift) & 0b1)
+		if ((a -> head -> rk >> shift) & 0b1)
 			ra(a);
 		else
 			pb(a, b);
@@ -61,7 +61,7 @@ void	rdx_srt(t_hld *a, t_hld *b)
 	int	max_shf;
 
 	shift = 0;
-	max_shf = maxBit(a -> max_idx);
+	max_shf = maxBit(a -> max_rk);
 	while (shift <= max_shf && !is_sorted(a))
 	{
 		sep_stk(a, b, shift);
