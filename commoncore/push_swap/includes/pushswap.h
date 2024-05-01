@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pushswap.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/02 00:01:17 by titan             #+#    #+#             */
+/*   Updated: 2024/05/02 00:01:18 by titan            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSHSWAP_H
 # define PUSHSWAP_H
 # include <errno.h>
@@ -30,10 +42,22 @@ int		stk_push(t_hld *hld, int val, int rk);
 void	free_split(char **split);
 void	free_hld(t_hld *hld);
 void	*free_exit_hld(t_hld *hld, char **split);
+
+int		check_limit(long num);
+int		check_num(char *num);
+int		check_num_arr(char **str);
+t_llst	*first_node(t_hld *hld);
+t_llst  *min_val(t_hld *hld);
+
 t_hld	*parse_args(int argc, char **argv);
 t_hld	*init_hld();
+
+
+t_llst  *find_slst(t_hld *hld);
 int		push_oth(t_hld *a, t_hld *b);
 int		rotate(t_hld *hld);
+int		rev_rotate(t_hld *hld);
+int		swap(t_hld *hld);
 
 void    pa(t_hld *a, t_hld *b);
 void    pb(t_hld *a, t_hld *b);

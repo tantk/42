@@ -1,12 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sortings.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/02 00:02:19 by titan             #+#    #+#             */
+/*   Updated: 2024/05/02 00:16:10 by titan            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pushswap.h"
 
 int	is_sorted(t_hld *hld)
 {
 	t_llst	*node;
+
 	if (hld -> size < 2)
 		return (1);
 	node = hld -> head;
-	while(node -> next)
+	while (node -> next)
 	{
 		if (node -> val < node -> next -> val)
 			node = node -> next;
@@ -16,9 +29,9 @@ int	is_sorted(t_hld *hld)
 	return (1);
 }
 
-int	maxBit(int n)
+static int	max_bit(int n)
 {
-	int msb;
+	int	msb;
 
 	msb = 0;
 	if (n == 0)
@@ -32,7 +45,7 @@ int	maxBit(int n)
 	return (msb);
 }
 
-void	sep_stk(t_hld *a, t_hld *b, int shift)
+static void	sep_stk(t_hld *a, t_hld *b, int shift)
 {
 	int		ctr;
 	int		max;
@@ -49,7 +62,7 @@ void	sep_stk(t_hld *a, t_hld *b, int shift)
 	}
 }
 
-void	join_stk(t_hld *a, t_hld *b)
+static void	join_stk(t_hld *a, t_hld *b)
 {
 	while (b -> head)
 		pa(a, b);
@@ -61,7 +74,7 @@ void	rdx_srt(t_hld *a, t_hld *b)
 	int	max_shf;
 
 	shift = 0;
-	max_shf = maxBit(a -> max_rk);
+	max_shf = max_bit(a -> max_rk);
 	while (shift <= max_shf && !is_sorted(a))
 	{
 		sep_stk(a, b, shift);

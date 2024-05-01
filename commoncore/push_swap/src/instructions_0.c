@@ -1,25 +1,22 @@
-# include "pushswap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   instructions_0.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/02 00:00:46 by titan             #+#    #+#             */
+/*   Updated: 2024/05/02 00:04:08 by titan            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-t_llst	*find_node(t_hld *hld, int val)
+#include "pushswap.h"
+
+t_llst	*find_slst(t_hld *hld)
 {
 	t_llst	*node;
 
 	node = hld -> head;
-	while (node)
-	{
-		if (node -> rk == val)
-			return (node);
-		node = node -> next;
-	}
-	return (NULL);
-}
-
-t_llst	*find_slst(t_hld *hld)
-{
-	t_llst *node;
-
-	node = hld -> head;
-	
 	while (node)
 	{
 		if (node -> next)
@@ -33,7 +30,7 @@ t_llst	*find_slst(t_hld *hld)
 int	push_oth(t_hld *a, t_hld *b)
 {
 	int	tmp_rk;
-	int tmp_val;
+	int	tmp_val;
 
 	tmp_rk = a -> head -> rk;
 	tmp_val = a -> head -> val;
@@ -44,7 +41,7 @@ int	push_oth(t_hld *a, t_hld *b)
 
 int	rotate(t_hld *hld)
 {
-	t_llst *tmp;
+	t_llst	*tmp;
 
 	if (hld -> size == 1)
 		return (1);
@@ -56,7 +53,7 @@ int	rotate(t_hld *hld)
 	return (1);
 }
 
-int rev_rotate(t_hld *hld)
+int	rev_rotate(t_hld *hld)
 {
 	t_llst	*new_last;
 	t_llst	*new_first;
@@ -86,40 +83,4 @@ int	swap(t_hld *hld)
 	hld -> head -> next -> val = tmp_val;
 	hld -> head -> next -> rk = tmp_rk;
 	return (1);
-}
-
-void	pa(t_hld *a, t_hld *b)
-{
-	push_oth(b, a);
-	ft_printf("pa\n");
-}
-
-void	pb(t_hld *a, t_hld *b)
-{
-	push_oth(a, b);
-	ft_printf("pb\n");
-}
-
-void	ra(t_hld *a)
-{
-	rotate(a);
-	ft_printf("ra\n");
-}
-
-void	rb(t_hld *b)
-{
-	rotate(b);
-	ft_printf("rb\n");
-}
-
-void	sa(t_hld *a)
-{
-	swap(a);
-	ft_printf("sa\n");
-}
-
-void	rra(t_hld *a)
-{
-	rev_rotate(a);
-	ft_printf("rra\n");
 }

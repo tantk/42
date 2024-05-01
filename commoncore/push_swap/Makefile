@@ -53,8 +53,12 @@ PS_DIR = src
 PS_SRC = $(addprefix $(PS_DIR)/,\
 main.c \
 lst.c \
+lst_free.c \
 parser.c \
-instructions.c \
+parser_util.c \
+instructions_0.c \
+instructions_1.c \
+instructions_2.c \
 error.c \
 sortings.c \
 sort_fix.c \

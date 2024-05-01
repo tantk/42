@@ -1,25 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   instructions_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 00:00:40 by titan             #+#    #+#             */
-/*   Updated: 2024/05/02 00:03:16 by titan            ###   ########.fr       */
+/*   Created: 2024/05/02 00:01:27 by titan             #+#    #+#             */
+/*   Updated: 2024/05/02 00:01:28 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-void	ft_err_exit(char *msg)
+void	pa(t_hld *a, t_hld *b)
 {
-	ft_printf_err("Error:  %s", msg);
-	exit(0);
+	push_oth(b, a);
+	ft_printf("pa\n");
 }
 
-int	ft_err_int(char *msg)
+void	pb(t_hld *a, t_hld *b)
 {
-	ft_printf_err("Error: %s", msg);
-	return (0);
+	push_oth(a, b);
+	ft_printf("pb\n");
+}
+
+void	ra(t_hld *a)
+{
+	rotate(a);
+	ft_printf("ra\n");
+}
+
+void	rb(t_hld *b)
+{
+	rotate(b);
+	ft_printf("rb\n");
+}
+
+void	sa(t_hld *a)
+{
+	swap(a);
+	ft_printf("sa\n");
 }
