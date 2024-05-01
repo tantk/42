@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:17:52 by titan             #+#    #+#             */
-/*   Updated: 2023/09/18 15:33:07 by titan            ###   ########.fr       */
+/*   Updated: 2024/05/02 00:21:29 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,10 @@ int	ft_atoi(const char *str)
 	return (result * sign);
 }
 
-
 long	ft_atol(const char *str)
 {
 	long	sign;
-	long    result;
+	long	result;
 
 	result = 0;
 	sign = 1;

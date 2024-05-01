@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 16:47:12 by titan             #+#    #+#             */
-/*   Updated: 2023/11/01 16:06:33 by titan            ###   ########.fr       */
+/*   Updated: 2024/05/02 00:18:04 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef LIBFT_H
@@ -48,7 +48,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(const char *s);
 int		ft_atoi(const char *str);
-long    ft_atol(const char *str);
+long	ft_atol(const char *str);
 
 //part 2 additional function
 

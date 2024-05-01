@@ -6,7 +6,7 @@
 /*   By: titan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 00:01:17 by titan             #+#    #+#             */
-/*   Updated: 2024/05/02 00:01:18 by titan            ###   ########.fr       */
+/*   Updated: 2024/05/02 00:20:43 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,20 @@
 # include "get_next_line.h"
 # include "limits.h"
 
-
-typedef struct s_llst{
-    int             val;
+typedef struct s_llst
+{
+	int				val;
 	int				rk;
-    struct s_llst   *next;
-}   t_llst;
+	struct s_llst	*next;
+}	t_llst;
 
-typedef struct s_lst_holder{
+typedef struct s_lst_holder
+{
 	t_llst			*head;
 	t_llst			*last;
 	unsigned int	size;
 	unsigned int	max_rk;
 }	t_hld;
-
 
 int		stk_rev_ins(t_hld *hld, int val, int rk);
 int		stk_pop(t_hld *hld);
@@ -47,22 +47,21 @@ int		check_limit(long num);
 int		check_num(char *num);
 int		check_num_arr(char **str);
 t_llst	*first_node(t_hld *hld);
-t_llst  *min_val(t_hld *hld);
+t_llst	*min_val(t_hld *hld);
 
 t_hld	*parse_args(int argc, char **argv);
-t_hld	*init_hld();
+t_hld	*init_hld(void);
 
-
-t_llst  *find_slst(t_hld *hld);
+t_llst	*find_slst(t_hld *hld);
 int		push_oth(t_hld *a, t_hld *b);
 int		rotate(t_hld *hld);
 int		rev_rotate(t_hld *hld);
 int		swap(t_hld *hld);
 
-void    pa(t_hld *a, t_hld *b);
-void    pb(t_hld *a, t_hld *b);
-void    ra(t_hld *a);
-void    rb(t_hld *b);
+void	pa(t_hld *a, t_hld *b);
+void	pb(t_hld *a, t_hld *b);
+void	ra(t_hld *a);
+void	rb(t_hld *b);
 void	sa(t_hld *a);
 void	rra(t_hld *a);
 
