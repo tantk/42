@@ -39,8 +39,14 @@ void    pa(t_hld *a, t_hld *b);
 void    pb(t_hld *a, t_hld *b);
 void    ra(t_hld *a);
 void    rb(t_hld *b);
+void	sa(t_hld *a);
+void	rra(t_hld *a);
 
 int		is_sorted(t_hld *hld);
+void	sort_2(t_hld *hld);
+void	sort_3(t_hld *hld);
+void	sort_4(t_hld *a, t_hld *b, int find);
+void	sort_5(t_hld *a, t_hld *b);
 void	rdx_srt(t_hld *a, t_hld *b);
 
 void	ft_err_exit(char *msg);
