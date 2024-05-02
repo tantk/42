@@ -6,7 +6,7 @@
 /*   By: titan <titan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 09:10:55 by titan             #+#    #+#             */
-/*   Updated: 2023/11/04 06:37:39 by titan            ###   ########.fr       */
+/*   Updated: 2024/05/02 12:54:17 by titan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	ft_printf(const char *input, ...)
 		}
 		else
 		{
-			ft_putchar_fd(*input, STDOUT_FILENO);
+			ft_putchar_fd(*input, 1);
 			char_printed++;
 		}
 		input++;
@@ -105,7 +105,7 @@ int	ft_printf_err(const char *input, ...)
 		}
 		else
 		{
-			ft_putchar_fd(*input, STDERR_FILENO);
+			ft_putchar_fd(*input, 2);
 			char_printed++;
 		}
 		input++;
